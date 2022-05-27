@@ -5,7 +5,7 @@ interface ThemeProps {
   children: ReactNode;
 }
 
-const theme = {
+export const theme = {
   colours: {
     primary: '#00AF91',
     secondary: '#007965',

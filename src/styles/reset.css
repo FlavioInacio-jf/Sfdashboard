@@ -84,11 +84,7 @@ textarea {
  *    user zoom.
  */
 
-html {
-    font-size: 62.5%; /* 1 */
-    -webkit-text-size-adjust: 62.5%; /* 2 */
-    -ms-text-size-adjust: 62.5%; /* 2 */
-}
+
 
 /**
  * Address `outline` inconsistency between Chrome and other browsers.

@@ -33,7 +33,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
 
   transition: all 0.3s ease-in-out;
 
-  ${({ variant = 'primary', outline, theme }) =>
+  ${({ variant, outline, theme }) =>
     variant === 'primary' &&
     css`
       background-color: ${outline ? 'transparent' : `${theme.colours.primary}`};

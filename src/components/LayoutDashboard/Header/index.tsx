@@ -1,9 +1,11 @@
 import { FC } from 'react';
 import { BsPlusLg, BsSearch } from 'react-icons/bs';
+import { useDashboard } from '../../../hooks/useDashboard';
 import { Button } from '../../Button';
 import { Container, HeaderAvatar, HeaderWrapperActions, Search } from './styles';
 
 export const Header: FC = () => {
+  const { handleSearchDashboard, handleOpenNewProductModal } = useDashboard();
   return (
     <Container>
       <Search>
@@ -11,10 +13,15 @@ export const Header: FC = () => {
         <label htmlFor="search" className="sr-only">
           Search
         </label>
-        <input type="text" id="search" placeholder="Search by product name" />
+        <input
+          type="text"
+          id="search"
+          placeholder="Search by product name"
+          onChange={handleSearchDashboard}
+        />
       </Search>
       <HeaderWrapperActions>
-        <Button type="button" size="large" noPadding>
+        <Button type="button" size="large" noPadding onClick={handleOpenNewProductModal}>
           <BsPlusLg />
           <span className="sr-only">Add Product</span>
         </Button>

@@ -20,7 +20,8 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "react-hooks"
+        "react-hooks",
+        "eslint-plugin-storybook"
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",

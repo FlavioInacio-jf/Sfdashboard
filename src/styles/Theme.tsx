@@ -9,7 +9,7 @@ export const theme = {
   colours: {
     primary: '#00AF91',
     secondary: '#007965',
-    tertirary: '#F58634',
+    tertiary: '#F58634',
     quartenary: '#FFCC29',
     neutrals: {
       O00: '#FFFFFF',

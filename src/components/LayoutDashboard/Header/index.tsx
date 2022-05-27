@@ -14,7 +14,7 @@ export const Header: FC = () => {
         <input type="text" id="search" placeholder="Search by product name" />
       </Search>
       <HeaderWrapperActions>
-        <Button type="button" large noPadding>
+        <Button type="button" size="large" noPadding>
           <BsPlusLg />
           <span className="sr-only">Add Product</span>
         </Button>

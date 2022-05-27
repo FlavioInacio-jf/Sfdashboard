@@ -5,7 +5,7 @@ declare module 'styled-components' {
     colours: {
       primary: string;
       secondary: string;
-      tertirary: string;
+      tertiary: string;
       quartenary: string;
       neutrals: {
         O00: string;

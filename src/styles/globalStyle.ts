@@ -36,6 +36,21 @@ export default createGlobalStyle`
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
+  .overlay-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+  }
 
   *::-webkit-scrollbar {
     width: .6rem;

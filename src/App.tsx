@@ -1,9 +1,10 @@
-const App = () => {
+import GlobalStyle from './styles/globalStyle';
+import { Theme } from './styles/Theme';
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header"></header>
-    </div>
+    <Theme>
+      <GlobalStyle />
+    </Theme>
   );
 };
-
-export default App;

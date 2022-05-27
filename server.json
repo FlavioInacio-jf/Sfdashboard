@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Laranja",
+      "price": 100,
+      "description": "A laranja faz parte do cardápio de diversas pessoas que optam pelo suco da fruta pela manhã ou para acompanhar refeições. Além de ser usada como ingrediente de diversas receitas ou consumida in natura."
+    },
+    {
+      "id": 2,
+      "title": "Limão",
+      "price": 100,
+      "description": "O limão é uma fruta cítrica que, além de muita vitamina C, é um excelente antioxidante e rico em fibras solúveis que ajudam a diminuir o apetite e regular o intestino, sendo muito utilizado para temperar peixes, mariscos e frango."
+    },
+    {
+      "id": 3,
+      "title": "Melancia",
+      "price": 100,
+      "description": "A melancia é uma fruta rica em água, ajudando a manter o organismo e a pele hidratada, além de melhorar a retenção de líquidos e a prevenir a formação de pedra nos rins. "
+    },
+    {
+      "id": 4,
+      "title": "Melão",
+      "price": 100,
+      "description": "O melão é uma opção de fruta doce e refrescante para o verão, já que a maior parte da sua composição é formada por água. Além disso, é considerado um alimento pouco calórico: em 100 g há cerca de 100 kcal."
+    }
+  ],
+  "stocks": [
+    {
+      "id": 1,
+      "amout": 3
+    },
+    {
+      "id": 2,
+      "amout": 2
+    },
+    {
+      "id": 3,
+      "amout": 6
+    },
+    {
+      "id": 4,
+      "amout": 0
+    }
+  ]
+}

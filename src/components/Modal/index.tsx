@@ -21,7 +21,10 @@ export const Modal: FC<ModalProps> = ({ children, title, isOpen, onRequestClose 
           background: '#FFFFFF',
           WebkitOverflowScrolling: 'touch',
           borderRadius: '0.5rem',
-          position: 'relative'
+          position: 'relative',
+          border: 'none',
+          width: 'auto',
+          height: 'auto'
         }
       }}>
       <header>{title}</header>

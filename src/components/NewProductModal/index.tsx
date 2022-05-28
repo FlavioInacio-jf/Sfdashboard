@@ -21,8 +21,8 @@ export const NewProductModal: FC = () => {
       <Form>
         <Input label="Name" name="name" type="text" />
         <Column column="2" margin="3rem 0 3rem 0">
-          <Input label="Price" name="price" mask="currency" />
-          <Input label="Amount" name="amount" mask="number" type="number" />
+          <Input label="Price" name="price" mask="currency" defaultValue="0" />
+          <Input label="Amount" name="amount" mask="number" defaultValue="0" type="number" />
         </Column>
 
         <TextArea label="Description" name="description" margin="3rem 0 0 0" maxLength={205} />

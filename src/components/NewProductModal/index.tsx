@@ -15,7 +15,8 @@ export const NewProductModal: FC = () => {
     description: '',
     price: 0,
     title: '',
-    amount: 0
+    amount: 0,
+    photo_url: ''
   });
   const { mutate: createProductMutate } = createProductMutation();
 
@@ -43,9 +44,21 @@ export const NewProductModal: FC = () => {
           label="Title"
           name="title"
           type="text"
+          placeholder="Ex.: Orange"
           onChange={handleChange}
           value={product.title}
         />
+        <Column column="1" justifyItems="start" justifyContent="start" margin="3rem 0 3rem 0">
+          <Input
+            label="Photo"
+            name="photo_url"
+            type="text"
+            placeholder="Ex.: https://photos.google.com/photos"
+            onChange={handleChange}
+            value={product.photo_url}
+          />
+        </Column>
+
         <Column column="2" margin="3rem 0 3rem 0">
           <Input
             label="Price"
@@ -68,6 +81,7 @@ export const NewProductModal: FC = () => {
           label="Description"
           name="description"
           margin="3rem 0 0 0"
+          placeholder="Product Description"
           maxLength={205}
           onChange={handleChange}
         />

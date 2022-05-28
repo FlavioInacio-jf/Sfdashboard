@@ -23,6 +23,13 @@
       "title": "Melão",
       "price": 100,
       "description": "O melão é uma opção de fruta doce e refrescante para o verão, já que a maior parte da sua composição é formada por água. Além disso, é considerado um alimento pouco calórico: em 100 g há cerca de 100 kcal."
+    },
+    {
+      "description": "ddd",
+      "price": 0,
+      "title": "dd",
+      "amount": 0,
+      "id": 5
     }
   ],
   "stocks": [

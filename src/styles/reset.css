@@ -18,6 +18,9 @@ article, aside, canvas, footer, header, nav, section {
     font-style: normal;
     cursor: default;
 }
+ul {
+    list-style-type: none;
+}
 
 /* make sure to set some focus styles for accessibility */
 :focus {

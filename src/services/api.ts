@@ -15,4 +15,5 @@ api.interceptors.request.use((config: AxiosRequestConfig) => {
       'content-type': 'application/json; charset=UTF-8'
     };
   }
+  return config;
 });

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
+import { queryKey } from '../../constants/queryKeys';
 import { productService } from '../../services/productService';
 import { ProductRegisterType } from '../../types/productType';
 
@@ -14,7 +15,7 @@ export const createProductMutation = () => {
       toast.error(`Hello, I had a problem creating your product!`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries('products');
+      queryClient.invalidateQueries(queryKey.products);
       toast.success('Hello, your product was created successfully!');
     }
   });

@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
-export const FormGroup = styled.div`
+export interface FormGroupProps {
+  margin?: string;
+}
+
+export const FormGroup = styled.div<FormGroupProps>`
   width: 100%;
 
   position: relative;
 
-  & + & {
-    margin-top: 3rem;
-  }
+  margin-top: ${({ margin }) => margin || '0'};
 `;
 
 export const Label = styled.label`

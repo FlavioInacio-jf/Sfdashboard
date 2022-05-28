@@ -20,7 +20,11 @@ export const NewProductModal: FC = () => {
       height="55rem">
       <Form>
         <Input label="Name" name="name" type="text" />
-        <Input label="Price" name="price" mask="currency" />
+        <Column column="2" margin="3rem 0 3rem 0">
+          <Input label="Price" name="price" mask="currency" />
+          <Input label="Amount" name="amount" mask="number" type="number" />
+        </Column>
+
         <TextArea label="Description" name="description" margin="3rem 0 0 0" maxLength={205} />
 
         <Column sizeColumns="auto auto" justifyItems="center" margin="3rem 0 0 0">

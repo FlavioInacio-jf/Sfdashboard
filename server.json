@@ -4,50 +4,33 @@
       "id": 1,
       "title": "Laranja",
       "price": 100,
-      "description": "A laranja faz parte do cardápio de diversas pessoas que optam pelo suco da fruta pela manhã ou para acompanhar refeições. Além de ser usada como ingrediente de diversas receitas ou consumida in natura."
+      "description": "A laranja faz parte do cardápio de diversas pessoas que optam pelo suco da fruta pela manhã ou para acompanhar refeições. Além de ser usada como ingrediente de diversas receitas ou consumida in natura.",
+      "photo_url":"https://images.unsplash.com/photo-1580052614034-c55d20bfee3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      "amout": 0
     },
     {
       "id": 2,
       "title": "Limão",
       "price": 100,
-      "description": "O limão é uma fruta cítrica que, além de muita vitamina C, é um excelente antioxidante e rico em fibras solúveis que ajudam a diminuir o apetite e regular o intestino, sendo muito utilizado para temperar peixes, mariscos e frango."
+      "description": "O limão é uma fruta cítrica que, além de muita vitamina C, é um excelente antioxidante e rico em fibras solúveis que ajudam a diminuir o apetite e regular o intestino, sendo muito utilizado para temperar peixes, mariscos e frango.",
+      "photo_url": "https://images.unsplash.com/photo-1582287104445-6754664dbdb2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "amout": 6
     },
     {
       "id": 3,
       "title": "Melancia",
       "price": 100,
-      "description": "A melancia é uma fruta rica em água, ajudando a manter o organismo e a pele hidratada, além de melhorar a retenção de líquidos e a prevenir a formação de pedra nos rins. "
+      "description": "A melancia é uma fruta rica em água, ajudando a manter o organismo e a pele hidratada, além de melhorar a retenção de líquidos e a prevenir a formação de pedra nos rins. ",
+      "photo_url": "https://images.unsplash.com/photo-1581074817932-af423ba4566e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+      "amout": 2
     },
     {
       "id": 4,
       "title": "Melão",
       "price": 100,
-      "description": "O melão é uma opção de fruta doce e refrescante para o verão, já que a maior parte da sua composição é formada por água. Além disso, é considerado um alimento pouco calórico: em 100 g há cerca de 100 kcal."
-    },
-    {
-      "description": "ddd",
-      "price": 0,
-      "title": "dd",
-      "amount": 0,
-      "id": 5
-    }
-  ],
-  "stocks": [
-    {
-      "id": 1,
+      "description": "O melão é uma opção de fruta doce e refrescante para o verão, já que a maior parte da sua composição é formada por água. Além disso, é considerado um alimento pouco calórico: em 100 g há cerca de 100 kcal.",
+      "photo_url": "https://images.unsplash.com/photo-1615485290690-285a539321e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
       "amout": 3
-    },
-    {
-      "id": 2,
-      "amout": 2
-    },
-    {
-      "id": 3,
-      "amout": 6
-    },
-    {
-      "id": 4,
-      "amout": 0
     }
   ]
 }

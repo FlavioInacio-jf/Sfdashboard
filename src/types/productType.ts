@@ -2,6 +2,7 @@ export interface ProductType {
   id: number;
   title: string;
   price: number;
+  photo_url: string;
   description: string;
   amount: number;
   createdAt: Date;

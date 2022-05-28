@@ -1,7 +1,7 @@
 import { FC, TextareaHTMLAttributes } from 'react';
 import { Label, TextAreaFormGroup, TextAreaStyle } from './styles';
 
-type TextAreaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'name'> & {
+export type TextAreaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'name'> & {
   label: string;
   name: string;
   margin: string;

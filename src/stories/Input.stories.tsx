@@ -1,14 +1,10 @@
 import { Meta, Story } from '@storybook/react';
-import { TextArea, TextAreaProps } from '../components/Form/TextArea';
+import { Input, InputProps } from '../components/Form/Input';
 
 export default {
-  title: 'Text area',
-  component: TextArea,
+  title: 'Input',
+  component: Input,
   argTypes: {
-    children: {
-      description: 'Text inside the textarea.',
-      control: { type: 'text' }
-    },
     name: {
       description: 'Input name',
       control: { type: 'text' },
@@ -29,11 +25,19 @@ export default {
         'Margin values ​​must be passed as follows: marginTop marginRight margin Bottom marginLeft. example 1: 1rem 1rem 1rem 1rem example 2: 10px',
       control: { type: 'text' },
       defaultValue: '0'
+    },
+    mask: {
+      description: 'Input text mascara',
+      control: { type: 'select', options: ['number', 'currency', 'none'] },
+      defaultValue: 'none'
     }
   }
 } as Meta;
 
-const Template: Story<TextAreaProps> = (args) => <TextArea {...args} />;
+const Template: Story<InputProps> = (args) => <Input {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = { label: 'Name', name: 'name', placeholder: 'Enter a text', children: 'Name' };
+Primary.args = { label: 'Name', name: 'name', placeholder: 'Enter a text' };
+
+export const Currency = Template.bind({});
+Currency.args = { label: 'Currency', name: 'currency', placeholder: 'Enter', mask: 'currency' };

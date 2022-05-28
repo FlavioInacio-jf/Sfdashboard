@@ -1,15 +1,25 @@
 import { FC, ReactNode } from 'react';
 import { BsXLg } from 'react-icons/bs';
 import ReactModal from 'react-modal';
-import { CloseButton } from './styles';
+import { Title } from '../Title';
+import { CloseButton, Header } from './styles';
 
 interface ModalProps {
   title: string;
   children: ReactNode;
   isOpen: boolean;
+  width?: string;
+  height?: string;
   onRequestClose: () => void;
 }
-export const Modal: FC<ModalProps> = ({ children, title, isOpen, onRequestClose }) => {
+export const Modal: FC<ModalProps> = ({
+  children,
+  title,
+  isOpen,
+  onRequestClose,
+  width = 'auto',
+  height = 'auto'
+}) => {
   return (
     <ReactModal
       isOpen={isOpen}
@@ -20,19 +30,24 @@ export const Modal: FC<ModalProps> = ({ children, title, isOpen, onRequestClose 
           padding: '3rem',
           background: '#FFFFFF',
           WebkitOverflowScrolling: 'touch',
-          borderRadius: '0.5rem',
+          borderRadius: '1rem',
           position: 'relative',
           border: 'none',
-          width: 'auto',
-          height: 'auto'
+          inset: 'auto',
+          width: width,
+          height: height
         }
       }}>
-      <header>{title}</header>
+      <Header>
+        <Title size="extraLarge" weight="500" font="inter" align="center">
+          {title}
+        </Title>
+        <CloseButton type="button" onClick={onRequestClose}>
+          <BsXLg />
+          <span className="sr-only">Close</span>
+        </CloseButton>
+      </Header>
       {children}
-      <CloseButton type="button" onClick={onRequestClose}>
-        <BsXLg />
-        <span className="sr-only">Close</span>
-      </CloseButton>
     </ReactModal>
   );
 };

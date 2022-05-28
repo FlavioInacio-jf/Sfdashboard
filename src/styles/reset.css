@@ -5,7 +5,7 @@
 
 html, body, div, span,
 h1, h2, h3, h4, p, i, ul, li,
-fieldset, form, label, legend,
+fieldset, form, label, legend,input,textArea,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, footer, header, nav, section {
   margin: 0;

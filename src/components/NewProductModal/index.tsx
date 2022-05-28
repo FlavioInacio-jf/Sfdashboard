@@ -1,6 +1,12 @@
 import { FC } from 'react';
+import { BsCheckLg, BsXLg } from 'react-icons/bs';
 import { Modal } from '../../components/Modal';
 import { useDashboard } from '../../hooks/useDashboard';
+import { Button } from '../Button';
+import { Column } from '../Column';
+import { Input } from '../Form/Input';
+import { TextArea } from '../Form/TextArea';
+import { Form } from './styles';
 
 export const NewProductModal: FC = () => {
   const { isNewProductModalOpen, handleCloseNewProductModal } = useDashboard();
@@ -9,8 +15,31 @@ export const NewProductModal: FC = () => {
     <Modal
       title="Register new product"
       isOpen={isNewProductModalOpen}
-      onRequestClose={handleCloseNewProductModal}>
-      Teste
+      onRequestClose={handleCloseNewProductModal}
+      width="50rem"
+      height="55rem">
+      <Form>
+        <Input label="Name" name="name" type="text" />
+        <Input label="Price" name="price" mask="currency" />
+        <TextArea label="Description" name="description" margin="3rem 0 0 0" maxLength={205} />
+
+        <Column sizeColumns="auto auto" justifyItems="center" margin="3rem 0 0 0">
+          <Button
+            variant="danger"
+            size="large"
+            type="button"
+            positionIcon="left"
+            outline
+            onClick={handleCloseNewProductModal}>
+            <BsXLg />
+            Cancel
+          </Button>
+          <Button variant="primary" size="large" positionIcon="left" type="submit">
+            <BsCheckLg />
+            Register
+          </Button>
+        </Column>
+      </Form>
     </Modal>
   );
 };

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Modal from 'react-modal';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Routes } from './routes';
@@ -6,6 +7,7 @@ import { queryClient } from './services/query';
 import GlobalStyle from './styles/globalStyle';
 import { Theme } from './styles/Theme';
 
+Modal.setAppElement('#root');
 export const App: FC = () => {
   return (
     <Theme>

@@ -19,7 +19,7 @@ export default {
       description: 'Default: "primary"',
       control: {
         type: 'select',
-        options: ['primary', 'secondary', 'tertiary', 'quartenary', 'danger', 'success']
+        options: ['primary', 'secondary', 'tertiary', 'quartenary', 'danger', 'grey']
       }
     },
     flex: {

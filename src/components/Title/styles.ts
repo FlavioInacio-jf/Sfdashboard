@@ -6,6 +6,7 @@ export interface TitleStyledProps {
   variant?: 'primary' | 'danger' | 'grey' | 'light';
   size?: 'small' | 'large' | 'extraLarge';
   align?: 'center' | 'left' | 'right';
+  uppercase?: boolean;
   mxAuto?: boolean;
 }
 export const TitleStyled = styled.h1<TitleStyledProps>`
@@ -21,7 +22,13 @@ export const TitleStyled = styled.h1<TitleStyledProps>`
   font-size: 1.6rem;
   line-height: 2.08rem;
   text-align: ${({ align }) => align};
-  color: ${({ theme }) => theme.colours.neutrals[999]};
+  color: ${({ theme }) => theme.colours.neutrals[600]};
+
+  ${({ uppercase }) =>
+    uppercase &&
+    css`
+      text-transform: uppercase;
+    `};
 
   ${({ size }) =>
     size === 'small' &&

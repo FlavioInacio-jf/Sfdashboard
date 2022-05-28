@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import { useQuery } from 'react-query';
 import { NewProductModal } from '../../components/NewProductModal';
+import { ProductCard } from '../../components/ProductCard';
 import { TitleStyled } from '../../components/Title/styles';
 import { queryKey } from '../../constants/queryKeys';
 import { productService } from '../../services/productService';
 import { ProductType } from '../../types/productType';
+import { ContainerProducts } from './styles';
 
 export const Dashboard: FC = () => {
   const { index } = productService;
@@ -16,10 +18,12 @@ export const Dashboard: FC = () => {
       <TitleStyled size="large" weight="600" font="inter">
         My products
       </TitleStyled>
+      <ContainerProducts>
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </ContainerProducts>
 
-      {products.map((product) => (
-        <li key={product.id}>{product.description}</li>
-      ))}
       <NewProductModal />
     </>
   );

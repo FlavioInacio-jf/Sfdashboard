@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export interface ButtonStyledProps {
-  variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'tertiary' | 'quartenary';
+  variant?: 'primary' | 'secondary' | 'danger' | 'tertiary' | 'quartenary' | 'grey';
   outline?: boolean;
   size?: 'small' | 'large' | '';
   positionIcon?: 'left' | 'right';
@@ -71,6 +71,14 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
       background-color: ${outline ? 'transparent' : `${theme.colours.red[400]}`};
       color: ${outline ? `${theme.colours.red[400]}` : `${theme.colours.neutrals.O00}`};
       border: 0.1rem solid ${theme.colours.red[400]};
+    `};
+
+  ${({ variant, outline, theme }) =>
+    variant === 'grey' &&
+    css`
+      background-color: ${outline ? 'transparent' : `${theme.colours.neutrals[100]}`};
+      color: ${outline ? `${theme.colours.neutrals[400]}` : `${theme.colours.neutrals[400]}`};
+      border: 0.1rem solid ${theme.colours.neutrals[100]};
     `};
 
   ${({ size }) =>
@@ -143,6 +151,14 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
         background-color: ${outline ? `${theme.colours.red[400]}` : 'transparent'};
         color: ${outline ? `${theme.colours.neutrals.O00}` : `${theme.colours.red[400]}`};
         border: 0.1rem solid ${theme.colours.red[400]};
+      `};
+
+    ${({ variant, outline, theme }) =>
+      variant === 'grey' &&
+      css`
+        background-color: ${outline ? `${theme.colours.neutrals[100]}` : 'transparent'};
+        color: ${outline ? `${theme.colours.neutrals[700]}` : `${theme.colours.neutrals[400]}`};
+        border: 0.1rem solid ${theme.colours.neutrals[100]};
       `};
   }
 

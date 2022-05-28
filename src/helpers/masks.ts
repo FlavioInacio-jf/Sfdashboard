@@ -12,6 +12,9 @@ export const currency = (event: FormEvent<HTMLInputElement>) => {
 
 export const number = (event: FormEvent<HTMLInputElement>) => {
   let { value } = event.currentTarget;
+  const regex = new RegExp('^0+(?!$)', 'g');
+
   value = value.replace(/\D/g, '');
+  value = value.replace(regex, '');
   event.currentTarget.value = value;
 };

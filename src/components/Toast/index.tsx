@@ -4,7 +4,7 @@ import { ToastStyled } from './styles';
 export const Toast: FC = () => {
   return (
     <ToastStyled
-      position="top-center"
+      position="top-right"
       autoClose={1000 * 5}
       hideProgressBar={false}
       newestOnTop={false}

@@ -13,10 +13,9 @@ export const createProductMutation = () => {
       console.error(err);
       toast.error(`Hello, I had a problem creating your product!`);
     },
-    onSuccess: (result) => {
+    onSuccess: () => {
       queryClient.invalidateQueries('products');
       toast.success('Hello, your product was created successfully!');
-      console.log(result);
     }
   });
 };

@@ -14,7 +14,8 @@ export const productService = {
       console.error(err);
     }
   },
-  create: (product: ProductRegisterType, config?: AxiosRequestConfig) => post('', product, config),
+  create: (product: ProductRegisterType, config?: AxiosRequestConfig) =>
+    post(`${PRODUCTS}`, product, config),
   update: ({ id, ...rest }: ProductType, config?: AxiosRequestConfig) =>
     patch(`${PRODUCTS}/${id}`, rest, config),
   single: (id: string, config?: AxiosRequestConfig) => get(`${PRODUCTS}/${id}`, config),

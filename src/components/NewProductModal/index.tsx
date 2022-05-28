@@ -2,6 +2,7 @@ import { FC, FormEvent, useState } from 'react';
 import { BsCheckLg, BsXLg } from 'react-icons/bs';
 import { Modal } from '../../components/Modal';
 import { useDashboard } from '../../hooks/useDashboard';
+import { createProductMutation } from '../../mutations/createProductMutation';
 import { ProductRegisterType } from '../../types/productType';
 import { Button } from '../Button';
 import { Column } from '../Column';
@@ -16,6 +17,7 @@ export const NewProductModal: FC = () => {
     title: '',
     amount: 0
   });
+  const { mutate: createProductMutate } = createProductMutation();
 
   const { isNewProductModalOpen, handleCloseNewProductModal } = useDashboard();
 
@@ -26,6 +28,7 @@ export const NewProductModal: FC = () => {
   };
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    createProductMutate(product);
   };
 
   return (

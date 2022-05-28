@@ -2,7 +2,7 @@ import { FC, FormEvent, useState } from 'react';
 import { BsCheckLg, BsXLg } from 'react-icons/bs';
 import { Modal } from '../../components/Modal';
 import { useDashboard } from '../../hooks/useDashboard';
-import { ProductType } from '../../types/productType';
+import { ProductRegisterType } from '../../types/productType';
 import { Button } from '../Button';
 import { Column } from '../Column';
 import { Input } from '../Form/Input';
@@ -10,7 +10,7 @@ import { TextArea } from '../Form/TextArea';
 import { Form } from './styles';
 
 export const NewProductModal: FC = () => {
-  const [product, setProduct] = useState<Omit<ProductType, 'id'>>({
+  const [product, setProduct] = useState<ProductRegisterType>({
     description: '',
     price: 0,
     title: '',

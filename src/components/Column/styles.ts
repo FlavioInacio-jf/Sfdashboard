@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components';
 
-interface ColumnProps {
+export interface ColumnStyledProps {
   column?: string;
   sizeColumns?: string;
   justifyItems?: 'center' | 'start' | 'end';
-  justifyIContent?: 'center' | 'start' | 'end';
+  justifyContent?: 'center' | 'start' | 'end';
+  gap?: string;
   margin?: string;
 }
-export const Column = styled.div<ColumnProps>`
+export const ColumnStyled = styled.div<ColumnStyledProps>`
   width: 100%;
 
   display: grid;
@@ -22,8 +23,8 @@ export const Column = styled.div<ColumnProps>`
       grid-template-columns: ${sizeColumns};
     `};
   justify-items: ${({ justifyItems }) => justifyItems || 'center'};
-  justify-content: ${({ justifyIContent }) => justifyIContent || 'center'};
-  gap: 2rem;
+  justify-content: ${({ justifyContent }) => justifyContent || 'center'};
+  gap: ${({ gap }) => gap || '2rem'};
 
   margin: ${({ margin }) => margin || '0'};
 `;

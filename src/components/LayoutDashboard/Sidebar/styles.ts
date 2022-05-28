@@ -25,7 +25,7 @@ export const Brand = styled.div`
 `;
 
 export const SidebarListItems = styled.ul`
-  padding-top: 2rem;
+  padding-top: 1rem;
 `;
 
 interface SidebarItemProps {

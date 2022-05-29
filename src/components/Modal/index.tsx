@@ -10,6 +10,7 @@ interface ModalProps {
   isOpen: boolean;
   width?: string;
   height?: string;
+  padding?: string;
   onRequestClose: () => void;
 }
 export const Modal: FC<ModalProps> = ({
@@ -18,7 +19,8 @@ export const Modal: FC<ModalProps> = ({
   isOpen,
   onRequestClose,
   width = 'auto',
-  height = 'auto'
+  height = 'auto',
+  padding = '3rem'
 }) => {
   return (
     <ReactModal
@@ -27,18 +29,18 @@ export const Modal: FC<ModalProps> = ({
       overlayClassName="overlay-modal"
       style={{
         content: {
-          padding: '3rem',
+          padding,
           background: '#FFFFFF',
           WebkitOverflowScrolling: 'touch',
           borderRadius: '1rem',
           position: 'relative',
           border: 'none',
           inset: 'auto',
-          width: width,
-          height: height
+          width,
+          height
         }
       }}>
-      <Header>
+      <Header padding={padding === '0' ? '3rem 3rem 0 0' : '0'}>
         <Title size="extraLarge" weight="500" font="inter" align="center">
           {title}
         </Title>

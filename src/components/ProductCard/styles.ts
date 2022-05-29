@@ -5,7 +5,7 @@ export interface ProductCardContainerProps {
 }
 export const ProductCardContainer = styled.div<ProductCardContainerProps>`
   width: ${({ width }) => width || 'auto'};
-  max-width: 25rem;
+  max-width: 27rem;
   height: 35rem;
 
   display: flex;
@@ -58,16 +58,6 @@ export const ProductCardBody = styled.div`
     font-size: 2rem;
     font-weight: 600;
     color: ${({ theme }) => theme.colours.tertiary};
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    span {
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: ${({ theme }) => theme.colours.neutrals[400]};
-    }
   }
 `;
 

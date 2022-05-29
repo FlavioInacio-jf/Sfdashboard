@@ -3,6 +3,7 @@ import { BsPlusLg } from 'react-icons/bs';
 import { useQuery } from 'react-query';
 import emptyImg from '../../assets/empty.svg';
 import { Button } from '../../components/Button';
+import { DetailsProductModal } from '../../components/DetailsProductModal';
 import { EditProductModal } from '../../components/EditProductModal';
 import { Loader } from '../../components/Loader';
 import { Message } from '../../components/Message';
@@ -22,10 +23,13 @@ export const Dashboard: FC = () => {
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState({} as ProductUpdateType);
 
+  const [isDetailsProductModalOpen, setIsDetailsProductModalOpen] = useState(false);
+  const [seeingProduct, setSeeingProduct] = useState({} as ProductUpdateType);
+
   const { mutate: deleteProductMutate } = deleteProductMutation();
   const { handleOpenNewProductModal, searchDashboard } = useDashboard();
-  const { index } = productService;
-  const { data, isLoading } = useQuery<ProductType[]>(queryKey.products, index);
+  const { data, isLoading } = useQuery<ProductType[]>(queryKey.products, productService.index);
+
   const products = useMemo(() => data || [], [data]);
 
   const filteredProducts = useMemo(() => {
@@ -37,6 +41,13 @@ export const Dashboard: FC = () => {
   };
   const handleCloseEditProductModal = () => {
     setIsEditProductModalOpen(false);
+  };
+
+  const handleOpenDetailsProductModal = () => {
+    setIsDetailsProductModalOpen(true);
+  };
+  const handleDeleteDetailsProductModal = () => {
+    setIsDetailsProductModalOpen(false);
   };
 
   const handleDeleteProduct = (id: number) => {
@@ -60,7 +71,9 @@ export const Dashboard: FC = () => {
               key={product.id}
               product={product}
               onRequestOpenEditModal={handleOpenEditProductModal}
+              onRequestOpenDetailsModal={handleOpenDetailsProductModal}
               onAddProductEdit={setEditingProduct}
+              onAddProductDetails={setSeeingProduct}
               onDeleteProduct={handleDeleteProduct}
             />
           ))}
@@ -85,6 +98,11 @@ export const Dashboard: FC = () => {
       </RenderIf>
 
       <NewProductModal />
+      <DetailsProductModal
+        productSeeing={seeingProduct}
+        isOpen={isDetailsProductModalOpen}
+        onRequestClose={handleDeleteDetailsProductModal}
+      />
       <EditProductModal
         productEditing={editingProduct}
         isOpen={isEditProductModalOpen}

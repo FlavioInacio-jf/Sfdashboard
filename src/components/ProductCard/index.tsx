@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 import { FC, memo } from 'react';
-import { BsFillTrashFill, BsPen } from 'react-icons/bs';
+import { BsFillEyeFill, BsFillTrashFill, BsPen } from 'react-icons/bs';
 import { ProductType } from '../../types/productType';
 import { formatPrice } from '../../utils/format';
 import { Button } from '../Button';
@@ -18,17 +18,32 @@ import {
 export interface ProductCardProps extends ProductCardContainerProps {
   product: ProductType;
   onRequestOpenEditModal: () => void;
+  onRequestOpenDetailsModal: () => void;
   onAddProductEdit: (product: ProductType) => void;
+  onAddProductDetails: (product: ProductType) => void;
   onDeleteProduct: (id: number) => void;
 }
 export const ProductCard: FC<ProductCardProps> = memo(
-  ({ product, width, onRequestOpenEditModal, onAddProductEdit, onDeleteProduct }) => {
-    const { photo_url, title, description, price, amount, id } = product;
+  ({
+    product,
+    width,
+    onRequestOpenEditModal,
+    onRequestOpenDetailsModal,
+    onAddProductEdit,
+    onAddProductDetails,
+    onDeleteProduct
+  }) => {
+    const { photo_url, title, description, price, id } = product;
 
     const handleEditProduct = () => {
       onAddProductEdit(product);
       onRequestOpenEditModal();
     };
+    const handleDetailsProduct = () => {
+      onAddProductDetails(product);
+      onRequestOpenDetailsModal();
+    };
+
     return (
       <ProductCardContainer width={width}>
         <ProductCardHeader>
@@ -39,14 +54,16 @@ export const ProductCard: FC<ProductCardProps> = memo(
             {title}
           </Title>
           <p>{description}</p>
-          <span>
-            {formatPrice(price)} <span>{amount}</span>
-          </span>
+          <span>{formatPrice(price)}</span>
         </ProductCardBody>
         <ProductCardFooter>
-          <Column column="3" gap="0" justifyContent="center" justifyItems="center">
-            <Button type="button" variant="primary">
-              View details
+          <Column column="3" gap="0.5rem" justifyContent="center" justifyItems="center">
+            <Button
+              type="button"
+              variant="primary"
+              positionIcon="left"
+              onClick={handleDetailsProduct}>
+              <BsFillEyeFill /> View details
             </Button>
             <Button
               type="button"

@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+interface HeaderProps {
+  padding?: string;
+}
+export const Header = styled.header<HeaderProps>`
   position: relative;
 
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: ${({ padding }) => padding || 0};
 
   h1 {
     flex: 1;

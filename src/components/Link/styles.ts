@@ -168,9 +168,4 @@ export const LinkStyled = styled(Link)<LinkStyledProps>`
     css`
       padding: 0;
     `}
-
-  &:disabled {
-    cursor: default;
-    opacity: 0.65;
-  }
 `;

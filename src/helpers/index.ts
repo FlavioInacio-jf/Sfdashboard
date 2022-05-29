@@ -14,3 +14,7 @@ export const handleKeyUp = (mask: MasksType, event: FormEvent<HTMLInputElement>)
       break;
   }
 };
+
+export const search = (filter: string, value: string) => {
+  return filter.toLocaleLowerCase().includes(value.toLocaleLowerCase());
+};

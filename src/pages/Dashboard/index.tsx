@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 import { useQuery } from 'react-query';
 import emptyImg from '../../assets/empty.svg';
@@ -11,6 +11,7 @@ import { ProductCard } from '../../components/ProductCard';
 import { RenderIf } from '../../components/RenderIf';
 import { TitleStyled } from '../../components/Title/styles';
 import { queryKey } from '../../constants/queryKeys';
+import { search } from '../../helpers';
 import { useDashboard } from '../../hooks/useDashboard';
 import { deleteProductMutation } from '../../mutations/deleteProductMutation';
 import { productService } from '../../services/productService';
@@ -22,10 +23,14 @@ export const Dashboard: FC = () => {
   const [editingProduct, setEditingProduct] = useState({} as ProductUpdateType);
 
   const { mutate: deleteProductMutate } = deleteProductMutation();
-  const { handleOpenNewProductModal } = useDashboard();
+  const { handleOpenNewProductModal, searchDashboard } = useDashboard();
   const { index } = productService;
   const { data, isLoading } = useQuery<ProductType[]>(queryKey.products, index);
-  const products = data || [];
+  const products = useMemo(() => data || [], [data]);
+
+  const filteredProducts = useMemo(() => {
+    return products.filter(({ title }) => search(title, searchDashboard));
+  }, [products, searchDashboard]);
 
   const handleOpenEditProductModal = () => {
     setIsEditProductModalOpen(true);
@@ -50,7 +55,7 @@ export const Dashboard: FC = () => {
 
       <RenderIf condition={products.length > 0}>
         <ContainerProducts>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}

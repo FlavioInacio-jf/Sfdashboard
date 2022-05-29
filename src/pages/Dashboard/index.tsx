@@ -12,6 +12,7 @@ import { RenderIf } from '../../components/RenderIf';
 import { TitleStyled } from '../../components/Title/styles';
 import { queryKey } from '../../constants/queryKeys';
 import { useDashboard } from '../../hooks/useDashboard';
+import { deleteProductMutation } from '../../mutations/deleteProductMutation';
 import { productService } from '../../services/productService';
 import { ProductType, ProductUpdateType } from '../../types/productType';
 import { ContainerProducts } from './styles';
@@ -20,6 +21,7 @@ export const Dashboard: FC = () => {
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState({} as ProductUpdateType);
 
+  const { mutate: deleteProductMutate } = deleteProductMutation();
   const { handleOpenNewProductModal } = useDashboard();
   const { index } = productService;
   const { data, isLoading } = useQuery<ProductType[]>(queryKey.products, index);
@@ -30,6 +32,10 @@ export const Dashboard: FC = () => {
   };
   const handleCloseEditProductModal = () => {
     setIsEditProductModalOpen(false);
+  };
+
+  const handleDeleteProduct = (id: number) => {
+    deleteProductMutate(id);
   };
 
   return (
@@ -50,6 +56,7 @@ export const Dashboard: FC = () => {
               product={product}
               onRequestOpenEditModal={handleOpenEditProductModal}
               onAddProductEdit={setEditingProduct}
+              onDeleteProduct={handleDeleteProduct}
             />
           ))}
         </ContainerProducts>

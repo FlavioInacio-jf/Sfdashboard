@@ -19,5 +19,5 @@ export const productService = {
   update: ({ id, ...rest }: ProductUpdateType, config?: AxiosRequestConfig) =>
     patch(`${PRODUCTS}/${id}`, rest, config),
   single: (id: string, config?: AxiosRequestConfig) => get(`${PRODUCTS}/${id}`, config),
-  remove: (id: string, config?: AxiosRequestConfig) => destroy(`${PRODUCTS}/${id}`, config)
+  remove: (id: number, config?: AxiosRequestConfig) => destroy(`${PRODUCTS}/${id}`, config)
 };

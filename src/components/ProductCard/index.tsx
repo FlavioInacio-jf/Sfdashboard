@@ -17,14 +17,16 @@ export interface ProductCardProps extends ProductCardContainerProps {
   product: ProductType;
   onRequestOpenEditModal: () => void;
   onAddProductEdit: (product: ProductType) => void;
+  onDeleteProduct: (id: number) => void;
 }
 export const ProductCard: FC<ProductCardProps> = ({
   product,
   width,
   onRequestOpenEditModal,
-  onAddProductEdit
+  onAddProductEdit,
+  onDeleteProduct
 }) => {
-  const { photo_url, title, description, price, amount } = product;
+  const { photo_url, title, description, price, amount, id } = product;
 
   const handleEditProduct = () => {
     onAddProductEdit(product);
@@ -49,7 +51,11 @@ export const ProductCard: FC<ProductCardProps> = ({
           <Button type="button" variant="primary">
             View details
           </Button>
-          <Button type="button" variant="grey" title="Delete this product">
+          <Button
+            type="button"
+            variant="grey"
+            title="Delete this product"
+            onClick={() => onDeleteProduct(id)}>
             <BsFillTrashFill />
           </Button>
           <Button

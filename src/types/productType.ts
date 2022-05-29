@@ -10,3 +10,5 @@ export interface ProductType {
 }
 
 export type ProductRegisterType = Omit<ProductType, 'id' | 'createdAt' | 'updatedAt'>;
+
+export type ProductUpdateType = ProductType;

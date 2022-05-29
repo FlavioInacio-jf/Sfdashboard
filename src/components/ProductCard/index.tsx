@@ -15,10 +15,21 @@ import {
 
 export interface ProductCardProps extends ProductCardContainerProps {
   product: ProductType;
+  onRequestOpenEditModal: () => void;
+  onAddProductEdit: (product: ProductType) => void;
 }
-export const ProductCard: FC<ProductCardProps> = ({ product, width }) => {
+export const ProductCard: FC<ProductCardProps> = ({
+  product,
+  width,
+  onRequestOpenEditModal,
+  onAddProductEdit
+}) => {
   const { photo_url, title, description, price, amount } = product;
 
+  const handleEditProduct = () => {
+    onAddProductEdit(product);
+    onRequestOpenEditModal();
+  };
   return (
     <ProductCardContainer width={width}>
       <ProductCardHeader>
@@ -41,7 +52,11 @@ export const ProductCard: FC<ProductCardProps> = ({ product, width }) => {
           <Button type="button" variant="grey" title="Delete this product">
             <BsFillTrashFill />
           </Button>
-          <Button type="button" variant="grey" title="Edit this product">
+          <Button
+            type="button"
+            variant="grey"
+            title="Edit this product"
+            onClick={handleEditProduct}>
             <BsPen />
           </Button>
         </Column>

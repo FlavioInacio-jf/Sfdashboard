@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 import { useQuery } from 'react-query';
 import emptyImg from '../../assets/empty.svg';
 import { Button } from '../../components/Button';
+import { EditProductModal } from '../../components/EditProductModal';
 import { Loader } from '../../components/Loader';
 import { Message } from '../../components/Message';
 import { NewProductModal } from '../../components/NewProductModal';
@@ -12,14 +13,24 @@ import { TitleStyled } from '../../components/Title/styles';
 import { queryKey } from '../../constants/queryKeys';
 import { useDashboard } from '../../hooks/useDashboard';
 import { productService } from '../../services/productService';
-import { ProductType } from '../../types/productType';
+import { ProductType, ProductUpdateType } from '../../types/productType';
 import { ContainerProducts } from './styles';
 
 export const Dashboard: FC = () => {
+  const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState({} as ProductUpdateType);
+
   const { handleOpenNewProductModal } = useDashboard();
   const { index } = productService;
   const { data, isLoading } = useQuery<ProductType[]>(queryKey.products, index);
   const products = data || [];
+
+  const handleOpenEditProductModal = () => {
+    setIsEditProductModalOpen(true);
+  };
+  const handleCloseEditProductModal = () => {
+    setIsEditProductModalOpen(false);
+  };
 
   return (
     <>
@@ -34,7 +45,12 @@ export const Dashboard: FC = () => {
       <RenderIf condition={products.length > 0}>
         <ContainerProducts>
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onRequestOpenEditModal={handleOpenEditProductModal}
+              onAddProductEdit={setEditingProduct}
+            />
           ))}
         </ContainerProducts>
       </RenderIf>
@@ -57,6 +73,11 @@ export const Dashboard: FC = () => {
       </RenderIf>
 
       <NewProductModal />
+      <EditProductModal
+        productEditing={editingProduct}
+        isOpen={isEditProductModalOpen}
+        onRequestClose={handleCloseEditProductModal}
+      />
     </>
   );
 };

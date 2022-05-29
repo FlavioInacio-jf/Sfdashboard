@@ -1,19 +1,13 @@
 import { FC } from 'react';
-import { Route, RouteProps } from 'react-router-dom';
 import { LayoutDashboard } from '../components/LayoutDashboard';
 
-interface PrivateRouteProps extends RouteProps {
-  component: FC;
+interface PrivateRouteProps {
+  page: FC;
 }
-export const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }) => {
+export const PrivateRoute: FC<PrivateRouteProps> = ({ page: Page }) => {
   return (
-    <Route
-      {...rest}
-      element={
-        <LayoutDashboard>
-          <Component />
-        </LayoutDashboard>
-      }
-    />
+    <LayoutDashboard>
+      <Page />
+    </LayoutDashboard>
   );
 };

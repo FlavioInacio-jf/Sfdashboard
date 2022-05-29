@@ -22,7 +22,7 @@ export const Sidebar: FC = () => {
         </SidebarItem>
 
         <SidebarItem isCurrentPage={pathname === '/register'}>
-          <NavLink to="/" className="active-item-menu">
+          <NavLink to="/stocks" className="active-item-menu">
             <span className="sr-only">Home</span>
             <BsFillGridFill />
           </NavLink>

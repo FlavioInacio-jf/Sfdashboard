@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { PRODUCTS } from '../constants/endpoints';
-import { ProductRegisterType, ProductType } from '../types/productType';
+import { ProductRegisterType, ProductUpdateType } from '../types/productType';
 import { api } from './api';
 
 const { get, delete: destroy, post, patch } = api;
@@ -16,7 +16,7 @@ export const productService = {
   },
   create: (product: ProductRegisterType, config?: AxiosRequestConfig) =>
     post(`${PRODUCTS}`, product, config),
-  update: ({ id, ...rest }: ProductType, config?: AxiosRequestConfig) =>
+  update: ({ id, ...rest }: ProductUpdateType, config?: AxiosRequestConfig) =>
     patch(`${PRODUCTS}/${id}`, rest, config),
   single: (id: string, config?: AxiosRequestConfig) => get(`${PRODUCTS}/${id}`, config),
   remove: (id: string, config?: AxiosRequestConfig) => destroy(`${PRODUCTS}/${id}`, config)

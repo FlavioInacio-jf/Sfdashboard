@@ -1,5 +1,6 @@
 import { FC, FormEvent, useEffect, useState } from 'react';
 import { Modal } from '../../components/Modal';
+import { updateProductMutation } from '../../mutations/updateProductMutation';
 import { ProductUpdateType } from '../../types/productType';
 import { FormProduct } from '../FormProduct';
 
@@ -14,6 +15,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
   onRequestClose
 }) => {
   const [product, setProduct] = useState<ProductUpdateType>(productEditing);
+  const { mutate: updateProductMutate } = updateProductMutation();
 
   useEffect(() => {
     setProduct(productEditing);
@@ -26,7 +28,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
   };
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log(product);
+    updateProductMutate(product);
   };
 
   return (

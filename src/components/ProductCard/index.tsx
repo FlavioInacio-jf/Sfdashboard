@@ -1,4 +1,6 @@
-import { FC } from 'react';
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
+import { FC, memo } from 'react';
 import { BsFillTrashFill, BsPen } from 'react-icons/bs';
 import { ProductType } from '../../types/productType';
 import { formatPrice } from '../../utils/format';
@@ -19,54 +21,50 @@ export interface ProductCardProps extends ProductCardContainerProps {
   onAddProductEdit: (product: ProductType) => void;
   onDeleteProduct: (id: number) => void;
 }
-export const ProductCard: FC<ProductCardProps> = ({
-  product,
-  width,
-  onRequestOpenEditModal,
-  onAddProductEdit,
-  onDeleteProduct
-}) => {
-  const { photo_url, title, description, price, amount, id } = product;
+export const ProductCard: FC<ProductCardProps> = memo(
+  ({ product, width, onRequestOpenEditModal, onAddProductEdit, onDeleteProduct }) => {
+    const { photo_url, title, description, price, amount, id } = product;
 
-  const handleEditProduct = () => {
-    onAddProductEdit(product);
-    onRequestOpenEditModal();
-  };
-  return (
-    <ProductCardContainer width={width}>
-      <ProductCardHeader>
-        <img src={photo_url} alt={title} width="auto" height="auto" />
-      </ProductCardHeader>
-      <ProductCardBody>
-        <Title font="inter" weight="600" uppercase>
-          {title}
-        </Title>
-        <p>{description}</p>
-        <span>
-          {formatPrice(price)} <span>{amount}</span>
-        </span>
-      </ProductCardBody>
-      <ProductCardFooter>
-        <Column column="3" gap="0" justifyContent="center" justifyItems="center">
-          <Button type="button" variant="primary">
-            View details
-          </Button>
-          <Button
-            type="button"
-            variant="grey"
-            title="Delete this product"
-            onClick={() => onDeleteProduct(id)}>
-            <BsFillTrashFill />
-          </Button>
-          <Button
-            type="button"
-            variant="grey"
-            title="Edit this product"
-            onClick={handleEditProduct}>
-            <BsPen />
-          </Button>
-        </Column>
-      </ProductCardFooter>
-    </ProductCardContainer>
-  );
-};
+    const handleEditProduct = () => {
+      onAddProductEdit(product);
+      onRequestOpenEditModal();
+    };
+    return (
+      <ProductCardContainer width={width}>
+        <ProductCardHeader>
+          <img src={photo_url} alt={title} width="auto" height="auto" />
+        </ProductCardHeader>
+        <ProductCardBody>
+          <Title font="inter" weight="600" uppercase>
+            {title}
+          </Title>
+          <p>{description}</p>
+          <span>
+            {formatPrice(price)} <span>{amount}</span>
+          </span>
+        </ProductCardBody>
+        <ProductCardFooter>
+          <Column column="3" gap="0" justifyContent="center" justifyItems="center">
+            <Button type="button" variant="primary">
+              View details
+            </Button>
+            <Button
+              type="button"
+              variant="grey"
+              title="Delete this product"
+              onClick={() => onDeleteProduct(id)}>
+              <BsFillTrashFill />
+            </Button>
+            <Button
+              type="button"
+              variant="grey"
+              title="Edit this product"
+              onClick={handleEditProduct}>
+              <BsPen />
+            </Button>
+          </Column>
+        </ProductCardFooter>
+      </ProductCardContainer>
+    );
+  }
+);

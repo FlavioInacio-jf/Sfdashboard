@@ -6,5 +6,5 @@ interface RenderIfProps {
 }
 
 export const RenderIf: FC<RenderIfProps> = ({ children, condition }) => {
-  return <>{condition ? { children } : null}</>;
+  return <>{condition ? children : null}</>;
 };

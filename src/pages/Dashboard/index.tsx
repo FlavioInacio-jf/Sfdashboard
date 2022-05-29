@@ -3,6 +3,7 @@ import { BsPlusLg } from 'react-icons/bs';
 import { useQuery } from 'react-query';
 import emptyImg from '../../assets/empty.svg';
 import { Button } from '../../components/Button';
+import { Loader } from '../../components/Loader';
 import { Message } from '../../components/Message';
 import { NewProductModal } from '../../components/NewProductModal';
 import { ProductCard } from '../../components/ProductCard';
@@ -17,7 +18,7 @@ import { ContainerProducts } from './styles';
 export const Dashboard: FC = () => {
   const { handleOpenNewProductModal } = useDashboard();
   const { index } = productService;
-  const { data } = useQuery<ProductType[]>(queryKey.products, index);
+  const { data, isLoading } = useQuery<ProductType[]>(queryKey.products, index);
   const products = data || [];
 
   return (
@@ -25,6 +26,10 @@ export const Dashboard: FC = () => {
       <TitleStyled size="large" weight="600" font="inter">
         My products
       </TitleStyled>
+
+      <RenderIf condition={isLoading}>
+        <Loader />
+      </RenderIf>
 
       <RenderIf condition={products.length > 0}>
         <ContainerProducts>

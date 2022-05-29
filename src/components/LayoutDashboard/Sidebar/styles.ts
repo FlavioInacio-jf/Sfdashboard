@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.nav`
   grid-area: sidebar;
@@ -28,10 +28,7 @@ export const SidebarListItems = styled.ul`
   padding-top: 1rem;
 `;
 
-interface SidebarItemProps {
-  isCurrentPage: boolean;
-}
-export const SidebarItem = styled.li<SidebarItemProps>`
+export const SidebarItem = styled.li`
   display: flex;
   justify-content: center;
 
@@ -41,13 +38,10 @@ export const SidebarItem = styled.li<SidebarItemProps>`
 
   transition: 0.3s ease-in-out;
 
-  ${({ isCurrentPage }) =>
-    isCurrentPage &&
-    css`
-      color: ${({ theme }) => theme.colours.neutrals.O00};
-    `}
-
   & + & {
     margin-top: 2rem;
+  }
+  .menu-item-link.active {
+    color: ${({ theme }) => theme.colours.neutrals.O00};
   }
 `;

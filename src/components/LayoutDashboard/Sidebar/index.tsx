@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { BsFillGridFill } from 'react-icons/bs';
-import { NavLink, useLocation } from 'react-router-dom';
+import { FaDolly } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 import { Brand, Container, SidebarItem, SidebarListItems } from './styles';
 
 export const Sidebar: FC = () => {
-  const { pathname } = useLocation();
   return (
     <Container>
       <Brand>
@@ -14,17 +14,17 @@ export const Sidebar: FC = () => {
         </NavLink>
       </Brand>
       <SidebarListItems>
-        <SidebarItem isCurrentPage={pathname === '/'}>
-          <NavLink to="/" className="active-item-menu">
+        <SidebarItem>
+          <NavLink to="/" className="menu-item-link">
             <span className="sr-only">Home</span>
             <BsFillGridFill />
           </NavLink>
         </SidebarItem>
 
-        <SidebarItem isCurrentPage={pathname === '/register'}>
-          <NavLink to="/stocks" className="active-item-menu">
-            <span className="sr-only">Home</span>
-            <BsFillGridFill />
+        <SidebarItem>
+          <NavLink to="/stocks" className="menu-item-link">
+            <span className="sr-only">Stocks</span>
+            <FaDolly />
           </NavLink>
         </SidebarItem>
       </SidebarListItems>

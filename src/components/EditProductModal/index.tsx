@@ -41,6 +41,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
         onChange={handleChange}
         onSubmit={handleSubmit}
         onRequestClose={onRequestClose}
+        type="update"
       />
     </Modal>
   );

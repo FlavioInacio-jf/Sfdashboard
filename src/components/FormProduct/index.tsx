@@ -11,12 +11,14 @@ interface FormProductProps {
   onSubmit: (event: FormEvent) => void;
   onChange: (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   product: ProductRegisterType;
+  type?: 'update' | 'create';
 }
 export const FormProduct: FC<FormProductProps> = ({
   onSubmit,
   product,
   onChange,
-  onRequestClose
+  onRequestClose,
+  type = 'create'
 }) => {
   return (
     <form onSubmit={onSubmit}>
@@ -80,7 +82,7 @@ export const FormProduct: FC<FormProductProps> = ({
         </Button>
         <Button variant="primary" size="large" positionIcon="left" type="submit">
           <BsCheckLg />
-          Register
+          {type === 'create' ? 'Create' : 'Update'}
         </Button>
       </Column>
     </form>

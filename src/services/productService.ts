@@ -9,7 +9,7 @@ export const productService = {
   index: async () => {
     try {
       const res = await get(`${PRODUCTS}`);
-      return res.data;
+      return res.data.result;
     } catch (err) {
       console.error(err);
     }

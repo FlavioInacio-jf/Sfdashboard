@@ -22,11 +22,11 @@ export const DetailsProductModal: FC<DetailsProductModalProps> = ({
   onRequestClose,
   productSeeing
 }) => {
-  const { title, price, description, photo_url, amount } = productSeeing;
+  const { name, price, description, photo_url, amount } = productSeeing;
 
   return (
     <Modal
-      title={`Details ${title}`}
+      title={`Details ${name}`}
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       width="50rem"
@@ -34,11 +34,11 @@ export const DetailsProductModal: FC<DetailsProductModalProps> = ({
       <Container>
         <OverflowVertical>
           <DetailsProductHeader>
-            <img src={photo_url} alt={title} width="auto" height="auto" />
+            <img src={photo_url} alt={name} width="auto" height="auto" />
           </DetailsProductHeader>
           <DetailsProductBody>
             <Title font="inter" weight="600" size="large" uppercase>
-              {title}
+              {name}
             </Title>
             <p>{description}</p>
           </DetailsProductBody>

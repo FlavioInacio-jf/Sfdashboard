@@ -33,7 +33,7 @@ export const ProductCard: FC<ProductCardProps> = memo(
     onAddProductDetails,
     onDeleteProduct
   }) => {
-    const { photo_url, title, description, price, id } = product;
+    const { photo_url, name, description, price, id } = product;
 
     const handleEditProduct = () => {
       onAddProductEdit(product);
@@ -47,11 +47,11 @@ export const ProductCard: FC<ProductCardProps> = memo(
     return (
       <ProductCardContainer width={width}>
         <ProductCardHeader>
-          <img src={photo_url} alt={title} width="auto" height="auto" />
+          <img src={photo_url} alt={name} width="auto" height="auto" />
         </ProductCardHeader>
         <ProductCardBody>
           <Title font="inter" weight="600" uppercase>
-            {title}
+            {name}
           </Title>
           <p>{description}</p>
           <span>{formatPrice(price)}</span>

@@ -12,7 +12,7 @@ export const Apple = Template.bind({});
 Apple.args = {
   product: {
     id: 1,
-    title: 'Apple',
+    name: 'Apple',
     description: 'Lorem ipsum dolor sit amet, consectetur adip',
     price: 2000,
     amount: 2,

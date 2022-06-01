@@ -33,7 +33,7 @@ export const Dashboard: FC = () => {
   const products = useMemo(() => data || [], [data]);
 
   const filteredProducts = useMemo(() => {
-    return products.filter(({ title }) => search(title, searchDashboard));
+    return products.filter(({ name }) => search(name, searchDashboard));
   }, [products, searchDashboard]);
 
   const handleOpenEditProductModal = () => {
@@ -104,7 +104,7 @@ export const Dashboard: FC = () => {
         onRequestClose={handleDeleteDetailsProductModal}
       />
       <EditProductModal
-        productEditing={editingProduct}
+        product={editingProduct}
         isOpen={isEditProductModalOpen}
         onRequestClose={handleCloseEditProductModal}
       />

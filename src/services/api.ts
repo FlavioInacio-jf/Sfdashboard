@@ -1,12 +1,11 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { BASE_URL } from '../constants/endpoints';
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json'
-  },
-  timeout: 10000
+  }
 });
 
 api.interceptors.request.use((config: AxiosRequestConfig) => {
@@ -17,3 +16,6 @@ api.interceptors.request.use((config: AxiosRequestConfig) => {
   }
   return config;
 });
+api.interceptors.response.use((response) => response);
+
+export { api };

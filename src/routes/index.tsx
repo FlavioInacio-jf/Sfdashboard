@@ -9,9 +9,9 @@ export const Routes = () => {
   return (
     <BrowserRouter>
       <RoutesRouterDom>
-        <Route path="/" element={<PrivateRoute page={Dashboard} />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/products" element={<PrivateRoute page={Dashboard} />} />
         <Route path="/stocks" element={<PrivateRoute page={Stocks} />} />
-        <Route path="/login" element={<Login />} />
         <Route path="*" element={<Custom404 />} />
       </RoutesRouterDom>
     </BrowserRouter>

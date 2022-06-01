@@ -47,8 +47,8 @@ export const TitleStyled = styled.h1<TitleStyledProps>`
   ${({ size }) =>
     size === 'extraLarge' &&
     css`
-      font-size: 2.8rem;
-      line-height: 3.64rem;
+      font-size: 3.6rem;
+      line-height: 4.68rem;
     `};
 
   ${({ variant, theme }) =>

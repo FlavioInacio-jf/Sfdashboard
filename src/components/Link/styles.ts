@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export interface LinkStyledProps {
-  variant?: 'primary' | 'secondary' | 'danger' | 'tertiary' | 'quartenary' | 'grey';
+  variant?: 'primary' | 'secondary' | 'danger' | 'tertiary' | 'quartenary' | 'grey' | 'light';
   outline?: boolean;
   size?: 'small' | 'large' | '';
   positionIcon?: 'left' | 'right';
@@ -80,6 +80,13 @@ export const LinkStyled = styled(Link)<LinkStyledProps>`
       background-color: ${outline ? 'transparent' : `${theme.colours.neutrals[100]}`};
       color: ${outline ? `${theme.colours.neutrals[400]}` : `${theme.colours.neutrals[400]}`};
       border: 0.1rem solid ${theme.colours.neutrals[100]};
+    `};
+  ${({ variant, outline, theme }) =>
+    variant === 'light' &&
+    css`
+      background-color: ${outline ? 'transparent' : `${theme.colours.neutrals.O00}`};
+      color: ${outline ? `${theme.colours.neutrals[700]}` : `${theme.colours.neutrals[700]}`};
+      border: 0.1rem solid ${theme.colours.neutrals.O00};
     `};
 
   ${({ size }) =>

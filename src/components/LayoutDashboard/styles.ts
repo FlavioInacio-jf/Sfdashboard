@@ -8,6 +8,10 @@ export const Container = styled.div`
   grid-template-columns: 10rem 1fr;
   grid-template-rows: 6.2rem 1fr;
   grid-template-areas: 'sidebar header' 'sidebar content';
+
+  @media (max-width: 1080px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Content = styled.div`

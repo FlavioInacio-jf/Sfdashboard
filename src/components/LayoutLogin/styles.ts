@@ -7,7 +7,10 @@ export const Container = styled.main`
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr;
-  justify-items: space-between;
+
+  @media (max-width: 1080px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const FirstContent = styled.section`
@@ -29,6 +32,8 @@ export const SecondContent = styled.div`
   align-items: center;
   justify-content: center;
 
+  padding: 0 2rem;
+
   background-image: linear-gradient(
     to right bottom,
     #00af91,
@@ -44,6 +49,10 @@ export const SecondContent = styled.div`
     #007965,
     #007965
   );
+
+  @media (max-width: 1080px) {
+    display: none;
+  }
 `;
 
 export const SecondContentDescription = styled.p`

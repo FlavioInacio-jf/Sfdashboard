@@ -71,4 +71,10 @@ export default createGlobalStyle`
     display: none;
   }
 
+
+  @media (max-width: 1080px) {
+    html {
+      font-size: 56.25%;
+    }
+  }
 `;

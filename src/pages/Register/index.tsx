@@ -8,6 +8,8 @@ import { CreateUserMutation } from '../../mutations/createUserMutation';
 import { UserRegisterType } from '../../types/userType';
 import { Form } from './styles';
 
+const photo_default =
+  'https://images.unsplash.com/photo-1523626797181-8c5ae80d40c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80';
 export const Register: FC = () => {
   const {
     register,
@@ -21,7 +23,10 @@ export const Register: FC = () => {
   const { mutate: createUserMutate } = CreateUserMutation();
 
   const onSubmit = (data: UserRegisterType) => {
-    createUserMutate(data);
+    createUserMutate({
+      ...data,
+      photo_url: data.photo_url || photo_default
+    });
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

@@ -11,6 +11,9 @@ import { Column } from '../Column';
 import { Input } from '../Form/Input';
 import { TextArea } from '../Form/TextArea';
 
+const photo_product =
+  'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
+
 export const NewProductModal: FC = () => {
   const {
     register,
@@ -28,7 +31,11 @@ export const NewProductModal: FC = () => {
   const onSubmit = (data: ProductRegisterType) => {
     const priceNumber = convertPriceToNumber(data.price);
 
-    createProductMutate({ ...data, price: priceNumber });
+    createProductMutate({
+      ...data,
+      price: priceNumber,
+      photo_url: data.photo_url || photo_product
+    });
     reset();
     handleCloseNewProductModal();
   };
@@ -59,7 +66,6 @@ export const NewProductModal: FC = () => {
             type="text"
             placeholder="Ex.: https://photos.google.com/photos"
             register={register}
-            rules={{ required: 'Photo is required' }}
             errors={errors}
           />
         </Column>

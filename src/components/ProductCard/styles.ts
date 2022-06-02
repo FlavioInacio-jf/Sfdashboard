@@ -16,6 +16,8 @@ export const ProductCardContainer = styled.div<ProductCardContainerProps>`
   border-radius: 0.5rem;
 
   cursor: pointer;
+
+  overflow: hidden;
 `;
 
 export const ProductCardHeader = styled.header`
@@ -27,10 +29,12 @@ export const ProductCardHeader = styled.header`
   margin-bottom: 1rem;
 
   img {
+    width: 100%;
+    height: 100%;
+
     aspect-ratio: 2/1;
     border-radius: 0.5rem 0.5rem 0 0;
     object-fit: cover;
-    height: 100%;
   }
 `;
 
@@ -50,6 +54,11 @@ export const ProductCardBody = styled.div`
 
     margin-top: 0.5rem;
     margin-bottom: 1rem;
+  }
+
+  h1 {
+    overflow: hidden;
+    white-space: nowrap;
   }
   > span {
     width: 100%;

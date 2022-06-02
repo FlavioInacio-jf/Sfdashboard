@@ -79,5 +79,6 @@ export default createGlobalStyle`
     html {
       font-size: 56.25%;
     }
+
   }
 `;

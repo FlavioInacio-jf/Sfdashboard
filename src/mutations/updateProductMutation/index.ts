@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { AxiosError } from 'axios';
 import { parseCookies } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
@@ -18,9 +19,12 @@ export const updateProductMutation = () => {
   };
 
   return useMutation((product: ProductUpdateType) => update(product, config), {
-    onError: (err) => {
-      console.error(err);
-      toast.error(`Hi, I had a problem updating your product!`);
+    onError: (err: AxiosError) => {
+      if (err?.response?.status === 422) {
+        toast.error('Hello, there are fields with validation error.');
+      } else {
+        toast.error(`Hello, I had a problem updating your product!`);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries(queryKey.products);

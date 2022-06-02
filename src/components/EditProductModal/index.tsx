@@ -33,10 +33,15 @@ export const EditProductModal: FC<EditProductModalProps> = ({
     reset(product);
   }, [product, reset]);
 
-  const { mutate: updateProductMutate } = updateProductMutation();
+  const { mutate: updateProductMutate, isSuccess } = updateProductMutation();
 
   const onSubmit = (data: ProductUpdateType) => {
     updateProductMutate({ ...data, category: 'oii' });
+
+    if (isSuccess) {
+      reset();
+      onRequestClose();
+    }
   };
 
   return (
@@ -46,7 +51,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
       onRequestClose={onRequestClose}
       width="50rem"
       height="63rem">
-      <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%' }}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Input<ProductUpdateType>
           label="Name"
           name="name"

@@ -2,7 +2,8 @@ import NextLink from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 import { FC } from 'react';
-import { BsFillGridFill } from 'react-icons/bs';
+import { BsBoxArrowRight, BsFillGridFill } from 'react-icons/bs';
+import { LogoutMutation } from '../../../mutations/logoutMutation';
 import { Link } from '../../Link';
 import { Brand, Container, SidebarItem, SidebarListItems } from './styles';
 
@@ -15,7 +16,11 @@ export const signOut = () => {
 
 export const Sidebar: FC = () => {
   const { pathname } = useRouter();
+  const { mutate: logoutMutate } = LogoutMutation();
 
+  const handleLogout = () => {
+    logoutMutate();
+  };
   return (
     <Container>
       <Brand>
@@ -32,6 +37,13 @@ export const Sidebar: FC = () => {
             <BsFillGridFill />
             <span className="sr-only">Home</span>
           </Link>
+        </SidebarItem>
+
+        <SidebarItem isActive={true} onClick={handleLogout}>
+          <a>
+            <BsBoxArrowRight />
+            <span className="sr-only">Logout</span>
+          </a>
         </SidebarItem>
       </SidebarListItems>
     </Container>

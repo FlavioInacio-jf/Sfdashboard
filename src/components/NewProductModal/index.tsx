@@ -24,7 +24,7 @@ export const NewProductModal: FC = () => {
     mode: 'onBlur'
   });
 
-  const { mutate: createProductMutate } = createProductMutation();
+  const { mutate: createProductMutate, isSuccess } = createProductMutation();
 
   const { isNewProductModalOpen, handleCloseNewProductModal } = useDashboard();
 
@@ -36,8 +36,10 @@ export const NewProductModal: FC = () => {
       price: priceNumber,
       photo_url: data.photo_url || photo_product
     });
-    reset();
-    handleCloseNewProductModal();
+    if (isSuccess) {
+      reset();
+      handleCloseNewProductModal();
+    }
   };
 
   return (

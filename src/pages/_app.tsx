@@ -6,7 +6,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import 'react-toastify/dist/ReactToastify.css';
 import { LayoutDashboard } from '../components/LayoutDashboard';
 import { LayoutLogin } from '../components/LayoutLogin';
-import { AuthProvider } from '../contexts/AuthContext';
 import { queryClient } from '../services/query';
 import GlobalStyle from '../styles/globalStyle';
 import '../styles/reset.css';
@@ -52,12 +51,10 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
       <Theme>
         <GlobalStyle />
         <QueryClientProvider client={queryClient}>
-          <AuthProvider>
-            <LayoutDashboard>
-              <Component {...pageProps} />
-              <ReactQueryDevtools initialIsOpen />
-            </LayoutDashboard>
-          </AuthProvider>
+          <LayoutDashboard>
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen />
+          </LayoutDashboard>
         </QueryClientProvider>
       </Theme>
     </>

@@ -44,11 +44,20 @@ export const Brand = styled.div`
 `;
 
 export const SidebarListItems = styled.ul`
+  height: calc(100vh - 114px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   padding-top: 1rem;
 
   @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    height: auto;
+
     display: flex;
-    align-items: center;
+    flex-direction: row;
+
     justify-content: center;
 
     gap: 2rem;
@@ -63,10 +72,11 @@ export const SidebarItem = styled.li<{ isActive: boolean }>`
   transition: 0.3s ease-in-out;
 
   & + & {
-    margin-top: 2rem;
+    margin-top: auto;
   }
   a {
     display: flex;
+    justify-content: center;
     flex-direction: column;
 
     font-size: 2.4rem;
@@ -86,6 +96,11 @@ export const SidebarItem = styled.li<{ isActive: boolean }>`
       margin-top: 0;
     }
 
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .sr-only {
       position: relative;
       width: auto;

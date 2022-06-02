@@ -41,7 +41,7 @@ export const Modal: FC<ModalProps> = ({
         }
       }}>
       <Header padding={padding === '0' ? '3rem 3rem 0 0' : '0'}>
-        <Title size="extraLarge" weight="500" font="inter" align="center">
+        <Title size="large" weight="500" font="inter" align="center">
           {title}
         </Title>
         <CloseButton type="button" onClick={onRequestClose}>

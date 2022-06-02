@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import Router from 'next/router';
 import { setCookie } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
@@ -35,6 +36,7 @@ export const LoginMutation = () => {
       });
 
       api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+      Router.push('/products');
     }
   });
 };

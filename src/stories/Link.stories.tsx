@@ -61,7 +61,7 @@ Primary.args = {
   children: 'Hello World',
   variant: 'primary',
   size: 'small',
-  to: '/'
+  href: '/'
 };
 
 export const Secondary = Template.bind({});
@@ -69,7 +69,7 @@ Secondary.args = {
   children: 'Secondary',
   variant: 'secondary',
   size: 'small',
-  to: '/'
+  href: '/'
 };
 
 export const Tertiary = Template.bind({});
@@ -77,7 +77,7 @@ Tertiary.args = {
   children: 'Tertiary',
   variant: 'tertiary',
   size: 'small',
-  to: '/'
+  href: '/'
 };
 
 export const Quartenary = Template.bind({});
@@ -85,7 +85,7 @@ Quartenary.args = {
   children: 'Quartenary',
   variant: 'quartenary',
   size: 'small',
-  to: '/'
+  href: '/'
 };
 
 export const Danger = Template.bind({});
@@ -93,7 +93,7 @@ Danger.args = {
   children: 'Danger',
   variant: 'danger',
   size: 'small',
-  to: '/'
+  href: '/'
 };
 
 export const Small = Template.bind({});
@@ -101,7 +101,7 @@ Small.args = {
   children: 'Small',
   variant: 'danger',
   size: 'small',
-  to: '/'
+  href: '/'
 };
 
 export const Large = Template.bind({});
@@ -109,7 +109,7 @@ Large.args = {
   children: 'Large',
   variant: 'primary',
   size: 'large',
-  to: '/'
+  href: '/'
 };
 
 export const Icon = Template.bind({});
@@ -122,5 +122,5 @@ Icon.args = {
   variant: 'primary',
   size: 'large',
   positionIcon: 'left',
-  to: '/'
+  href: '/'
 };

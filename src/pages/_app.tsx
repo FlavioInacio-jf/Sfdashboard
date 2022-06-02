@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import 'react-toastify/dist/ReactToastify.css';
 import { LayoutDashboard } from '../components/LayoutDashboard';
 import { LayoutLogin } from '../components/LayoutLogin';
+import { AuthProvider } from '../contexts/AuthContext';
 import { queryClient } from '../services/query';
 import GlobalStyle from '../styles/globalStyle';
 import '../styles/reset.css';
@@ -15,7 +16,7 @@ Modal.setAppElement('#__next');
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const MyApp = ({ Component, pageProps, router }: AppProps) => {
-  if (router.pathname === '/') {
+  if (router.pathname === '/' || router.pathname === '/register') {
     return (
       <>
         <Head>
@@ -27,6 +28,7 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
         </Head>
         <Theme>
           <GlobalStyle />
+
           <QueryClientProvider client={queryClient}>
             <LayoutLogin>
               <Component {...pageProps} />
@@ -50,10 +52,12 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => {
       <Theme>
         <GlobalStyle />
         <QueryClientProvider client={queryClient}>
-          <LayoutDashboard>
-            <Component {...pageProps} />
-            <ReactQueryDevtools initialIsOpen />
-          </LayoutDashboard>
+          <AuthProvider>
+            <LayoutDashboard>
+              <Component {...pageProps} />
+              <ReactQueryDevtools initialIsOpen />
+            </LayoutDashboard>
+          </AuthProvider>
         </QueryClientProvider>
       </Theme>
     </>

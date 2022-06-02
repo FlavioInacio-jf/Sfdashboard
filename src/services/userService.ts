@@ -4,11 +4,13 @@ import { users } from '../constants/endpoints';
 import { UserRegisterType } from '../types/userType';
 import { api } from './api';
 
+let cookies = parseCookies();
 const { get, post } = api;
 
 export const userService = {
   me: async () => {
-    const { 'SFDashboard.auth.token': token } = parseCookies();
+    cookies = parseCookies();
+    const { 'SFDashboard.auth.token': token } = cookies;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`
@@ -18,7 +20,7 @@ export const userService = {
       const { data } = await get(`${users}/me`, config);
       return data.result;
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   },
   create: async (user: UserRegisterType, config?: AxiosRequestConfig) =>

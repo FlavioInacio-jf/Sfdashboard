@@ -17,6 +17,7 @@ import { useDashboard } from '../../hooks/useDashboard';
 import { deleteProductMutation } from '../../mutations/deleteProductMutation';
 import { productService } from '../../services/productService';
 import { ProductType, ProductUpdateType } from '../../types/productType';
+import { withSSRAuth } from '../../utils/withSSRAuth';
 import { ContainerProducts } from './styles';
 
 const Products: NextPage = () => {
@@ -113,3 +114,9 @@ const Products: NextPage = () => {
 };
 
 export default Products;
+
+export const getServerSideProps = withSSRAuth(async () => {
+  return {
+    props: {}
+  };
+});

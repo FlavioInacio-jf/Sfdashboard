@@ -7,6 +7,7 @@ import { Input } from '../components/Form/Input';
 import { LoginMutation } from '../mutations/LoginMutation';
 import { Form } from '../styles/homeStyles';
 import { CredentialsType } from '../types/credentialsType';
+import { withSSRGuest } from '../utils/withSSRGuest';
 
 const Login: NextPage = () => {
   const {
@@ -61,3 +62,9 @@ const Login: NextPage = () => {
 };
 
 export default Login;
+
+export const getServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {}
+  };
+});

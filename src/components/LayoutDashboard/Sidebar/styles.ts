@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.nav`
   grid-area: sidebar;
@@ -13,6 +13,8 @@ export const Brand = styled.div`
   padding: 2rem 0;
 
   .brand {
+    display: block;
+
     padding: 0 2rem;
 
     font-family: ${({ theme }) => theme.font.fontFamily[1]};
@@ -32,20 +34,27 @@ export const SidebarListItems = styled.ul`
   padding-top: 1rem;
 `;
 
-export const SidebarItem = styled.li`
+export const SidebarItem = styled.li<{ isActive: boolean }>`
   display: flex;
   justify-content: center;
-
-  font-size: 2.4rem;
-  text-align: center;
-  color: ${({ theme }) => theme.colours.secondary};
 
   transition: 0.3s ease-in-out;
 
   & + & {
     margin-top: 2rem;
   }
-  .menu-item-link.active {
-    color: ${({ theme }) => theme.colours.neutrals.O00};
+  a {
+    display: block;
+
+    font-size: 2.4rem;
+    text-align: center;
+    color: ${({ theme }) => theme.colours.secondary};
   }
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      a {
+        color: ${({ theme }) => theme.colours.neutrals.O00};
+      }
+    `}
 `;

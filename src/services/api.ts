@@ -1,6 +1,15 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { destroyCookie, parseCookies, setCookie } from 'nookies';
+import { parseCookies, setCookie } from 'nookies';
+import { signOut } from '../components/LayoutDashboard/Sidebar';
 import { BASE_URL } from '../constants/endpoints';
+
+interface MessageErrorType {
+  message: string;
+  code: number;
+  path: string;
+}
+
+let cookies = parseCookies();
 
 interface MessageErrorType {
   message: string;
@@ -19,7 +28,8 @@ const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  timeout: 1000
 });
 
 api.interceptors.request.use((config: AxiosRequestConfig) => {
@@ -36,11 +46,11 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       if (error.response?.data?.message === 'token expired') {
         const originalConfig = error.config;
+        cookies = parseCookies();
 
-        const { 'SFDashboard.auth.refreshToken': refreshToken } = parseCookies();
-
+        const { 'SFDashboard.auth.refreshToken': refreshToken } = cookies;
         if (!isRefreshing) {
-          isRefreshing = false;
+          isRefreshing = true;
 
           api
             .post(
@@ -64,18 +74,20 @@ api.interceptors.response.use(
                 maxAge: 60 * 60 * 24 * 3, // 3 days
                 path: '/'
               });
+              api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
               failedRequestsQueue.forEach((request) => request.onSuccess(accessToken));
               failedRequestsQueue = [];
             })
             .catch((err) => {
-              console.error(err);
-              destroyCookie(null, 'SFDashboard.auth.token', { path: '/' });
-              destroyCookie(null, 'SFDashboard.auth.refreshToken', { path: '/' });
-
               failedRequestsQueue.forEach((request) => request.onFailure(err));
+              failedRequestsQueue = [];
+
+              signOut();
             })
-            .finally(() => (isRefreshing = false));
+            .finally(() => {
+              isRefreshing = false;
+            });
         }
 
         return new Promise((resolve, reject) => {
@@ -85,20 +97,20 @@ api.interceptors.response.use(
                 Authorization: `Bearer ${token}`
               };
 
-              resolve(api(originalConfig));
+              return resolve(api(originalConfig));
             },
             onFailure: (err: AxiosError) => {
-              reject(err);
+              return reject(err);
             }
           });
         });
       } else {
-        destroyCookie(null, 'SFDashboard.auth.token', { path: '/' });
-        destroyCookie(null, 'SFDashboard.auth.refreshToken', { path: '/' });
+        return signOut();
       }
     }
+
     return Promise.reject(error);
   }
 );
-//invalid token! or token missing
+
 export { api };

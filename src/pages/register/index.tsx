@@ -14,15 +14,19 @@ const Register: NextPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isDirty, isValid, isSubmitting }
   } = useForm<UserRegisterType>({
     mode: 'onBlur',
     reValidateMode: 'onBlur'
   });
 
-  const { mutate: createUserMutate } = CreateUserMutation();
+  const { mutate: createUserMutate, isSuccess } = CreateUserMutation();
 
   const onSubmit = (data: UserRegisterType) => {
+    if (!isSuccess) {
+      reset();
+    }
     createUserMutate({
       ...data,
       photo_url: data.photo_url || photo_default

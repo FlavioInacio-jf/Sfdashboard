@@ -48,6 +48,7 @@ export const HeaderWrapperActions = styled.div`
 export const HeaderAvatar = styled.div`
   margin-left: 2rem;
 
+  font-size: 3.2rem;
   cursor: pointer;
 
   img {

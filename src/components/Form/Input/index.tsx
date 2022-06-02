@@ -1,6 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { InputHTMLAttributes } from 'react';
 import { DeepMap, FieldError, Path, RegisterOptions, UseFormRegister } from 'react-hook-form';
+import { BsAsterisk } from 'react-icons/bs';
 import { handleKeyUp, MasksType } from '../../../helpers';
 import { FormGroup, FormGroupProps, InputStyled, InputStyledTextError, Label } from './styles';
 
@@ -24,13 +25,21 @@ export function Input<T>({
   register,
   rules,
   errors,
+  disabledRequeridStyle,
   ...rest
 }: InputProps<T>) {
   //const errorMessage = get(errors, name);
   //const hasError = !!(errors && errorMessage);
   return (
     <FormGroup margin={margin}>
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name}>
+        {label}
+        {rules?.required && !disabledRequeridStyle && (
+          <span>
+            <BsAsterisk />
+          </span>
+        )}
+      </Label>
       <InputStyled
         name={name}
         id={name}

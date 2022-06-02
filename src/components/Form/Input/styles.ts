@@ -23,6 +23,13 @@ export const Label = styled.label`
 
   margin-bottom: 0.5rem;
 
+  span {
+    color: ${({ theme }) => theme.colours.red[700]};
+    font-size: 0.7rem;
+
+    margin-left: 0.5rem;
+  }
+
   cursor: pointer;
 `;
 

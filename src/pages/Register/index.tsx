@@ -59,6 +59,7 @@ export const Register: FC = () => {
           name="photo_url"
           type="text"
           placeholder="https://www.myphoto.com"
+          rules={{ required: false }}
           register={register}
           errors={errors}
         />
@@ -70,6 +71,7 @@ export const Register: FC = () => {
           name="password"
           type="password"
           register={register}
+          rules={{ required: 'Password is required' }}
           errors={errors}
         />
       </Column>

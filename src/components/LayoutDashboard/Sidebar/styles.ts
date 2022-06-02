@@ -8,6 +8,8 @@ export const Container = styled.nav`
 `;
 
 export const Brand = styled.div`
+  cursor: pointer;
+
   padding: 2rem 0;
 
   .brand {
@@ -17,6 +19,8 @@ export const Brand = styled.div`
     font-size: 2.8rem;
     font-weight: 700;
     text-align: center;
+
+    cursor: pointer;
 
     span:first-child {
       color: ${({ theme }) => theme.colours.quartenary};

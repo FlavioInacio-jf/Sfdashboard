@@ -15,7 +15,7 @@ export const Sidebar: FC = () => {
       </Brand>
       <SidebarListItems>
         <SidebarItem>
-          <NavLink to="/" className="menu-item-link">
+          <NavLink to="/products" className="menu-item-link">
             <span className="sr-only">Home</span>
             <BsFillGridFill />
           </NavLink>

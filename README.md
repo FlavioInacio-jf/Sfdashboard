@@ -32,17 +32,19 @@
 
 ## 💻 Sobre o projeto
 
-O projeto **[Movieall](https://movieall-git-master-flavioinacio-jf.vercel.app/)** foi desenvolvido utilizando o framework ReactJs. Css grid, Styled Components e TypeScript foram algumas tecnologias utilizadas.
+O projeto SF Dashboard foi desenvolvido utilizando o framework Nextjs, TypeScript e varias outras tecnologias utilizadas no mercado. Foi utilizado o styled components para fazer toda a parte de estilo da aplicação. O react query foi utilizado para fazer o gerenciamento de estados. Para a parte de autênticação foi utilizado em conjunto com axios a bliclioteca Nookies. Através dela foi possivel armazenar nos cookies do navegador os tokens de autenticação do usuário.
 
-OBS.: Esse projeto serviu como parte de um processo seletivo para estagio em desenvolvimento WEB. Eu fui aprovado! :)
+OBS.: Esse projeto serviu como parte de um processo seletivo para estagio em desenvolvimento Full Stack.
 ---
 
 ## ⚙️ Funcionalidades
 
-- Ver quais são os filmes mais populares
-- Ver quais são os filmes mais votados
-- Ver detalhes especificos de um determinado filme
-- Favoritar um filme
+- Cadastrar produtos
+- Excluir produtos
+- Editar produtos
+- Visualizar produtos
+- Pagina exclusiva para criação de usuário
+- Pagina exclusiva para login
 ---
 
 

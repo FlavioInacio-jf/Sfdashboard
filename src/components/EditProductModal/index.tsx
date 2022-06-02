@@ -41,7 +41,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
 
   return (
     <Modal
-      title={`Edit ${product.name}`}
+      title={`Edit ${product.name.slice(0, 25)}`}
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       width="50rem"

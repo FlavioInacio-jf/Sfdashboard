@@ -6,4 +6,8 @@ export const ContainerProducts = styled.div`
   gap: 2rem;
 
   padding-top: 3rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    justify-content: center;
+  }
 `;

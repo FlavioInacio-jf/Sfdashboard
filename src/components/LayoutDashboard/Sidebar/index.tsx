@@ -12,6 +12,7 @@ export const signOut = () => {
 
   Router.push('/');
 };
+
 export const Sidebar: FC = () => {
   const { pathname } = useRouter();
 
@@ -28,8 +29,8 @@ export const Sidebar: FC = () => {
       <SidebarListItems>
         <SidebarItem isActive={pathname === '/products'}>
           <Link href="/products">
-            <span className="sr-only">Home</span>
             <BsFillGridFill />
+            <span className="sr-only">Home</span>
           </Link>
         </SidebarItem>
       </SidebarListItems>

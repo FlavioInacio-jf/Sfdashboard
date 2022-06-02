@@ -57,4 +57,20 @@ export const HeaderAvatar = styled.div`
   }
 
   clip-path: circle();
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    display: none;
+  }
+`;
+
+export const MenuMobileButton = styled.button`
+  font-size: 2.4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    display: none;
+  }
 `;

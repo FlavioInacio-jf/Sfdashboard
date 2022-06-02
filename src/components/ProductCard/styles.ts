@@ -18,6 +18,14 @@ export const ProductCardContainer = styled.div<ProductCardContainerProps>`
   cursor: pointer;
 
   overflow: hidden;
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    max-width: calc(min(35rem, 100%));
+    height: 38rem;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoint.mobile}) {
+    max-width: 100%;
+  }
 `;
 
 export const ProductCardHeader = styled.header`
@@ -35,6 +43,10 @@ export const ProductCardHeader = styled.header`
     aspect-ratio: 2/1;
     border-radius: 0.5rem 0.5rem 0 0;
     object-fit: cover;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    height: 23rem;
   }
 `;
 

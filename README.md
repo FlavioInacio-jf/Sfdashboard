@@ -32,7 +32,7 @@
 
 ## 💻 Sobre o projeto
 
-O projeto SF Dashboard foi desenvolvido utilizando o framework Nextjs, TypeScript e varias outras tecnologias utilizadas no mercado. Foi utilizado o styled components para fazer toda a parte de estilo da aplicação. O react query foi utilizado para fazer o gerenciamento de estados. Para a parte de autênticação foi utilizado em conjunto com axios a bliclioteca Nookies. Através dela foi possivel armazenar nos cookies do navegador os tokens de autenticação do usuário.
+O projeto SF Dashboard foi desenvolvido utilizando o framework Nextjs, TypeScript e varias outras tecnologias utilizadas no mercado. Foi utilizado o styled components para fazer toda a parte de estilo da aplicação. O react query foi utilizado para fazer o gerenciamento de estados. Para a parte de autênticação foi utilizado em conjunto com axios a bliclioteca Nookies. Através dela foi possivel armazenar nos cookies do navegador os tokens de autenticação do usuário. Por último mas não menos importante foi utilizado o story books para documentar os alguns componentes da aplicação.
 
 OBS.: Esse projeto serviu como parte de um processo seletivo para estagio em desenvolvimento Full Stack.
 ---

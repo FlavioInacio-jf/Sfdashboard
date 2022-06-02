@@ -61,16 +61,16 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 ```bash
 
 # Clone este repositório
-$ git clone https://github.com/FlavioInacio-jf/movieall
+$ git clone https://github.com/FlavioInacio-jf/sfdashboard
 
 # Acesse a pasta do projeto no seu terminal/cmd
-$ cd movieall
+$ cd sfdashboard
 
 # Instale as depêndencias
-$ npm i
+$ yarn 
 
 # Iniciar o projeto(O app estará deponivel no  http://localhost:3000)
-$ npm start
+$ yarn dev
 ```
 
 ---
@@ -88,6 +88,10 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - **[React Icons](https://react-icons.github.io/react-icons/)**
 - **[React Query](https://react-query.tanstack.com/)**
 - **[Storybook](https://storybook.js.org/)**
+- **[React-toastify](https://storybook.js.org/)**
+- **[React-modal](https://www.npmjs.com/package/react-modal)**
+- **[React Hook Form](https://react-hook-form.com/)**
+- **[Nookies](https://www.npmjs.com/package/nookies)**
 
 ### **Utilitários**
 

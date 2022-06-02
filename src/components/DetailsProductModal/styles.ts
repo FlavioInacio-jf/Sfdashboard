@@ -34,6 +34,10 @@ export const DetailsProductBody = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+  h1 {
+    white-space: normal;
+    word-break: break-all;
+  }
   span:first-child {
     width: 100%;
 

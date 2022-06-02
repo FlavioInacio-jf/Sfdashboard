@@ -6,6 +6,8 @@ interface HeaderProps {
 export const Header = styled.header<HeaderProps>`
   position: relative;
 
+  max-height: 10rem;
+
   margin-bottom: 2rem;
 
   display: flex;
@@ -15,6 +17,11 @@ export const Header = styled.header<HeaderProps>`
   padding: ${({ padding }) => padding || 0};
 
   h1 {
+    overflow: hidden;
+    white-space: wrap;
+    white-space: normal;
+    word-break: break-all;
+
     flex: 1;
   }
 `;

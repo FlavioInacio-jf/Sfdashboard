@@ -37,10 +37,11 @@ export const Modal: FC<ModalProps> = ({
           border: 'none',
           inset: 'auto',
           width,
-          height
+          height,
+          overflowX: 'hidden'
         }
       }}>
-      <Header padding={padding === '0' ? '3rem 3rem 0 0' : '0'}>
+      <Header padding={padding === '0' ? '3rem 3rem 0 3rem' : '0'}>
         <Title size="large" weight="500" font="inter" align="center">
           {title}
         </Title>

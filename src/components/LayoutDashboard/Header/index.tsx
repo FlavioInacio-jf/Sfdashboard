@@ -33,7 +33,7 @@ export const Header: FC = () => {
           <span className="sr-only">Add Product</span>
         </Button>
         <HeaderAvatar>
-          <RenderIf condition={user?.photo_url.startsWith('https://') || false}>
+          <RenderIf condition={user?.photo_url?.startsWith('https://') || false}>
             <img src={user?.photo_url} width="30" height="30" />
           </RenderIf>
         </HeaderAvatar>

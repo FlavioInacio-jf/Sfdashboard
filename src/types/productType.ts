@@ -4,10 +4,10 @@ export interface ProductType {
   price: number;
   photo_url: string;
   description: string;
-  category_id?: string;
+  category: string;
   amount: number;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export type ProductRegisterType = Omit<ProductType, 'id' | 'createdAt' | 'updatedAt'>;

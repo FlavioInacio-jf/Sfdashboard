@@ -23,8 +23,11 @@ export const productService = {
   },
   create: (product: ProductRegisterType, config?: AxiosRequestConfig) =>
     post(`${PRODUCTS}`, product, config),
-  update: ({ id, ...rest }: ProductUpdateType, config?: AxiosRequestConfig) =>
-    patch(`${PRODUCTS}/${id}`, rest, config),
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  update: (
+    { id, created_at, updated_at, ...rest }: ProductUpdateType,
+    config?: AxiosRequestConfig
+  ) => patch(`${PRODUCTS}/${id}`, rest, config),
   single: (id: string, config?: AxiosRequestConfig) => get(`${PRODUCTS}/${id}`, config),
   remove: (id: number, config?: AxiosRequestConfig) => destroy(`${PRODUCTS}/${id}`, config)
 };

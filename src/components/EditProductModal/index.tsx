@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsCheckLg, BsXLg } from 'react-icons/bs';
 import { Modal } from '../../components/Modal';
@@ -22,16 +22,21 @@ export const EditProductModal: FC<EditProductModalProps> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    reset,
+    formState: { errors, isDirty, isValid, isSubmitting }
   } = useForm<ProductUpdateType>({
     mode: 'onBlur',
     defaultValues: product
   });
 
+  useEffect(() => {
+    reset(product);
+  }, [product, reset]);
+
   const { mutate: updateProductMutate } = updateProductMutation();
 
-  const onSubmit = () => {
-    updateProductMutate(product);
+  const onSubmit = (data: ProductUpdateType) => {
+    updateProductMutate({ ...data, category: 'oii' });
   };
 
   return (
@@ -43,11 +48,14 @@ export const EditProductModal: FC<EditProductModalProps> = ({
       height="63rem">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input<ProductUpdateType>
-          label="Title"
-          name={'name'}
+          label="Name"
+          name="name"
           type="text"
+          max={100}
+          maxLength={100}
           placeholder="Ex.: Orange"
           register={register}
+          rules={{ min: 3, max: 100, required: 'Name is required' }}
           errors={errors}
         />
         <Column column="1" justifyItems="start" justifyContent="start" margin="3rem 0 3rem 0">
@@ -57,6 +65,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
             type="text"
             placeholder="Ex.: https://photos.google.com/photos"
             register={register}
+            rules={{ required: 'Photo is required' }}
             errors={errors}
           />
         </Column>
@@ -67,6 +76,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
             name="price"
             mask="currency"
             register={register}
+            rules={{ required: 'Price is required' }}
             errors={errors}
           />
           <Input<ProductUpdateType>
@@ -75,16 +85,20 @@ export const EditProductModal: FC<EditProductModalProps> = ({
             mask="number"
             type="number"
             register={register}
+            rules={{ valueAsNumber: true, required: 'Amount is required' }}
             errors={errors}
           />
         </Column>
 
-        <TextArea
+        <TextArea<ProductUpdateType>
           label="Description"
           name="description"
           margin="3rem 0 0 0"
           placeholder="Product Description"
-          maxLength={205}
+          register={register}
+          rules={{ min: 10, max: 600, required: 'Description is required' }}
+          errors={errors}
+          maxLength={600}
         />
 
         <Column sizeColumns="auto auto" justifyItems="center" margin="3rem 0 0 0">
@@ -98,9 +112,14 @@ export const EditProductModal: FC<EditProductModalProps> = ({
             <BsXLg />
             Cancel
           </Button>
-          <Button variant="primary" size="large" positionIcon="left" type="submit">
+          <Button
+            variant="primary"
+            size="large"
+            positionIcon="left"
+            type="submit"
+            disabled={!isValid || !isDirty || isSubmitting}>
             <BsCheckLg />
-            Create product
+            Update
           </Button>
         </Column>
       </form>

@@ -1,8 +1,10 @@
+import { AxiosRequestConfig } from 'axios';
 import { parseCookies } from 'nookies';
 import { users } from '../constants/endpoints';
+import { UserRegisterType } from '../types/userType';
 import { api } from './api';
 
-const { get } = api;
+const { get, post } = api;
 
 export const userService = {
   me: async () => {
@@ -18,5 +20,7 @@ export const userService = {
     } catch (err) {
       console.error(err);
     }
-  }
+  },
+  create: async (user: UserRegisterType, config?: AxiosRequestConfig) =>
+    post(`${users}`, user, config)
 };

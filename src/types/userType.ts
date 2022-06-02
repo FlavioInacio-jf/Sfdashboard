@@ -6,3 +6,7 @@ export interface UserType {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface UserRegisterType extends Omit<UserType, 'created_at' | 'updated_at'> {
+  password: string;
+}

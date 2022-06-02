@@ -81,7 +81,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **Website** 
 - **[React](https://pt-br.reactjs.org/)**
-- **[Nexjs]([https://pt-br.reactjs.org/](https://nextjs.org/))**
+- **[Nexjs](https://nextjs.org/)**
 - **[TypeScript](https://www.typescriptlang.org/)**
 - **[Styled Components](https://styled-components.com/)**
 - **[Axios](https://axios-http.com/docs/intro)**
@@ -92,6 +92,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - **[React-modal](https://www.npmjs.com/package/react-modal)**
 - **[React Hook Form](https://react-hook-form.com/)**
 - **[Nookies](https://www.npmjs.com/package/nookies)**
+- **[Json server](https://www.npmjs.com/package/json-server)**
 
 ### **Utilitários**
 

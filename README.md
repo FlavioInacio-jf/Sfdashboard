@@ -1,19 +1,9 @@
-
 <h1 align="center">
+	<a data-flickr-embed="true" href="https://www.flickr.com/photos/193310286@N05/51275486470/in/dateposted-public/" title="screen-moveat">
+	<img 	src="https://i.imgur.com/dKngYAm.png" width="640" height="323" alt="screen-moveat"></a>
 	
-	
-	📱 SF Dashboard
+	🌱 SF Dashboard
 </h1>
-<h3 align="center">
-    🌱 💚
-</h3>
-
-<p align="center">
-	
-  
-    
-</p>
-
 
 
 <h4 align="center"> 
@@ -32,7 +22,7 @@
 
 ## 💻 Sobre o projeto
 
-O projeto SF Dashboard foi desenvolvido utilizando o framework Nextjs, TypeScript e varias outras tecnologias utilizadas no mercado. Foi utilizado o styled components para fazer toda a parte de estilo da aplicação. O react query foi utilizado para fazer o gerenciamento de estados. Para a parte de autênticação foi utilizado em conjunto com axios a bliclioteca Nookies. Através dela foi possivel armazenar nos cookies do navegador os tokens de autenticação do usuário. Por último mas não menos importante foi utilizado o story books para documentar os alguns componentes da aplicação.
+O projeto SF Dashboard foi desenvolvido utilizando o framework Nextjs, TypeScript e varias outras tecnologias utilizadas no mercado. Foi utilizado o styled components para fazer toda a parte de estilo da aplicação. O react query foi utilizado para fazer o gerenciamento de estados. Para a parte de autênticação foi utilizado em conjunto com axios a bliclioteca Nookies. Através dela foi possivel armazenar nos cookies do navegador os tokens de autenticação do usuário. Por último mas não menos importante foi utilizado o story books para documentar os alguns componentes da aplicação. Essa aplição é utilizada em conjunto com a api que está no repositório [sfdashboard-server](https://github.com/FlavioInacio-jf/sfdashboard-server)
 
 OBS.: Esse projeto serviu como parte de um processo seletivo para estagio em desenvolvimento Full Stack.
 ---

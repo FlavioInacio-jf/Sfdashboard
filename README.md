@@ -2,7 +2,7 @@
 <h1 align="center">
 	
 	
-	📱 Movieall
+	📱 SF Dashboard
 </h1>
 <h3 align="center">
     🌱 💚
@@ -17,7 +17,7 @@
 
 
 <h4 align="center"> 
-	🚧  Movieall 👨🏾‍💻 Finalizado 🚀 🚧
+	🚧  SF Dashboard é uma dashboard simples, porém elegante! 👨🏾‍💻 Finalizado 🚀 🚧
 </h4>
 
 <p align="center">
@@ -81,10 +81,13 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **Website** 
 - **[React](https://pt-br.reactjs.org/)**
+- **[Nexjs]([https://pt-br.reactjs.org/](https://nextjs.org/))**
 - **[TypeScript](https://www.typescriptlang.org/)**
 - **[Styled Components](https://styled-components.com/)**
 - **[Axios](https://axios-http.com/docs/intro)**
 - **[React Icons](https://react-icons.github.io/react-icons/)**
+- **[React Query](https://react-query.tanstack.com/)**
+- **[Storybook](https://storybook.js.org/)**
 
 ### **Utilitários**
 

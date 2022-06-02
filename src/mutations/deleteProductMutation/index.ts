@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { parseCookies } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { queryKey } from '../../constants/queryKeys';
@@ -8,7 +9,14 @@ export const deleteProductMutation = () => {
   const { remove } = productService;
   const queryClient = useQueryClient();
 
-  return useMutation((id: number) => remove(id), {
+  const { 'SFDashboard.auth.token': token } = parseCookies();
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return useMutation((id: number) => remove(id, config), {
     onError: (err) => {
       console.error(err);
       toast.error(`Hi, I had a problem removing your product!`);

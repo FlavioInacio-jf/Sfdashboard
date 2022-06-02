@@ -27,6 +27,7 @@ export const Modal: FC<ModalProps> = ({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       overlayClassName="overlay-modal"
+      className="next-modal"
       style={{
         content: {
           padding,

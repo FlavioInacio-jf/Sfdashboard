@@ -51,6 +51,10 @@ export default createGlobalStyle`
     justify-content: center;
 
     z-index: 1000;
+
+    @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+      align-items: flex-end;
+    }
   }
 
   *::-webkit-scrollbar {
@@ -69,6 +73,13 @@ export default createGlobalStyle`
   }
   *::-webkit-scrollbar-button {
     display: none;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    .next-modal {
+      width: 100% !important;
+      height: fit-content !important;
+    }
   }
 
 

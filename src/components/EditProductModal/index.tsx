@@ -46,7 +46,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
       onRequestClose={onRequestClose}
       width="50rem"
       height="63rem">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%' }}>
         <Input<ProductUpdateType>
           label="Name"
           name="name"

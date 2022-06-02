@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { parseCookies } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { queryKey } from '../../constants/queryKeys';
@@ -9,7 +10,14 @@ export const createProductMutation = () => {
   const { create } = productService;
   const queryClient = useQueryClient();
 
-  return useMutation((product: ProductRegisterType) => create(product), {
+  const { 'SFDashboard.auth.token': token } = parseCookies();
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return useMutation((product: ProductRegisterType) => create(product, config), {
     onError: (err) => {
       console.error(err);
       toast.error(`Hello, I had a problem creating your product!`);

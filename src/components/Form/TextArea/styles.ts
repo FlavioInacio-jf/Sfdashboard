@@ -52,3 +52,16 @@ export const TextAreaStyle = styled.textarea`
     box-shadow: inset 0 0.1rem 0.1rem rgba(0, 175, 145, 0.075), 0 0 0.5rem rgba(0, 175, 145, 0.4);
   }
 `;
+
+export const TextAreaStyleTextError = styled.span`
+  position: absolute;
+  left: 0;
+  bottom: -2rem;
+
+  font-family: ${({ theme }) => theme.font.fontFamily[0]};
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.56rem;
+
+  color: ${({ theme }) => theme.colours.red[400]};
+`;

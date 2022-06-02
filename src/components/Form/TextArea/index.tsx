@@ -1,17 +1,39 @@
-import { FC, TextareaHTMLAttributes } from 'react';
-import { Label, TextAreaFormGroup, TextAreaStyle } from './styles';
+import { ErrorMessage } from '@hookform/error-message';
+import { TextareaHTMLAttributes } from 'react';
+import { DeepMap, FieldError, Path, RegisterOptions, UseFormRegister } from 'react-hook-form';
+import { Label, TextAreaFormGroup, TextAreaStyle, TextAreaStyleTextError } from './styles';
 
-export type TextAreaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'name'> & {
+export interface TextAreaProps<T>
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'name'> {
   label: string;
-  name: string;
+  name: Path<T>;
   margin: string;
-};
+  register?: UseFormRegister<T>;
+  errors?: Partial<DeepMap<T, FieldError>>;
+  rules?: RegisterOptions;
+  disabledRequeridStyle?: boolean;
+}
 
-export const TextArea: FC<TextAreaProps> = ({ label, name, margin, ...props }) => {
+// eslint-disable-next-line react/function-component-definition
+export function TextArea<T>({
+  label,
+  name,
+  margin,
+  register,
+  rules,
+  errors,
+  ...props
+}: TextAreaProps<T>) {
   return (
     <TextAreaFormGroup margin={margin}>
       <Label htmlFor={name}>{label}</Label>
-      <TextAreaStyle id={name} name={name} {...props} />
+      <TextAreaStyle id={name} name={name} {...props} {...(register && register(name, rules))} />
+      <ErrorMessage
+        errors={errors}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        name={name as any}
+        render={({ message }) => <TextAreaStyleTextError>{message}</TextAreaStyleTextError>}
+      />
     </TextAreaFormGroup>
   );
-};
+}

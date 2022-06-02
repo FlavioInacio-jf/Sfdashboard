@@ -5,6 +5,7 @@ import { Modal } from '../../components/Modal';
 import { useDashboard } from '../../hooks/useDashboard';
 import { createProductMutation } from '../../mutations/createProductMutation';
 import { ProductRegisterType } from '../../types/productType';
+import { convertPriceToNumber } from '../../utils/format';
 import { Button } from '../Button';
 import { Column } from '../Column';
 import { Input } from '../Form/Input';
@@ -14,7 +15,8 @@ export const NewProductModal: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    reset,
+    formState: { errors, isDirty, isValid, isSubmitting }
   } = useForm<ProductRegisterType>({
     mode: 'onBlur'
   });
@@ -24,7 +26,11 @@ export const NewProductModal: FC = () => {
   const { isNewProductModalOpen, handleCloseNewProductModal } = useDashboard();
 
   const onSubmit = (data: ProductRegisterType) => {
-    createProductMutate(data);
+    const priceNumber = convertPriceToNumber(data.price);
+
+    createProductMutate({ ...data, price: priceNumber });
+    reset();
+    handleCloseNewProductModal();
   };
 
   return (
@@ -36,11 +42,14 @@ export const NewProductModal: FC = () => {
       height="63rem">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input<ProductRegisterType>
-          label="Title"
-          name={'name'}
+          label="Name"
+          name="name"
           type="text"
+          max={100}
+          maxLength={100}
           placeholder="Ex.: Orange"
           register={register}
+          rules={{ min: 3, max: 100, required: 'Name is required' }}
           errors={errors}
         />
         <Column column="1" justifyItems="start" justifyContent="start" margin="3rem 0 3rem 0">
@@ -50,6 +59,7 @@ export const NewProductModal: FC = () => {
             type="text"
             placeholder="Ex.: https://photos.google.com/photos"
             register={register}
+            rules={{ required: 'Photo is required' }}
             errors={errors}
           />
         </Column>
@@ -60,6 +70,7 @@ export const NewProductModal: FC = () => {
             name="price"
             mask="currency"
             register={register}
+            rules={{ required: 'Price is required' }}
             errors={errors}
           />
           <Input<ProductRegisterType>
@@ -68,16 +79,20 @@ export const NewProductModal: FC = () => {
             mask="number"
             type="number"
             register={register}
+            rules={{ valueAsNumber: true, required: 'Amount is required' }}
             errors={errors}
           />
         </Column>
 
-        <TextArea
+        <TextArea<ProductRegisterType>
           label="Description"
           name="description"
           margin="3rem 0 0 0"
           placeholder="Product Description"
-          maxLength={205}
+          register={register}
+          rules={{ min: 10, max: 600, required: 'Description is required' }}
+          errors={errors}
+          maxLength={600}
         />
 
         <Column sizeColumns="auto auto" justifyItems="center" margin="3rem 0 0 0">
@@ -91,7 +106,12 @@ export const NewProductModal: FC = () => {
             <BsXLg />
             Cancel
           </Button>
-          <Button variant="primary" size="large" positionIcon="left" type="submit">
+          <Button
+            variant="primary"
+            size="large"
+            positionIcon="left"
+            type="submit"
+            disabled={!isValid || !isDirty || isSubmitting}>
             <BsCheckLg />
             Create
           </Button>

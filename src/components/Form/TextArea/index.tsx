@@ -1,6 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { TextareaHTMLAttributes } from 'react';
 import { DeepMap, FieldError, Path, RegisterOptions, UseFormRegister } from 'react-hook-form';
+import { BsAsterisk } from 'react-icons/bs';
 import { Label, TextAreaFormGroup, TextAreaStyle, TextAreaStyleTextError } from './styles';
 
 export interface TextAreaProps<T>
@@ -22,11 +23,19 @@ export function TextArea<T>({
   register,
   rules,
   errors,
+  disabledRequeridStyle,
   ...props
 }: TextAreaProps<T>) {
   return (
     <TextAreaFormGroup margin={margin}>
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name}>
+        {label}
+        {rules?.required && !disabledRequeridStyle && (
+          <span>
+            <BsAsterisk />
+          </span>
+        )}
+      </Label>
       <TextAreaStyle id={name} name={name} {...props} {...(register && register(name, rules))} />
       <ErrorMessage
         errors={errors}

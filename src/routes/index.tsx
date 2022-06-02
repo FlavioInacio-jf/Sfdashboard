@@ -4,7 +4,6 @@ import { Custom404 } from '../pages/404';
 import { Dashboard } from '../pages/Dashboard';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
-import { Stocks } from '../pages/Stocks';
 import { PrivateRoute } from './PrivateRoute';
 
 export const Routes = () => {
@@ -28,7 +27,6 @@ export const Routes = () => {
           }
         />
         <Route path="/products" element={<PrivateRoute page={Dashboard} />} />
-        <Route path="/stocks" element={<PrivateRoute page={Stocks} />} />
         <Route path="*" element={<Custom404 />} />
       </RoutesRouterDom>
     </BrowserRouter>

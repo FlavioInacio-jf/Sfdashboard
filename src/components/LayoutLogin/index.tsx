@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Link } from '../Link';
 import { Title } from '../Title';
 import { Toast } from '../Toast';
@@ -9,8 +8,8 @@ interface LayouLoginProps {
   children: ReactNode;
 }
 
-export const LayouLogin: FC<LayouLoginProps> = ({ children }) => {
-  const { pathname } = useLocation();
+export const LayoutLogin: FC<LayouLoginProps> = ({ children }) => {
+  const pathname = 'useLocation()';
 
   return (
     <>
@@ -19,7 +18,7 @@ export const LayouLogin: FC<LayouLoginProps> = ({ children }) => {
 
         <SecondContent>
           <Title variant="light" size="extraLarge" font="inter" weight="700">
-            {pathname === '/' ? 'Now here?' : 'Already have an account?'}
+            {true ? 'Now here?' : 'Already have an account?'}
           </Title>
           <SecondContentDescription>
             {pathname === '/'

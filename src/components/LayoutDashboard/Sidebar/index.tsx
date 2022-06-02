@@ -1,31 +1,30 @@
 import { FC } from 'react';
 import { BsFillGridFill } from 'react-icons/bs';
 import { FaDolly } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
 import { Brand, Container, SidebarItem, SidebarListItems } from './styles';
 
 export const Sidebar: FC = () => {
   return (
     <Container>
       <Brand>
-        <NavLink to="/" className="brand">
+        <a href="/" className="brand">
           <span>S</span>
           <span>F</span>
-        </NavLink>
+        </a>
       </Brand>
       <SidebarListItems>
         <SidebarItem>
-          <NavLink to="/products" className="menu-item-link">
+          <a href="/products" className="menu-item-link">
             <span className="sr-only">Home</span>
             <BsFillGridFill />
-          </NavLink>
+          </a>
         </SidebarItem>
 
         <SidebarItem>
-          <NavLink to="/stocks" className="menu-item-link">
+          <a href="/stocks" className="menu-item-link">
             <span className="sr-only">Stocks</span>
             <FaDolly />
-          </NavLink>
+          </a>
         </SidebarItem>
       </SidebarListItems>
     </Container>

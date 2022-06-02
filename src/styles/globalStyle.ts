@@ -1,6 +1,4 @@
-import 'react-toastify/dist/ReactToastify.css';
 import { createGlobalStyle } from 'styled-components';
-import './reset.css';
 
 export default createGlobalStyle`
   html {

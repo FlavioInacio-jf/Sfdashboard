@@ -20,11 +20,16 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "src"
   ],
-  "exclude": ["node_modules"],
-  "files": ["src/types/theme.d.ts"],
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+    "src/types/theme.d.ts"
+  ]
 }

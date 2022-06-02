@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
 import { setCookie } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { queryKey } from '../../constants/queryKeys';
 import { api } from '../../services/api';
@@ -9,7 +8,6 @@ import { authService } from '../../services/authService';
 import { CredentialsType } from '../../types/credentialsType';
 
 export const LoginMutation = () => {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   return useMutation((credentials: CredentialsType) => authService.login(credentials), {
@@ -37,8 +35,6 @@ export const LoginMutation = () => {
       });
 
       api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-
-      navigate('/products');
     }
   });
 };

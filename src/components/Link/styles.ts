@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export interface LinkStyledProps {
@@ -11,7 +10,7 @@ export interface LinkStyledProps {
   noPadding?: boolean;
 }
 
-export const LinkStyled = styled(Link)<LinkStyledProps>`
+export const LinkStyled = styled.a<LinkStyledProps>`
   width: ${({ flex = false }) => (flex ? '100%' : 'auto')};
 
   font-family: ${({ theme }) => theme.font.fontFamily[0]};

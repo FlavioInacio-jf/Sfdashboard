@@ -26,7 +26,7 @@ export const DetailsProductModal: FC<DetailsProductModalProps> = ({
 
   return (
     <Modal
-      title={`Details ${name.slice(0, 20)}`}
+      title={`Details ${name?.slice(0, 20)}`}
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       width="50rem"

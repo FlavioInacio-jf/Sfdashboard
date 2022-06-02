@@ -3,11 +3,23 @@ export const Container = styled.div`
   height: 60rem;
 
   overflow: hidden;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    height: 80vh;
+  }
 `;
 
 export const OverflowVertical = styled.div`
   height: 50rem;
   overflow: hidden auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    height: auto;
+  }
 `;
 
 export const DetailsProductHeader = styled.header`
@@ -22,6 +34,8 @@ export const DetailsProductHeader = styled.header`
 `;
 
 export const DetailsProductBody = styled.div`
+  flex: 1;
+
   width: 100%;
   padding: 3rem;
 
@@ -51,6 +65,8 @@ export const DetailsProductBody = styled.div`
 `;
 
 export const DetailsProductFooter = styled.footer`
+  flex: 0;
+
   width: 100%;
 
   display: flex;

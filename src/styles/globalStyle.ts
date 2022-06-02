@@ -75,14 +75,6 @@ export default createGlobalStyle`
     display: none;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
-    .next-modal {
-      width: 100% !important;
-      height: fit-content !important;
-    }
-  }
-
-
   @media (max-width: 1080px) {
     html {
       font-size: 56.25%;

@@ -13,7 +13,7 @@ export const Container = styled.header`
 
 export const Search = styled.div`
   min-width: 23rem;
-  height: 4rem;
+  height: 4.5rem;
 
   display: flex;
   align-items: center;

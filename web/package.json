@@ -31,7 +31,10 @@
     "eslint-plugin-react-hooks": "^4.5.0"
   },
   "overrides": {
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "trim-newlines": "^3.0.1",
+    "glob-parent": "^5.1.2",
+    "trim": "0.0.3"
   },
   "scripts": {
     "dev": "next dev",

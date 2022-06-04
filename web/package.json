@@ -30,6 +30,9 @@
     "json-server": "^0.17.0",
     "eslint-plugin-react-hooks": "^4.5.0"
   },
+  "overrides": {
+    "node-fetch": "^2.6.7"
+  },
   "scripts": {
     "dev": "next dev",
     "start": "next start",

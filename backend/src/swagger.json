@@ -1,0 +1,579 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SF Dashboard API",
+    "description": "Smart and fast APIREST",
+    "version": "1.0.0",
+    "contact": {
+      "email": "jflavioinacio22@gmail.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create a new user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "User name",
+                    "type": "string",
+                    "required": true
+                  },
+                  "username": {
+                    "description": "This name will be used for login",
+                    "type": "string",
+                    "required": true
+                  },
+                  "photo_url": {
+                    "description": "Avatar url",
+                    "type": "string",
+                    "required": true
+                  },
+                  "password": {
+                    "description": "This password will be used for login",
+                    "type": "string",
+                    "required": true
+                  }
+                },
+                "example": {
+                  "name": "Carlos",
+                  "username": "jCarlos220",
+                  "photo_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                  "password": "123456789"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "schema": {
+              "type": "object",
+              "items": {
+                "message": "string",
+                "result": {
+                  "id": "string",
+                  "name": "string",
+                  "username": "string",
+                  "photo_url": "string",
+                  "password": "string",
+                  "created_at": "string",
+                  "updated_at": "string"
+                },
+                "status": "integer"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "409": {
+            "description": "Username Alred exists"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete user",
+        "description": "Delete user",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT access token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "id": "header",
+            "description": "User id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User removed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "photo_url": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Token missing / Invalid Token!"
+          },
+          "404": {
+            "description": "User doesn't exist!"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update a user",
+        "description": "Update a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Category name",
+                    "type": "string"
+                  },
+                  "photo_url": {
+                    "description": "Avatar url",
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Humberto"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT access token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "id": "header",
+            "description": "User id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User updated successfully",
+            "schema": {
+              "type": "object",
+              "items": {
+                "message": "string",
+                "result": {
+                  "name": "string",
+                  "username": "string",
+                  "photo_url": "string",
+                  "created_at": "string",
+                  "updated_at": "string"
+                },
+                "status": "integer"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Token missing / Invalid Token!"
+          },
+          "404": {
+            "description": "User doesn't exist!"
+          }
+        }
+      }
+    },
+    "/products": {
+      "post": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Create a new product",
+        "description": "Create a new product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Product name",
+                    "type": "string",
+                    "required": true
+                  },
+                  "price": {
+                    "description": "Product price",
+                    "type": "number",
+                    "required": true
+                  },
+                  "description": {
+                    "description": "Product description",
+                    "type": "string",
+                    "required": true
+                  },
+                  "photo_url": {
+                    "description": "Product url photo",
+                    "type": "string",
+                    "required": false
+                  },
+                  "category": {
+                    "description": "Product category",
+                    "type": "string",
+                    "required": false
+                  },
+                  "amount": {
+                    "description": "Product amount",
+                    "type": "number",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT access token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Product created successfully"
+          },
+          "401": {
+            "description": "Unauthorized / Token invalid!"
+          },
+          "409": {
+            "description": "product already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "List all products",
+        "description": "List all products",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT access token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized / Token invalid!"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "List single product",
+        "description": "List single product",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT acess token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "id": "header",
+            "description": "Product id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Token missing / Invalid Token!"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Delete product",
+        "description": "Delete product",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT access token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "id": "header",
+            "description": "Product id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Product removed successfully"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Token missing / Invalid Token!"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Update a product",
+        "description": "Update a product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Product name",
+                    "type": "string",
+                    "required": false
+                  },
+                  "price": {
+                    "description": "Product price",
+                    "type": "number",
+                    "required": false
+                  },
+                  "description": {
+                    "description": "Product description",
+                    "type": "string",
+                    "required": false
+                  },
+                  "photo_url": {
+                    "description": "Product url photo",
+                    "type": "string",
+                    "required": false
+                  },
+                  "category": {
+                    "description": "Product category",
+                    "type": "string",
+                    "required": false
+                  },
+                  "amount": {
+                    "description": "Product amount",
+                    "type": "number",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT access token",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "id": "header",
+            "description": "Product id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Product updated successfully"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Token missing / Invalid Token!"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Create a new session",
+        "description": "Create a new session",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "description": "This name will be used for login",
+                    "type": "string",
+                    "required": true
+                  },
+                  "password": {
+                    "description": "This password will be used for login",
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Login successfully performed"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Email and/or password incorrect."
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT refresh token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "summary": "Log out of account",
+        "description": "Log out of account",
+        "responses": {
+          "201": {
+            "description": "Logout successfully performed"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Refresh token invalid"
+          }
+        }
+      }
+    },
+    "/auth/refres-token": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "id": "header",
+            "description": "JWT refresh token",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "summary": "Log out of account",
+        "description": "Log out of account",
+        "responses": {
+          "201": {
+            "description": "Refresh token is not inspired or Refresh token created successfully"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Refresh token invalid"
+          }
+        }
+      }
+    }
+  }
+}

@@ -24,8 +24,8 @@ export class CreateComments1654648449588 implements MigrationInterface {
             referencedTableName: "users",
             referencedColumnNames: ["id"],
             columnNames: ["user_id"],
-            onDelete: "null",
-            onUpdate: "null",
+            onDelete: "SET NULL",
+            onUpdate: "SET NULL",
           },
           {
             name: "FKProductComment",

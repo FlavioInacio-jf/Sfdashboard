@@ -10,7 +10,7 @@ import {
 import { v4 as uuidV4 } from "uuid";
 import { User } from "./User";
 
-@Entity("refresh_token")
+@Entity("refreshToken")
 export class RefreshToken {
   @PrimaryColumn()
   readonly id: string;

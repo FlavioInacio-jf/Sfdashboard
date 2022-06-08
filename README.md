@@ -7,7 +7,7 @@
 
 
 <h4 align="center"> 
-	🚧  SF Dashboard é uma dashboard simples, porém elegante! 👨🏾‍💻 Finalizado 🚀 🚧
+	🚧  SF Dashboard é uma dashboard simples, porém elegante! 👨🏾‍💻 Em desenvolvimento 🚀 🚧
 </h4>
 
 <p align="center">
@@ -26,7 +26,7 @@ O projeto SF Dashboard foi desenvolvido utilizando o framework Nextjs, TypeScrip
 	O front-end foi utilizado o styled components para fazer toda a parte de estilo da aplicação. O react query foi utilizado para fazer o gerenciamento de estados. Para a parte de autênticação foi utilizado em conjunto com axios a bliclioteca Nookies. Através dela foi possivel armazenar nos cookies do navegador os tokens de autenticação do usuário. Por último mas não menos importante foi utilizado o story books para documentar os componentes da aplicação. 
 	A back-end foi desenvolvida utilizando o framework Express.js e TypeScript. Foram utilizados diversos conceitos como middlewares, autênticação JWT, persistência de dados, segurança, migrations, SOLID, entidades e relacionamentos. Para persistência dos dados foi utilizado o SQLITE3. Com a api é possivel cadastrar usuários e consequentemente cadastrar, editar e excluir seus próprios produtos. E para fazer os schemas de validação dos campos foi utilizada a bliblioteca Joi. Também foi utilizado o Swagger para fazer descrição, consumo e visualização da API REST.
 
-OBS.: Esse projeto serviu como parte de um processo seletivo para estagio em desenvolvimento Full Stack.
+#### OBS.: Esse projeto serviu como parte de um processo seletivo para estagio em desenvolvimento Full Stack.
 ---
 
 ## ⚙️ Funcionalidades

@@ -20,7 +20,7 @@ class Product {
   title: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @Column({
     nullable: false,
@@ -32,11 +32,11 @@ class Product {
   })
   amount: number;
 
-  @Column()
+  @Column({ nullable: false })
   photo: string;
 
   @Column()
-  category: string;
+  category?: string;
 
   @Column({ nullable: false })
   status: string;

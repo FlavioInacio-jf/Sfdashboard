@@ -1,10 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity("users")
@@ -21,34 +15,35 @@ export class User {
   @Column({
     nullable: false,
     unique: true,
-    length: 50,
   })
-  username: string;
+  email: string;
 
   @Column({
     nullable: true,
   })
-  photo_url?: string;
+  photo?: string;
+
+  @Column({
+    nullable: false,
+    length: 10,
+  })
+  role: "admin" | "user";
+
+  @Column({
+    nullable: false,
+    array: true,
+  })
+  permissions: string;
 
   @Column({
     nullable: false,
   })
   password: string;
 
-  @Column({
-    nullable: false,
-    length: 10,
-    default: "user",
-  })
-  role: "admin" | "user";
-
   @CreateDateColumn({
     nullable: false,
   })
   created_at: Date;
-
-  @UpdateDateColumn({ nullable: false })
-  updated_at: Date;
 
   constructor() {
     if (!this.id) {

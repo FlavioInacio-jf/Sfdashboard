@@ -27,6 +27,16 @@ export class CreateCommentService {
       throw new AppError("Product doesn't exist!", 404, "/comments");
     }
 
+    const isFromTheSameUser = productExists.user_id === user_id;
+
+    if (isFromTheSameUser) {
+      throw new AppError(
+        "User cannot comment on their own product!",
+        409,
+        "/comments",
+      );
+    }
+
     const comment = commentsRepository.create({
       title,
       description,

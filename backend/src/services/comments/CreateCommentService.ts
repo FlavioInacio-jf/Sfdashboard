@@ -24,7 +24,7 @@ export class CreateCommentService {
     const productExists = await productRepository.findOne(product_id);
 
     if (!productExists) {
-      throw new AppError("Comment product doesn't exist!", 404, "/comments");
+      throw new AppError("Product doesn't exist!", 404, "/comments");
     }
 
     const comment = commentsRepository.create({

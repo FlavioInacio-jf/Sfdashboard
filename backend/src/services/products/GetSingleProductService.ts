@@ -17,14 +17,13 @@ export class GetSingleProductService {
       {
         select: [
           "id",
-          "name",
+          "title",
           "amount",
           "description",
-          "photo_url",
+          "photo",
           "category",
           "price",
           "created_at",
-          "updated_at",
         ],
       },
     );

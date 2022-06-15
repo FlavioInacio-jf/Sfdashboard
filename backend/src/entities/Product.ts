@@ -16,6 +16,7 @@ class Product {
 
   @Column({
     nullable: false,
+    unique: true,
   })
   title: string;
 
@@ -42,7 +43,7 @@ class Product {
   status: string;
 
   @Column({ nullable: false })
-  physical_condition: string;
+  physical_condition: "new" | "old";
 
   @Column({
     nullable: false,

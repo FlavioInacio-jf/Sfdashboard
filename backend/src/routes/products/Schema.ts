@@ -5,7 +5,7 @@ export class Schema extends Validator {
   static get create() {
     const schema = {
       body: Joi.object({
-        name: Joi.string().min(3).max(100).required().label("Name"),
+        title: Joi.string().min(3).max(100).required().label("Name"),
         price: Joi.number().required().label("Price"),
         description: Joi.string()
           .min(10)
@@ -13,12 +13,11 @@ export class Schema extends Validator {
           .required()
           .label("Description"),
         amount: Joi.number().required().label("Amount"),
-        photo_url: Joi.string().required().label("Photo url"),
-        category_id: Joi.string()
-          .uuid({ version: "uuidv4" })
-          .label("Category id"),
+        photo: Joi.string().required().label("Photo url"),
+        category: Joi.string().required().label("Category"),
+        status: Joi.string().required().label("Status"),
+        physical_condition: Joi.string().required().label("Physical Condition"),
         created_at: Joi.any().forbidden(),
-        updated_at: Joi.any().forbidden(),
         timestamp: Joi.any().forbidden(),
       }),
     };

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { CreateUserController } from "../../controllers/Users/CreateUserController";
 import { DeleteUserController } from "../../controllers/Users/DeleteUserController";
+import { GetAllUsersController } from "../../controllers/Users/GetAllUsersController";
 import { GetCurrentUserController } from "../../controllers/Users/GetCurrentUserController";
 import { UpdateUserController } from "../../controllers/Users/UpdateUserController";
 import { EnsureAdmin } from "../../middlewares/EnsureAdmin";
@@ -13,6 +14,8 @@ const createUserController = new CreateUserController();
 const updateUserController = new UpdateUserController();
 const deleteUserController = new DeleteUserController();
 const getCurrentUserController = new GetCurrentUserController();
+const getAllUsersController = new GetAllUsersController();
+
 const ensureAuthenticated = new EnsureAuthenticated();
 const ensureAdmin = new EnsureAdmin();
 
@@ -22,6 +25,7 @@ usersRoutes.post("/", Schema.create, createUserController.execute);
 /** Users need to have the authentication token to access these routes */
 usersRoutes.use(ensureAuthenticated.execute);
 usersRoutes.get("/me", getCurrentUserController.execute);
+usersRoutes.get("/", getAllUsersController.execute);
 usersRoutes.patch("/:id", Schema.update, updateUserController.execute);
 usersRoutes.delete("/:id", ensureAdmin.execute, deleteUserController.execute);
 

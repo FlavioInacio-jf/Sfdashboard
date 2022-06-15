@@ -7,8 +7,8 @@ import { UsersRepository } from "../../repositories/UsersRepository";
 interface IUserRequest {
   name: string;
   email: string;
-  photo: string;
-  role: "admin" | "user";
+  photo?: string;
+  role?: "admin" | "user";
   permissions: string[];
   password: string;
 }
@@ -44,7 +44,7 @@ export class CreateUserService {
 
     await usersRepository.save(user);
 
-    user.password = password;
+    delete user.password;
     return user;
   }
 }

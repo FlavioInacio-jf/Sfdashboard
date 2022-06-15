@@ -3,14 +3,13 @@ import { AppError } from "../../errors/AppError";
 import { AuthenticateUserService } from "../../services/authenticate/AuthenticateUserService";
 
 export class AuthenticateUserController {
-  // eslint-disable-next-line consistent-return
   async execute(req: Request, res: Response): Promise<Response> {
     const authenticateUserService = new AuthenticateUserService();
 
     try {
-      const { username, password } = req.body;
+      const { email, password } = req.body;
       const token = await authenticateUserService.execute({
-        username,
+        email,
         password,
       });
       return res.status(201).json({

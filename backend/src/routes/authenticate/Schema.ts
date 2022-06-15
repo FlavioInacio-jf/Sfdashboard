@@ -5,7 +5,7 @@ export class Schema extends Validator {
   static get create() {
     const schema = {
       body: Joi.object({
-        username: Joi.string().min(3).max(50).required().label("Username"),
+        email: Joi.string().min(3).max(50).required().label("Email"),
         password: Joi.string().required().label("Password"),
       }),
     };

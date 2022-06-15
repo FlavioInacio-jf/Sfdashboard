@@ -25,8 +25,9 @@ usersRoutes.post("/", Schema.create, createUserController.execute);
 /** Users need to have the authentication token to access these routes */
 usersRoutes.use(ensureAuthenticated.execute);
 usersRoutes.get("/me", getCurrentUserController.execute);
-usersRoutes.get("/", getAllUsersController.execute);
 usersRoutes.patch("/:id", Schema.update, updateUserController.execute);
+
+usersRoutes.get("/", ensureAdmin.execute, getAllUsersController.execute);
 usersRoutes.delete("/:id", ensureAdmin.execute, deleteUserController.execute);
 
 export { usersRoutes };

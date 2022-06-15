@@ -27,7 +27,7 @@ export class User {
     nullable: false,
     length: 10,
   })
-  role?: "admin" | "user";
+  role: "admin" | "user";
 
   @Column("simple-array", {
     nullable: false,

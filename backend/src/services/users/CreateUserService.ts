@@ -8,7 +8,7 @@ interface IUserRequest {
   name: string;
   email: string;
   photo?: string;
-  role?: "admin" | "user";
+  role: "admin" | "user";
   permissions: string[];
   password: string;
 }

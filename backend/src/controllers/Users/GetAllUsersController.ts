@@ -8,14 +8,15 @@ export class GetAllUsersController {
 
     try {
       const { limit } = req.query;
+      const limitNumber = Number(limit);
 
       const products = await getAllUsersService.execute({
-        limit: Number(limit),
+        limit: limitNumber,
       });
 
-      return res.status(200).json({ result: products });
+      return res.status(200).json({ result: products, limit: limitNumber });
     } catch (error) {
-      throw new AppError(error.detail || error.message, 400, "/products");
+      throw new AppError(error.detail || error.message, 400, "/users");
     }
   }
 }

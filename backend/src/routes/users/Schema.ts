@@ -6,8 +6,10 @@ export class Schema extends Validator {
     const schema = {
       body: Joi.object({
         name: Joi.string().min(3).max(200).required().label("Name"),
-        username: Joi.string().min(3).max(50).required().label("Username"),
-        photo_url: Joi.string().label("Photo url"),
+        email: Joi.string().min(3).max(50).required().label("Email"),
+        photo: Joi.string().optional().label("Photo"),
+        role: Joi.string().optional().label("Role"),
+        permissions: Joi.array().required().label("Permissions"),
         password: Joi.string().required().label("Password"),
         created_at: Joi.any().forbidden(),
         updated_at: Joi.any().forbidden(),

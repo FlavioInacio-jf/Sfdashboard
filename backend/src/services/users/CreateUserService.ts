@@ -6,30 +6,28 @@ import { UsersRepository } from "../../repositories/UsersRepository";
 
 interface IUserRequest {
   name: string;
-  username: string;
-  photo_url: string;
-  password: string;
+  email: string;
+  photo: string;
   role: "admin" | "user";
+  permissions: string[];
+  password: string;
 }
 
 export class CreateUserService {
   async execute({
     name,
-    username,
-    photo_url,
+    email,
+    photo,
+    permissions,
     password,
     role,
   }: IUserRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
 
-    const userAlreadyExists = await usersRepository.findOne({ username });
+    const emailAlreadyExists = await usersRepository.findOne({ email });
 
-    if (userAlreadyExists) {
-      throw new AppError(
-        `Username "${username}" already exists`,
-        409,
-        "/users",
-      );
+    if (emailAlreadyExists) {
+      throw new AppError(`Username "${email}" already exists`, 409, "/users");
     }
 
     const salt = await genSalt(12);
@@ -37,9 +35,10 @@ export class CreateUserService {
 
     const user = usersRepository.create({
       name,
-      username,
+      email,
       password: passwordHash,
-      photo_url,
+      permissions,
+      photo,
       role,
     });
 

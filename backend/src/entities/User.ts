@@ -27,13 +27,13 @@ export class User {
     nullable: false,
     length: 10,
   })
-  role: "admin" | "user";
+  role?: "admin" | "user";
 
-  @Column({
+  @Column("simple-array", {
     nullable: false,
     array: true,
   })
-  permissions: string;
+  permissions: string[];
 
   @Column({
     nullable: false,

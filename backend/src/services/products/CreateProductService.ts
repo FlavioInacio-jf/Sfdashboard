@@ -10,7 +10,7 @@ interface ICreateProductRequest {
   amount: number;
   photo: string;
   category: string;
-  status: string;
+  status: "published" | "draft" | "out_of_stock";
   physical_condition: "new" | "old";
   user_id: string;
 }

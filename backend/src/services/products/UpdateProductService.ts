@@ -12,7 +12,7 @@ interface IUpdateProductRequest {
   photo: string;
   category: string;
   physical_condition: "new" | "old";
-  status: string;
+  status: "published" | "draft" | "out_of_stock";
 }
 
 export class UpdateProductService {

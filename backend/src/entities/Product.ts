@@ -40,7 +40,7 @@ class Product {
   category?: string;
 
   @Column({ nullable: false })
-  status: string;
+  status: "published" | "draft" | "out_of_stock";
 
   @Column({ nullable: false })
   physical_condition: "new" | "old";

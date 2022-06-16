@@ -4,7 +4,7 @@ export const createSchema = yup.object().shape({
   address: yup
     .string()
     .required("Address field is required.")
-    .min(10, "The Address must be at least 10 characters long.")
+    .min(10, "The address must be at least 10 characters long.")
     .max(120, "The title must have a maximum of 120 characters."),
   county: yup
     .string()

@@ -6,7 +6,8 @@ import { GetCurrentUserController } from "../../controllers/Users/GetCurrentUser
 import { UpdateUserController } from "../../controllers/Users/UpdateUserController";
 import { EnsureAdmin } from "../../middlewares/EnsureAdmin";
 import { EnsureAuthenticated } from "../../middlewares/EnsureAuthenticated";
-import { Schema } from "./Schema";
+import { validateResource } from "../../middlewares/validateResource";
+import { createSchema, updateSchema } from "./schema";
 
 const usersRoutes = Router();
 
@@ -20,12 +21,20 @@ const ensureAuthenticated = new EnsureAuthenticated();
 const ensureAdmin = new EnsureAdmin();
 
 /** The user registration route does not have the token as mandatory */
-usersRoutes.post("/", Schema.create, createUserController.execute);
+usersRoutes.post(
+  "/",
+  validateResource(createSchema),
+  createUserController.execute,
+);
 
 /** Users need to have the authentication token to access these routes */
 usersRoutes.use(ensureAuthenticated.execute);
 usersRoutes.get("/me", getCurrentUserController.execute);
-usersRoutes.patch("/:id", Schema.update, updateUserController.execute);
+usersRoutes.patch(
+  "/:id",
+  validateResource(updateSchema),
+  updateUserController.execute,
+);
 
 usersRoutes.get("/", ensureAdmin.execute, getAllUsersController.execute);
 usersRoutes.delete("/:id", ensureAdmin.execute, deleteUserController.execute);

@@ -8,6 +8,6 @@ export const validateResource =
       await schema.validate(body);
       next();
     } catch (err) {
-      throw new AppError(err.errors, 422, `${req.baseUrl}${req.path}`);
+      throw new AppError(err.errors, 403, `${req.baseUrl}${req.path}`);
     }
   };

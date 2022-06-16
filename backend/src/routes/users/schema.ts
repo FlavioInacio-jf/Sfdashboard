@@ -8,7 +8,10 @@ export const createSchema = yup.object().shape({
     .max(100, "The name must have a maximum of 100 characters."),
   email: yup.string().email().required("Email field is required."),
   photo: yup.string().url().required("Photo url field is required."),
-  role: yup.string().required("Role field is required."),
+  role: yup
+    .string()
+    .equals(["admin", "user"], "Role must be admin or user.")
+    .required("Role field is required."),
   permissions: yup.array().required("Permissions field is required."),
   password: yup
     .string()
@@ -23,6 +26,9 @@ export const updateSchema = yup.object().shape({
     .min(2, "The name must be at least 2 characters long.")
     .max(100, "The name must have a maximum of 100 characters."),
   photo: yup.string().url().notRequired(),
-  role: yup.string().notRequired(),
+  role: yup
+    .string()
+    .equals(["admin", "user"], "Role must be admin or user.")
+    .notRequired(),
   permissions: yup.array().notRequired(),
 });

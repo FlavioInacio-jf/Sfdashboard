@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
+import { AnyObjectSchema } from "yup";
 import { AppError } from "../errors/AppError";
 
 export const validateResource =
-  schema => async (req: Request, res: Response, next: NextFunction) => {
+  (schema: AnyObjectSchema) =>
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { body } = req;
       await schema.validate(body);

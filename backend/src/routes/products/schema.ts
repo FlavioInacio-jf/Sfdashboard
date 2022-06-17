@@ -36,3 +36,35 @@ export const createSchema = yup.object().shape({
     .equals(["old", "new"], "Physical condition must be old or new")
     .required("Physical condition field is required."),
 });
+
+export const updateSchema = yup.object().shape({
+  price: yup
+    .number()
+    .min(0, "The minimum value of the price body is 0")
+    .notRequired(),
+  description: yup
+    .string()
+    .min(200, "The description must be at least 200 characters long.")
+    .max(3000, "The description must have a maximum of 3000 characters.")
+    .notRequired(),
+  amount: yup
+    .number()
+    .min(0, "The minimum value of the amount body is 0")
+    .notRequired(),
+  photo: yup.string().url().notRequired(),
+  category: yup
+    .string()
+    .min(2, "The category must at be at least 8 characters long.")
+    .notRequired(),
+  status: yup
+    .string()
+    .equals(
+      ["published", "draft", "out_of_stock"],
+      "Status must be published, draft or out_of_stock.",
+    )
+    .notRequired(),
+  physical_condition: yup
+    .string()
+    .equals(["old", "new"], "Physical condition must be old or new")
+    .notRequired(),
+});

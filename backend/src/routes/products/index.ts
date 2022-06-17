@@ -6,7 +6,7 @@ import { GetSingleProductController } from "../../controllers/products/GetSingle
 import { UpdateProductController } from "../../controllers/products/UpdateProductController";
 import { EnsureAuthenticated } from "../../middlewares/EnsureAuthenticated";
 import { validateResource } from "../../middlewares/validateResource";
-import { createSchema } from "./schema";
+import { createSchema, updateSchema } from "./schema";
 
 const productsRoutes = Router();
 const createProductController = new CreateProductController();
@@ -27,7 +27,7 @@ productsRoutes.post(
 );
 productsRoutes.patch(
   "/:id",
-  validateResource(createSchema),
+  validateResource(updateSchema),
   updateProductController.execute,
 );
 productsRoutes.delete("/:id", deleteCategoryController.execute);

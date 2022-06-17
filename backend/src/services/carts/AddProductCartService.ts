@@ -37,12 +37,27 @@ export class AddProductCartService {
       );
     }
 
+    if (product.amount === 0) {
+      product.status = "out_of_stock";
+    }
     product.amount -= amount;
     await productsRepository.save(product);
 
+    const productAlredyExist = await cartsRepository.findOne({
+      product_id,
+      user_id,
+    });
+
+    // If the product already exists in the cart, just update the quantity
+    if (productAlredyExist) {
+      productAlredyExist.amount += amount;
+      await cartsRepository.save(productAlredyExist);
+      return productAlredyExist;
+    }
+
+    // If the product does not exist in the cart, a new registration is created
     const cart = cartsRepository.create({ user_id, product_id, amount });
     await cartsRepository.save(cart);
-
     return cart;
   }
 }

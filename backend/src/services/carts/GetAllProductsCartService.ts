@@ -16,6 +16,8 @@ export class GetAllProductsCartService {
 
     const productsInCart = await cartsRepository.find({
       where: { user_id },
+      select: ["id", "amount", "created_at"],
+      relations: ["product"],
       take: limit,
     });
 

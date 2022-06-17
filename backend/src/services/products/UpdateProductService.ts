@@ -6,42 +6,46 @@ import { ProductsRepository } from "../../repositories/ProductsRepository";
 interface IUpdateProductRequest {
   user_id: string;
   id: string;
-  name: string;
-  price: number;
   description: string;
+  price: number;
   amount: number;
-  photo_url: string;
+  photo: string;
   category: string;
+  physical_condition: "new" | "old";
+  status: "published" | "draft" | "out_of_stock";
 }
 
 export class UpdateProductService {
   async execute({
     user_id,
     id,
-    name,
     price,
     description,
     amount,
-    photo_url,
+    photo,
     category,
+    physical_condition,
+    status,
   }: IUpdateProductRequest): Promise<Product> {
     const productsRepository = getCustomRepository(ProductsRepository);
 
-    const product = await productsRepository.findOne({ id, user_id });
+    const productExists = await productsRepository.findOne({ id, user_id });
 
-    if (!product) {
+    if (!productExists) {
       throw new AppError("Product doesn't exist!", 404, `/products/${id}`);
     }
 
-    product.name = name || product.name;
-    product.price = price || product.price;
-    product.description = description || product.description;
-    product.amount = amount || product.amount;
-    product.photo_url = photo_url || product.photo_url;
-    product.category = category || product.category;
+    productExists.price = price || productExists.price;
+    productExists.description = description || productExists.description;
+    productExists.amount = amount || productExists.amount;
+    productExists.photo = photo || productExists.photo;
+    productExists.category = category || productExists.category;
+    productExists.physical_condition =
+      physical_condition || productExists.physical_condition;
+    productExists.status = status || productExists.status;
 
-    await productsRepository.save(product);
+    await productsRepository.save(productExists);
 
-    return product;
+    return productExists;
   }
 }

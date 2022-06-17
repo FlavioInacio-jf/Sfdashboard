@@ -4,44 +4,50 @@ import { AppError } from "../../errors/AppError";
 import { ProductsRepository } from "../../repositories/ProductsRepository";
 
 interface ICreateProductRequest {
-  name: string;
+  title: string;
   price: number;
   description: string;
   amount: number;
-  photo_url: string;
+  photo: string;
   category: string;
+  status: "published" | "draft" | "out_of_stock";
+  physical_condition: "new" | "old";
   user_id: string;
 }
 
 export class CreateProductService {
   async execute({
     user_id,
-    name,
-    price,
+    title,
     description,
+    price,
     amount,
-    photo_url,
+    photo,
     category,
+    physical_condition,
+    status,
   }: ICreateProductRequest): Promise<Product> {
     const productsRepository = getCustomRepository(ProductsRepository);
 
-    const productAlreadyExists = await productsRepository.findOne({
-      name,
+    const titleAlreadyExists = await productsRepository.findOne({
+      title,
       user_id,
     });
 
-    if (productAlreadyExists) {
-      throw new AppError(`Product "${name}" already exists`, 409, "/products");
+    if (titleAlreadyExists) {
+      throw new AppError(`Product "${title}" already exists`, 409, "/products");
     }
 
     const product = productsRepository.create({
-      name,
-      price,
-      description,
-      amount,
-      photo_url,
-      category,
       user_id,
+      title,
+      description,
+      price,
+      amount,
+      photo,
+      category,
+      physical_condition,
+      status,
     });
 
     await productsRepository.save(product);

@@ -6,29 +6,29 @@ import { GenerateTokenProvider } from "../../provider/GenerateTokenProvider";
 import { UsersRepository } from "../../repositories/UsersRepository";
 
 interface IAuthenticateUserRequest {
-  username: string;
+  email: string;
   password: string;
 }
 
 interface IAuthenticateResponse {
   id: string;
   name: string;
-  username: string;
-  photo_url?: string;
-  role: string;
+  email: string;
+  photo?: string;
+  role?: "admin" | "user";
+  permissions: string[];
   created_at: Date;
-  updated_at: Date;
   accessToken: string;
   refreshToken: string;
 }
 
 export class AuthenticateUserService {
   async execute({
-    username,
+    email,
     password,
   }: IAuthenticateUserRequest): Promise<IAuthenticateResponse> {
     const usersRepository = getCustomRepository(UsersRepository);
-    const user = await usersRepository.findOne({ username });
+    const user = await usersRepository.findOne({ email });
 
     if (!user) {
       throw new AppError(`Email and/or password incorrect.`, 401, "/auth");

@@ -18,7 +18,7 @@ export class LogouUserController {
 
       return res.status(201).json({
         message: "Logout successfully performed",
-        result: {},
+        result: undefined,
         status: 201,
       });
     } catch (error) {

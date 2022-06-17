@@ -8,28 +8,31 @@ export class CreateProduct1653931908410 implements MigrationInterface {
         columns: [
           { name: "id", type: "uuid", isPrimary: true },
           {
-            name: "name",
-            type: "varchar(100)",
+            name: "title",
+            type: "varchar",
             isNullable: false,
           },
-          { name: "description", type: "varchar(600)", isNullable: false },
+          { name: "description", type: "varchar" },
           { name: "price", type: "number", isNullable: false },
           { name: "amount", type: "number", isNullable: false },
-          { name: "photo_url", type: "varchar", isNullable: false },
+          { name: "photo", type: "varchar", isNullable: false },
           {
             name: "category",
             type: "uuid",
-            isNullable: true,
+          },
+          {
+            name: "status",
+            type: "varchar",
+            isNullable: false,
+          },
+          {
+            name: "physical_condition",
+            type: "varchar",
+            isNullable: false,
           },
           { name: "user_id", type: "uuid", isNullable: false },
           {
             name: "created_at",
-            type: "timestamp",
-            default: "now()",
-            isNullable: false,
-          },
-          {
-            name: "updated_at",
             type: "timestamp",
             default: "now()",
             isNullable: false,

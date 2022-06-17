@@ -6,18 +6,28 @@ export class CreateProductController {
   async execute(req: Request, res: Response) {
     const createProductService = new CreateProductService();
     try {
-      const { name, price, description, amount, photo_url, category } =
-        req.body;
+      const {
+        title,
+        price,
+        description,
+        amount,
+        photo,
+        category,
+        status,
+        physical_condition,
+      } = req.body;
       const { id: user_id } = req.user;
 
       const product = await createProductService.execute({
         user_id,
-        name,
+        title,
         price,
         description,
         amount,
-        photo_url,
+        photo,
         category,
+        status,
+        physical_condition,
       });
 
       return res.status(201).json({

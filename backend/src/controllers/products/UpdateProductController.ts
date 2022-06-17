@@ -8,18 +8,26 @@ export class UpdateProductController {
     try {
       const { id } = req.params;
       const { id: user_id } = req.user;
-      const { name, price, description, amount, photo_url, category } =
-        req.body;
+      const {
+        price,
+        description,
+        amount,
+        photo,
+        category,
+        physical_condition,
+        status,
+      } = req.body;
 
       const product = await updateProductService.execute({
         user_id,
         id,
-        name,
         price,
         description,
         amount,
-        photo_url,
+        photo,
         category,
+        physical_condition,
+        status,
       });
 
       return res.status(201).json({

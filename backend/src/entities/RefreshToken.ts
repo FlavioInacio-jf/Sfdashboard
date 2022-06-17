@@ -5,12 +5,11 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
-  UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 import { User } from "./User";
 
-@Entity("refresh_token")
+@Entity("refreshToken")
 export class RefreshToken {
   @PrimaryColumn()
   readonly id: string;
@@ -34,9 +33,6 @@ export class RefreshToken {
     nullable: false,
   })
   created_at: Date;
-
-  @UpdateDateColumn({ nullable: false })
-  updated_at: Date;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @ManyToOne(type => User, Refresh => RefreshToken, {

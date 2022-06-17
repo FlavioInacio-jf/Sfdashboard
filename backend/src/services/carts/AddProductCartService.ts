@@ -43,16 +43,16 @@ export class AddProductCartService {
     product.amount -= amount;
     await productsRepository.save(product);
 
-    const productAlredyExist = await cartsRepository.findOne({
+    const productExistInCart = await cartsRepository.findOne({
       product_id,
       user_id,
     });
 
     // If the product already exists in the cart, just update the quantity
-    if (productAlredyExist) {
-      productAlredyExist.amount += amount;
-      await cartsRepository.save(productAlredyExist);
-      return productAlredyExist;
+    if (productExistInCart) {
+      productExistInCart.amount += amount;
+      await cartsRepository.save(productExistInCart);
+      return productExistInCart;
     }
 
     // If the product does not exist in the cart, a new registration is created

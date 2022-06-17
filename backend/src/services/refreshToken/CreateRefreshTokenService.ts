@@ -25,12 +25,8 @@ export default class CreateRefreshTokenService {
     const refreshTokenExpired = dayjs().isAfter(
       dayjs.unix(refreshTokenExists.expires_in),
     );
-    if (!refreshTokenExpired) {
-      throw new AppError(
-        "Refresh token is not inspired",
-        201,
-        "/refresh-token",
-      );
+    if (refreshTokenExpired) {
+      throw new AppError("Refresh token expired", 201, "/refresh-token");
     }
 
     const generateRefreshToken = new GenerateRefreshTokenProvider();

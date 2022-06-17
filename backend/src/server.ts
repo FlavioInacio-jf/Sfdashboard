@@ -6,14 +6,14 @@ import swaggerUi from "swagger-ui-express";
 import "./database";
 import { AppError } from "./errors/AppError";
 import { routes } from "./routes";
-import * as swaggerFile from "./swagger.json";
+import swaggerDocument from "./swagger.json";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(routes);
 

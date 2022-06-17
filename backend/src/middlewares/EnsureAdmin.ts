@@ -10,7 +10,7 @@ export class EnsureAdmin {
     }
     throw new AppError(
       "User does not have access to this feature.",
-      401,
+      403,
       baseUrl,
     );
   }

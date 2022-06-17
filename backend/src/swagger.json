@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "SF Dashboard API",
-    "description": "Smart and fast APIREST",
+    "title": "Place Dream API",
+    "description": "APIREST Place Dream",
     "version": "1.0.0",
     "contact": {
       "email": "jflavioinacio22@gmail.com"
@@ -10,6 +10,16 @@
     "license": {
       "name": "MIT License",
       "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "in": "header",
+        "bearerFormat": "JWT"
+      }
     }
   },
   "paths": {
@@ -31,14 +41,24 @@
                     "type": "string",
                     "required": true
                   },
-                  "username": {
-                    "description": "This name will be used for login",
+                  "email": {
+                    "description": "This e-mail will be used for login",
                     "type": "string",
                     "required": true
                   },
-                  "photo_url": {
-                    "description": "Avatar url",
+                  "photo": {
+                    "description": "Photo url",
                     "type": "string",
+                    "required": false
+                  },
+                  "role": {
+                    "description": "This password will be used for login",
+                    "type": "string",
+                    "required": true
+                  },
+                  "permissions": {
+                    "description": "This password will be used for login",
+                    "type": "array",
                     "required": true
                   },
                   "password": {
@@ -49,8 +69,12 @@
                 },
                 "example": {
                   "name": "Carlos",
-                  "username": "jCarlos220",
-                  "photo_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                  "email": "jCarlos@gmail.com",
+                  "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                  "role": "user",
+                  "permissions": [
+                    "create"
+                  ],
                   "password": "123456789"
                 }
               }
@@ -59,29 +83,25 @@
         },
         "responses": {
           "201": {
-            "description": "User created successfully",
-            "schema": {
-              "type": "object",
-              "items": {
-                "message": "string",
-                "result": {
-                  "id": "string",
-                  "name": "string",
-                  "username": "string",
-                  "photo_url": "string",
-                  "password": "string",
-                  "created_at": "string",
-                  "updated_at": "string"
-                },
-                "status": "integer"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "User created successfully"
           },
           "409": {
-            "description": "Username Alred exists"
+            "description": "Email already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "security": {
+          "bearerAuth": []
+        },
+        "summary": "Get all users",
+        "description": "List all users",
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -91,60 +111,27 @@
         "tags": [
           "users"
         ],
-        "summary": "Delete user",
+        "summary": "Delete user by ID",
         "description": "Delete user",
         "parameters": [
           {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          },
-          {
             "name": "id",
-            "id": "header",
-            "description": "User id",
-            "type": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "required": true
           }
         ],
         "responses": {
           "201": {
-            "description": "User removed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "username": {
-                      "type": "string"
-                    },
-                    "photo_url": {
-                      "type": "string"
-                    },
-                    "created_at": {
-                      "type": "string"
-                    },
-                    "updated_at": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "User removed successfully"
           },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "403": {
+            "description": "User does not have access to this feature."
           },
           "404": {
             "description": "User doesn't exist!"
@@ -155,7 +142,7 @@
         "tags": [
           "users"
         ],
-        "summary": "Update a user",
+        "summary": "Update a user by id",
         "description": "Update a user",
         "requestBody": {
           "content": {
@@ -164,16 +151,38 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Category name",
-                    "type": "string"
+                    "description": "User name",
+                    "type": "string",
+                    "required": false
                   },
-                  "photo_url": {
-                    "description": "Avatar url",
-                    "type": "string"
+                  "photo": {
+                    "description": "Photo url",
+                    "type": "string",
+                    "required": false
+                  },
+                  "role": {
+                    "description": "Role user",
+                    "type": "string",
+                    "required": false,
+                    "enum": [
+                      "admin",
+                      "user"
+                    ]
+                  },
+                  "permissions": {
+                    "description": "Permissions user",
+                    "type": "array",
+                    "required": false
                   }
                 },
                 "example": {
-                  "name": "Humberto"
+                  "name": "Carlos",
+                  "email": "jCarlos@gmail.com",
+                  "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                  "role": "user",
+                  "permissions": [
+                    "create"
+                  ]
                 }
               }
             }
@@ -181,43 +190,17 @@
         },
         "parameters": [
           {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          },
-          {
             "name": "id",
-            "id": "header",
-            "description": "User id",
-            "type": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "required": true
           }
         ],
         "responses": {
           "201": {
-            "description": "User updated successfully",
-            "schema": {
-              "type": "object",
-              "items": {
-                "message": "string",
-                "result": {
-                  "name": "string",
-                  "username": "string",
-                  "photo_url": "string",
-                  "created_at": "string",
-                  "updated_at": "string"
-                },
-                "status": "integer"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request"
-          },
-          "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "User updated successfully"
           },
           "404": {
             "description": "User doesn't exist!"
@@ -273,15 +256,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          }
-        ],
         "responses": {
           "201": {
             "description": "Product created successfully"
@@ -300,15 +274,6 @@
         ],
         "summary": "List all products",
         "description": "List all products",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -330,13 +295,6 @@
         "summary": "List single product",
         "description": "List single product",
         "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT acess token",
-            "type": "string",
-            "required": true
-          },
           {
             "name": "id",
             "id": "header",
@@ -367,13 +325,6 @@
         "summary": "Delete product",
         "description": "Delete product",
         "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          },
           {
             "name": "id",
             "id": "header",
@@ -446,13 +397,6 @@
         },
         "parameters": [
           {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          },
-          {
             "name": "id",
             "id": "header",
             "description": "Product id",
@@ -522,15 +466,6 @@
         "tags": [
           "auth"
         ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT refresh token",
-            "type": "string",
-            "required": true
-          }
-        ],
         "summary": "Log out of account",
         "description": "Log out of account",
         "responses": {
@@ -550,15 +485,6 @@
       "post": {
         "tags": [
           "auth"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT refresh token",
-            "type": "string",
-            "required": true
-          }
         ],
         "summary": "Log out of account",
         "description": "Log out of account",

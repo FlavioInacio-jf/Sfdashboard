@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import { Address } from "../../entities/Address";
+import { AppError } from "../../errors/AppError";
 import { AddressRepository } from "../../repositories/AddressRepository";
 
 interface ICreateAddressRequest {
@@ -25,6 +26,15 @@ export class CreateAddressService {
     number,
   }: ICreateAddressRequest): Promise<Address> {
     const addressesRepository = getCustomRepository(AddressRepository);
+    const addressesCount = await addressesRepository.count({ user_id });
+
+    if (addressesCount > 2) {
+      throw new AppError(
+        "The limit of registered addresses has been reached. A user can only have a maximum of 3 addresses!",
+        409,
+        "/addresses",
+      );
+    }
 
     const addressCreated = addressesRepository.create({
       user_id,

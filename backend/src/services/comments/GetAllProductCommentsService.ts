@@ -30,6 +30,7 @@ export class GetAllProductCommentsService {
 
     const comments = await commentsRepository.find({
       where: { product_id },
+      select: ["id", "title", "description", "created_at"],
       take: limit,
     });
 

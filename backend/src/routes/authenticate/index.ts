@@ -19,10 +19,11 @@ authRoutes.post(
   validateResource(createSchema),
   authenticateUserController.execute,
 );
-authRoutes.post("/refresh-token", createRefreshTokenController.execute);
 
 /** Users need to have the authentication token to access these routes */
+
 authRoutes.use(ensureAuthenticated.execute);
+authRoutes.post("/refresh-token", createRefreshTokenController.execute);
 authRoutes.post("/logout", logoutUserController.execute);
 
 export { authRoutes };

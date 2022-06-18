@@ -227,7 +227,8 @@
                   "title": {
                     "description": "Product title",
                     "type": "string",
-                    "required": true
+                    "required": true,
+                    "unique": true
                   },
                   "description": {
                     "description": "Product description",
@@ -447,7 +448,7 @@
         }
       }
     },
-    "/auth": {
+    "/auth/login": {
       "post": {
         "tags": [
           "auth"
@@ -460,10 +461,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
-                    "description": "This name will be used for login",
+                  "email": {
+                    "description": "This e-mail will be used for login",
                     "type": "string",
-                    "required": true
+                    "required": true,
+                    "unique": true
                   },
                   "password": {
                     "description": "This password will be used for login",
@@ -479,9 +481,6 @@
           "201": {
             "description": "Login successfully performed"
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "401": {
             "description": "Email and/or password incorrect."
           }
@@ -493,14 +492,11 @@
         "tags": [
           "auth"
         ],
-        "summary": "Log out of account",
-        "description": "Log out of account",
+        "summary": "Logout of account",
+        "description": "Logout of account. It's necessary to place the refresh token in the request header.",
         "responses": {
           "201": {
             "description": "Logout successfully performed"
-          },
-          "400": {
-            "description": "Invalid request"
           },
           "401": {
             "description": "Refresh token invalid"
@@ -508,22 +504,19 @@
         }
       }
     },
-    "/auth/refres-token": {
+    "/auth/refresh-token": {
       "post": {
         "tags": [
           "auth"
         ],
-        "summary": "Log out of account",
-        "description": "Log out of account",
+        "summary": "Create a new access token and refresh token",
+        "description": "Create a new access token and refresh token. It's necessary to place the refresh token in the request header.",
         "responses": {
           "201": {
-            "description": "Refresh token is not inspired or Refresh token created successfully"
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "Refresh token created successfully!"
           },
           "401": {
-            "description": "Refresh token invalid"
+            "description": "Refresh token invalid! or Refresh token expired!"
           }
         }
       }

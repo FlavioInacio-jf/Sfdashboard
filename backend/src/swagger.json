@@ -14,7 +14,7 @@
   },
   "components": {
     "securitySchemes": {
-      "bearerAuth": {
+      "Bearer": {
         "type": "http",
         "scheme": "bearer",
         "in": "header",
@@ -22,6 +22,11 @@
       }
     }
   },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
   "paths": {
     "/users": {
       "post": {

@@ -4,11 +4,11 @@ declare namespace Express {
     user: {
       id: string;
       name: string;
-      username: string;
-      photo_url?: string;
+      email: string;
+      photo?: string;
       role: "admin" | "user";
+      permissions: string[];
       created_at: Date;
-      updated_at: Date;
     };
   }
 }

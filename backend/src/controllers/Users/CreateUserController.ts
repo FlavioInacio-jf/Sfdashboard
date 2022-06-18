@@ -5,15 +5,16 @@ import { CreateUserService } from "../../services/users/CreateUserService";
 export class CreateUserController {
   async execute(req: Request, res: Response) {
     try {
-      const { name, username, photo_url, password, role } = req.body;
+      const { name, email, photo, password, role, permissions } = req.body;
       const createUserService = new CreateUserService();
 
       const user = await createUserService.execute({
         name,
-        username,
-        photo_url,
+        email,
+        photo,
         password,
         role,
+        permissions,
       });
 
       return res.status(201).json({

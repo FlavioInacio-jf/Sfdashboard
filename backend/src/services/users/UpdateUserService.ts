@@ -6,11 +6,19 @@ import { UsersRepository } from "../../repositories/UsersRepository";
 interface IUserUpdateRequest {
   id: string;
   name: string;
-  photo_url: string;
+  photo: string;
+  role: "admin" | "user";
+  permissions: string[];
 }
 
 export class UpdateUserService {
-  async execute({ id, name, photo_url }: IUserUpdateRequest): Promise<User> {
+  async execute({
+    id,
+    name,
+    photo,
+    role,
+    permissions,
+  }: IUserUpdateRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const user = await usersRepository.findOne({ id });
@@ -20,7 +28,9 @@ export class UpdateUserService {
     }
 
     user.name = name || user.name;
-    user.photo_url = photo_url || user.photo_url;
+    user.photo = photo || user.photo;
+    user.role = role || user.role;
+    user.permissions = permissions || user.permissions;
 
     await usersRepository.save(user);
 

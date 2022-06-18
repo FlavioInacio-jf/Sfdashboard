@@ -5,7 +5,6 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
-  UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 import { User } from "./User";
@@ -16,16 +15,13 @@ class Product {
   readonly id?: string;
 
   @Column({
-    length: 100,
     nullable: false,
+    unique: true,
   })
-  name: string;
+  title: string;
 
-  @Column({
-    length: 600,
-    nullable: false,
-  })
-  description: string;
+  @Column()
+  description?: string;
 
   @Column({
     nullable: false,
@@ -37,30 +33,27 @@ class Product {
   })
   amount: number;
 
-  @Column({
-    nullable: false,
-  })
-  photo_url: string;
+  @Column({ nullable: false })
+  photo: string;
 
-  @CreateDateColumn({
-    nullable: false,
-  })
-  created_at?: Date;
+  @Column()
+  category?: string;
 
-  @UpdateDateColumn({
-    nullable: false,
-  })
-  updated_at?: Date;
+  @Column({ nullable: false })
+  status: "published" | "draft" | "out_of_stock";
 
-  @Column({
-    nullable: true,
-  })
-  category: string;
+  @Column({ nullable: false })
+  physical_condition: "new" | "old";
 
   @Column({
     nullable: false,
   })
   user_id: string;
+
+  @CreateDateColumn({
+    nullable: false,
+  })
+  created_at?: Date;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @ManyToOne(type => User, Products => Product, { onDelete: "CASCADE" })

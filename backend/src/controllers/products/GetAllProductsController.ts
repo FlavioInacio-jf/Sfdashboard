@@ -8,9 +8,17 @@ export class GetAllProductsController {
 
     try {
       const { id: user_id } = req.user;
-      const products = await getAllProdutcsService.execute(user_id);
+      const { limit } = req.query;
+      const limitNumber = Number(limit);
 
-      return res.status(200).json({ result: products });
+      const products = await getAllProdutcsService.execute({
+        user_id,
+        limit: limitNumber,
+      });
+
+      return res
+        .status(200)
+        .json({ limit: limitNumber || 8, result: products });
     } catch (error) {
       throw new AppError(error.detail || error.message, 400, "/products");
     }

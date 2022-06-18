@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "SF Dashboard API",
-    "description": "Smart and fast APIREST",
+    "title": "Place Dream API",
+    "description": "APIREST Place Dream",
     "version": "1.0.0",
     "contact": {
       "email": "jflavioinacio22@gmail.com"
@@ -12,6 +12,21 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "in": "header",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
   "paths": {
     "/users": {
       "post": {
@@ -31,14 +46,24 @@
                     "type": "string",
                     "required": true
                   },
-                  "username": {
-                    "description": "This name will be used for login",
+                  "email": {
+                    "description": "This e-mail will be used for login",
                     "type": "string",
                     "required": true
                   },
-                  "photo_url": {
-                    "description": "Avatar url",
+                  "photo": {
+                    "description": "Photo url",
                     "type": "string",
+                    "required": false
+                  },
+                  "role": {
+                    "description": "This password will be used for login",
+                    "type": "string",
+                    "required": true
+                  },
+                  "permissions": {
+                    "description": "This password will be used for login",
+                    "type": "array",
                     "required": true
                   },
                   "password": {
@@ -49,8 +74,12 @@
                 },
                 "example": {
                   "name": "Carlos",
-                  "username": "jCarlos220",
-                  "photo_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                  "email": "jCarlos@gmail.com",
+                  "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                  "role": "user",
+                  "permissions": [
+                    "create"
+                  ],
                   "password": "123456789"
                 }
               }
@@ -59,29 +88,25 @@
         },
         "responses": {
           "201": {
-            "description": "User created successfully",
-            "schema": {
-              "type": "object",
-              "items": {
-                "message": "string",
-                "result": {
-                  "id": "string",
-                  "name": "string",
-                  "username": "string",
-                  "photo_url": "string",
-                  "password": "string",
-                  "created_at": "string",
-                  "updated_at": "string"
-                },
-                "status": "integer"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "User created successfully"
           },
           "409": {
-            "description": "Username Alred exists"
+            "description": "Email already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "security": {
+          "bearerAuth": []
+        },
+        "summary": "Get all users",
+        "description": "List all users",
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -91,60 +116,27 @@
         "tags": [
           "users"
         ],
-        "summary": "Delete user",
-        "description": "Delete user",
+        "summary": "Delete user by ID",
+        "description": "Delete user by ID",
         "parameters": [
           {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          },
-          {
             "name": "id",
-            "id": "header",
-            "description": "User id",
-            "type": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "required": true
           }
         ],
         "responses": {
           "201": {
-            "description": "User removed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "username": {
-                      "type": "string"
-                    },
-                    "photo_url": {
-                      "type": "string"
-                    },
-                    "created_at": {
-                      "type": "string"
-                    },
-                    "updated_at": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "User removed successfully"
           },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "403": {
+            "description": "User does not have access to this feature."
           },
           "404": {
             "description": "User doesn't exist!"
@@ -155,8 +147,8 @@
         "tags": [
           "users"
         ],
-        "summary": "Update a user",
-        "description": "Update a user",
+        "summary": "Update a user by ID",
+        "description": "Update a user by ID",
         "requestBody": {
           "content": {
             "application/json": {
@@ -164,16 +156,38 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Category name",
-                    "type": "string"
+                    "description": "User name",
+                    "type": "string",
+                    "required": false
                   },
-                  "photo_url": {
-                    "description": "Avatar url",
-                    "type": "string"
+                  "photo": {
+                    "description": "Photo url",
+                    "type": "string",
+                    "required": false
+                  },
+                  "role": {
+                    "description": "Role user",
+                    "type": "string",
+                    "required": false,
+                    "enum": [
+                      "admin",
+                      "user"
+                    ]
+                  },
+                  "permissions": {
+                    "description": "Permissions user",
+                    "type": "array",
+                    "required": false
                   }
                 },
                 "example": {
-                  "name": "Humberto"
+                  "name": "Carlos",
+                  "email": "jCarlos@gmail.com",
+                  "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                  "role": "user",
+                  "permissions": [
+                    "create"
+                  ]
                 }
               }
             }
@@ -181,46 +195,213 @@
         },
         "parameters": [
           {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          },
-          {
             "name": "id",
-            "id": "header",
-            "description": "User id",
-            "type": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "required": true
           }
         ],
         "responses": {
           "201": {
-            "description": "User updated successfully",
-            "schema": {
-              "type": "object",
-              "items": {
-                "message": "string",
-                "result": {
-                  "name": "string",
-                  "username": "string",
-                  "photo_url": "string",
-                  "created_at": "string",
-                  "updated_at": "string"
-                },
-                "status": "integer"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "User updated successfully"
           },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "404": {
             "description": "User doesn't exist!"
+          }
+        }
+      }
+    },
+    "/addresses": {
+      "post": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "Create a new address",
+        "description": "Create a new address",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "description": "Address",
+                    "type": "string",
+                    "required": true
+                  },
+                  "county": {
+                    "description": "County",
+                    "type": "string",
+                    "required": true
+                  },
+                  "cep": {
+                    "description": "Zip code",
+                    "type": "string",
+                    "required": true
+                  },
+                  "federative_unit": {
+                    "description": "Federative unit",
+                    "type": "string",
+                    "required": true,
+                    "length": 2
+                  },
+                  "district": {
+                    "description": "District",
+                    "type": "string",
+                    "required": true
+                  },
+                  "state": {
+                    "description": "State",
+                    "type": "string",
+                    "required": true
+                  },
+                  "number": {
+                    "description": "Number",
+                    "type": "number",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Address created successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "409": {
+            "description": "The limit of registered addresses has been reached. A user can only have a maximum of 3 addresses!"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "addresses"
+        ],
+        "security": {
+          "bearerAuth": []
+        },
+        "summary": "Get all addresses",
+        "description": "List all addresses",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          }
+        }
+      }
+    },
+    "/addresses/{id}": {
+      "delete": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "Delete a address by ID",
+        "description": "Delete a address by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Address removed successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Address doesn't exist!"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "Update a address by ID",
+        "description": "Update a address by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "description": "Address",
+                    "type": "string",
+                    "required": false
+                  },
+                  "county": {
+                    "description": "County",
+                    "type": "string",
+                    "required": false
+                  },
+                  "cep": {
+                    "description": "Zip code",
+                    "type": "string",
+                    "required": false
+                  },
+                  "federative_unit": {
+                    "description": "Federative unit",
+                    "type": "string",
+                    "required": false,
+                    "length": 2
+                  },
+                  "district": {
+                    "description": "District",
+                    "type": "string",
+                    "required": false
+                  },
+                  "state": {
+                    "description": "State",
+                    "type": "string",
+                    "required": false
+                  },
+                  "number": {
+                    "description": "Number",
+                    "type": "number",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Address updated successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Address doesn't exist!"
           }
         }
       }
@@ -238,8 +419,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "description": "Product name",
+                  "title": {
+                    "description": "Product title",
+                    "type": "string",
+                    "required": true,
+                    "unique": true
+                  },
+                  "description": {
+                    "description": "Product description",
                     "type": "string",
                     "required": true
                   },
@@ -248,24 +435,38 @@
                     "type": "number",
                     "required": true
                   },
-                  "description": {
-                    "description": "Product description",
-                    "type": "string",
+                  "amount": {
+                    "description": "Product amount",
+                    "type": "number",
                     "required": true
                   },
-                  "photo_url": {
+                  "photo": {
                     "description": "Product url photo",
                     "type": "string",
-                    "required": false
+                    "required": true
                   },
                   "category": {
                     "description": "Product category",
                     "type": "string",
                     "required": false
                   },
-                  "amount": {
-                    "description": "Product amount",
-                    "type": "number",
+                  "physical_condition": {
+                    "description": "Product physical condition",
+                    "type": "string",
+                    "enum": [
+                      "old",
+                      "new"
+                    ],
+                    "required": true
+                  },
+                  "status": {
+                    "description": "Product status",
+                    "type": "string",
+                    "enum": [
+                      "published",
+                      "draft",
+                      "out_of_stock"
+                    ],
                     "required": true
                   }
                 }
@@ -273,24 +474,15 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          }
-        ],
         "responses": {
           "201": {
             "description": "Product created successfully"
           },
           "401": {
-            "description": "Unauthorized / Token invalid!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "409": {
-            "description": "product already exists"
+            "description": "Product already exists"
           }
         }
       },
@@ -298,26 +490,14 @@
         "tags": [
           "products"
         ],
-        "summary": "List all products",
+        "summary": "Get all products",
         "description": "List all products",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "401": {
-            "description": "Unauthorized / Token invalid!"
+            "description": "Token invalid, Token expired or Unauthorized"
           }
         }
       }
@@ -327,21 +507,15 @@
         "tags": [
           "products"
         ],
-        "summary": "List single product",
-        "description": "List single product",
+        "summary": "Get a single product by ID",
+        "description": "Get a single product by ID",
         "parameters": [
           {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT acess token",
-            "type": "string",
-            "required": true
-          },
-          {
             "name": "id",
-            "id": "header",
-            "description": "Product id",
-            "type": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "required": true
           }
         ],
@@ -349,11 +523,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "404": {
             "description": "Product doesn't exist!"
@@ -364,33 +535,24 @@
         "tags": [
           "products"
         ],
-        "summary": "Delete product",
-        "description": "Delete product",
+        "summary": "Delete a product by ID",
+        "description": "Delete a product by ID",
         "parameters": [
           {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          },
-          {
             "name": "id",
-            "id": "header",
-            "description": "Product id",
-            "type": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "required": true
           }
         ],
         "responses": {
           "201": {
-            "description": "Product removed successfully"
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "Product removed successfully!"
           },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "404": {
             "description": "Product doesn't exist!"
@@ -401,16 +563,26 @@
         "tags": [
           "products"
         ],
-        "summary": "Update a product",
-        "description": "Update a product",
+        "summary": "Update a product by ID",
+        "description": "Update a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "description": "Product name",
+                  "description": {
+                    "description": "Product description",
                     "type": "string",
                     "required": false
                   },
@@ -419,12 +591,12 @@
                     "type": "number",
                     "required": false
                   },
-                  "description": {
-                    "description": "Product description",
-                    "type": "string",
+                  "amount": {
+                    "description": "Product amount",
+                    "type": "number",
                     "required": false
                   },
-                  "photo_url": {
+                  "photo": {
                     "description": "Product url photo",
                     "type": "string",
                     "required": false
@@ -434,9 +606,23 @@
                     "type": "string",
                     "required": false
                   },
-                  "amount": {
-                    "description": "Product amount",
-                    "type": "number",
+                  "physical_condition": {
+                    "description": "Product physical condition",
+                    "type": "string",
+                    "enum": [
+                      "old",
+                      "new"
+                    ],
+                    "required": false
+                  },
+                  "status": {
+                    "description": "Product status",
+                    "type": "string",
+                    "enum": [
+                      "published",
+                      "draft",
+                      "out_of_stock"
+                    ],
                     "required": false
                   }
                 }
@@ -444,31 +630,12 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT access token",
-            "type": "string",
-            "required": true
-          },
-          {
-            "name": "id",
-            "id": "header",
-            "description": "Product id",
-            "type": "string",
-            "required": true
-          }
-        ],
         "responses": {
           "201": {
             "description": "Product updated successfully"
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "404": {
             "description": "Product doesn't exist!"
@@ -476,7 +643,303 @@
         }
       }
     },
-    "/auth": {
+    "/comments": {
+      "post": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Create a new comment in a product",
+        "description": "Create a new comment in a product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "Comment title",
+                    "type": "string",
+                    "required": true
+                  },
+                  "description": {
+                    "description": "Comment description",
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment created successfully"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          },
+          "409": {
+            "description": "User cannot comment on their own product!"
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "get": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Get all product comments by ID",
+        "description": "Get all product comments by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Product id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Delete a comment by ID",
+        "description": "Delete a comment by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Comment removed successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Comment doesn't exist!"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Update a comment by ID",
+        "description": "Update a comment by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "Comment title",
+                    "type": "string",
+                    "required": false
+                  },
+                  "description": {
+                    "description": "Comment description",
+                    "type": "string",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment updated successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Comment doesn't exist!"
+          }
+        }
+      }
+    },
+    "/carts": {
+      "post": {
+        "tags": [
+          "carts"
+        ],
+        "summary": "Add a product to cart",
+        "description": "Add a product to cart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "description": "Amount",
+                    "type": "number",
+                    "required": true
+                  },
+                  "product_id": {
+                    "description": "Product id",
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The product has been successfully added to the cart!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          },
+          "409": {
+            "description": "The product does not have the quantity informed to make this request!"
+          }
+        }
+      }
+    },
+    "/carts/{id}": {
+      "get": {
+        "tags": [
+          "carts"
+        ],
+        "summary": "Get all products in cart by ID",
+        "description": "Get all products in cart by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "User id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "carts"
+        ],
+        "summary": "Remove a product in cart by ID",
+        "description": "Remove a product in cart",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Product successfully removed from cart!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist in cart!"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "carts"
+        ],
+        "summary": "Update a product in cart by ID",
+        "description": "Update a product in cart by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "description": "Comment title",
+                    "type": "number",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The product in the cart has been updated successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist in cart!"
+          }
+        }
+      }
+    },
+    "/auth/login": {
       "post": {
         "tags": [
           "auth"
@@ -489,10 +952,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
-                    "description": "This name will be used for login",
+                  "email": {
+                    "description": "This e-mail will be used for login",
                     "type": "string",
-                    "required": true
+                    "required": true,
+                    "unique": true
                   },
                   "password": {
                     "description": "This password will be used for login",
@@ -508,9 +972,6 @@
           "201": {
             "description": "Login successfully performed"
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "401": {
             "description": "Email and/or password incorrect."
           }
@@ -522,23 +983,11 @@
         "tags": [
           "auth"
         ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT refresh token",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "summary": "Log out of account",
-        "description": "Log out of account",
+        "summary": "Logout of account",
+        "description": "Logout of account. It's necessary to place the refresh token in the request header.",
         "responses": {
           "201": {
             "description": "Logout successfully performed"
-          },
-          "400": {
-            "description": "Invalid request"
           },
           "401": {
             "description": "Refresh token invalid"
@@ -546,31 +995,19 @@
         }
       }
     },
-    "/auth/refres-token": {
+    "/auth/refresh-token": {
       "post": {
         "tags": [
           "auth"
         ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "id": "header",
-            "description": "JWT refresh token",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "summary": "Log out of account",
-        "description": "Log out of account",
+        "summary": "Create a new access token and refresh token",
+        "description": "Create a new access token and refresh token. It's necessary to place the refresh token in the request header.",
         "responses": {
           "201": {
-            "description": "Refresh token is not inspired or Refresh token created successfully"
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "Refresh token created successfully!"
           },
           "401": {
-            "description": "Refresh token invalid"
+            "description": "Refresh token invalid! or Refresh token expired!"
           }
         }
       }

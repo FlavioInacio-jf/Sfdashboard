@@ -27,7 +27,7 @@ export class CreateUserService {
     const emailAlreadyExists = await usersRepository.findOne({ email });
 
     if (emailAlreadyExists) {
-      throw new AppError(`Username "${email}" already exists`, 409, "/users");
+      throw new AppError(`Email "${email}" already exists`, 409, "/users");
     }
 
     const salt = await genSalt(12);

@@ -23,7 +23,7 @@ export class UpdateAddressController {
     });
 
     return res.status(201).json({
-      message: "Address updated successfully",
+      message: "Address updated successfully!",
       result: addressUpdated,
       status: 201,
     });

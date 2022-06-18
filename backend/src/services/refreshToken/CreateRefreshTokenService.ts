@@ -19,14 +19,14 @@ export default class CreateRefreshTokenService {
     });
 
     if (!refreshTokenExists) {
-      throw new AppError("Refresh token invalid", 401, "/refresh-token");
+      throw new AppError("Refresh token invalid!", 401, "/refresh-token");
     }
 
     const refreshTokenExpired = dayjs().isAfter(
       dayjs.unix(refreshTokenExists.expires_in),
     );
     if (refreshTokenExpired) {
-      throw new AppError("Refresh token expired", 201, "/refresh-token");
+      throw new AppError("Refresh token expired!", 401, "/refresh-token");
     }
 
     const generateRefreshToken = new GenerateRefreshTokenProvider();

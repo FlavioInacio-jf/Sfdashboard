@@ -112,7 +112,7 @@
           "users"
         ],
         "summary": "Delete user by ID",
-        "description": "Delete user",
+        "description": "Delete user by ID",
         "parameters": [
           {
             "name": "id",
@@ -142,8 +142,8 @@
         "tags": [
           "users"
         ],
-        "summary": "Update a user by id",
-        "description": "Update a user",
+        "summary": "Update a user by ID",
+        "description": "Update a user by ID",
         "requestBody": {
           "content": {
             "application/json": {
@@ -202,6 +202,9 @@
           "201": {
             "description": "User updated successfully"
           },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
           "404": {
             "description": "User doesn't exist!"
           }
@@ -221,8 +224,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "description": "Product name",
+                  "title": {
+                    "description": "Product title",
+                    "type": "string",
+                    "required": true
+                  },
+                  "description": {
+                    "description": "Product description",
                     "type": "string",
                     "required": true
                   },
@@ -231,24 +239,38 @@
                     "type": "number",
                     "required": true
                   },
-                  "description": {
-                    "description": "Product description",
-                    "type": "string",
+                  "amount": {
+                    "description": "Product amount",
+                    "type": "number",
                     "required": true
                   },
-                  "photo_url": {
+                  "photo": {
                     "description": "Product url photo",
                     "type": "string",
-                    "required": false
+                    "required": true
                   },
                   "category": {
                     "description": "Product category",
                     "type": "string",
                     "required": false
                   },
-                  "amount": {
-                    "description": "Product amount",
-                    "type": "number",
+                  "physical_condition": {
+                    "description": "Product physical condition",
+                    "type": "string",
+                    "enum": [
+                      "old",
+                      "new"
+                    ],
+                    "required": true
+                  },
+                  "status": {
+                    "description": "Product status",
+                    "type": "string",
+                    "enum": [
+                      "published",
+                      "draft",
+                      "out_of_stock"
+                    ],
                     "required": true
                   }
                 }
@@ -261,10 +283,10 @@
             "description": "Product created successfully"
           },
           "401": {
-            "description": "Unauthorized / Token invalid!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "409": {
-            "description": "product already exists"
+            "description": "Product already exists"
           }
         }
       },
@@ -272,17 +294,14 @@
         "tags": [
           "products"
         ],
-        "summary": "List all products",
+        "summary": "Get all products",
         "description": "List all products",
         "responses": {
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "401": {
-            "description": "Unauthorized / Token invalid!"
+            "description": "Token invalid, Token expired or Unauthorized"
           }
         }
       }
@@ -292,14 +311,15 @@
         "tags": [
           "products"
         ],
-        "summary": "List single product",
-        "description": "List single product",
+        "summary": "Get a single product by ID",
+        "description": "Get a single product by ID",
         "parameters": [
           {
             "name": "id",
-            "id": "header",
-            "description": "Product id",
-            "type": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "required": true
           }
         ],
@@ -307,11 +327,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "404": {
             "description": "Product doesn't exist!"
@@ -322,26 +339,24 @@
         "tags": [
           "products"
         ],
-        "summary": "Delete product",
-        "description": "Delete product",
+        "summary": "Delete a product by ID",
+        "description": "Delete a product by ID",
         "parameters": [
           {
             "name": "id",
-            "id": "header",
-            "description": "Product id",
-            "type": "string",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
             "required": true
           }
         ],
         "responses": {
           "201": {
-            "description": "Product removed successfully"
-          },
-          "400": {
-            "description": "Invalid request"
+            "description": "Product removed successfully!"
           },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "404": {
             "description": "Product doesn't exist!"
@@ -352,16 +367,26 @@
         "tags": [
           "products"
         ],
-        "summary": "Update a product",
-        "description": "Update a product",
+        "summary": "Update a product by ID",
+        "description": "Update a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "description": "Product name",
+                  "description": {
+                    "description": "Product description",
                     "type": "string",
                     "required": false
                   },
@@ -370,12 +395,12 @@
                     "type": "number",
                     "required": false
                   },
-                  "description": {
-                    "description": "Product description",
-                    "type": "string",
+                  "amount": {
+                    "description": "Product amount",
+                    "type": "number",
                     "required": false
                   },
-                  "photo_url": {
+                  "photo": {
                     "description": "Product url photo",
                     "type": "string",
                     "required": false
@@ -385,9 +410,23 @@
                     "type": "string",
                     "required": false
                   },
-                  "amount": {
-                    "description": "Product amount",
-                    "type": "number",
+                  "physical_condition": {
+                    "description": "Product physical condition",
+                    "type": "string",
+                    "enum": [
+                      "old",
+                      "new"
+                    ],
+                    "required": false
+                  },
+                  "status": {
+                    "description": "Product status",
+                    "type": "string",
+                    "enum": [
+                      "published",
+                      "draft",
+                      "out_of_stock"
+                    ],
                     "required": false
                   }
                 }
@@ -395,24 +434,12 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "id",
-            "id": "header",
-            "description": "Product id",
-            "type": "string",
-            "required": true
-          }
-        ],
         "responses": {
           "201": {
             "description": "Product updated successfully"
           },
-          "400": {
-            "description": "Invalid request"
-          },
           "401": {
-            "description": "Token missing / Invalid Token!"
+            "description": "Token invalid, Token expired or Unauthorized"
           },
           "404": {
             "description": "Product doesn't exist!"

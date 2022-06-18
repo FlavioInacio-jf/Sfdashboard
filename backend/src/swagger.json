@@ -790,6 +790,150 @@
         }
       }
     },
+    "/carts": {
+      "post": {
+        "tags": [
+          "carts"
+        ],
+        "summary": "Add a product to cart",
+        "description": "Add a product to cart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "description": "Amount",
+                    "type": "number",
+                    "required": true
+                  },
+                  "product_id": {
+                    "description": "Product id",
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The product has been successfully added to the cart!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          },
+          "409": {
+            "description": "The product does not have the quantity informed to make this request!"
+          }
+        }
+      }
+    },
+    "/carts/{id}": {
+      "get": {
+        "tags": [
+          "carts"
+        ],
+        "summary": "Get all products in cart by ID",
+        "description": "Get all products in cart by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "User id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "carts"
+        ],
+        "summary": "Remove a product in cart by ID",
+        "description": "Remove a product in cart",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Product successfully removed from cart!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist in cart!"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "carts"
+        ],
+        "summary": "Update a product in cart by ID",
+        "description": "Update a product in cart by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "description": "Comment title",
+                    "type": "number",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The product in the cart has been updated successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist in cart!"
+          }
+        }
+      }
+    },
     "/auth/login": {
       "post": {
         "tags": [

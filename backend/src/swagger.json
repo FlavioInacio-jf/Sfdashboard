@@ -638,6 +638,158 @@
         }
       }
     },
+    "/comments": {
+      "post": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Create a new comment in a product",
+        "description": "Create a new comment in a product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "Comment title",
+                    "type": "string",
+                    "required": true
+                  },
+                  "description": {
+                    "description": "Comment description",
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment created successfully"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          },
+          "409": {
+            "description": "User cannot comment on their own product!"
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "get": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Get all product comments by ID",
+        "description": "Get all product comments by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Product id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Product doesn't exist!"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Delete a comment by ID",
+        "description": "Delete a comment by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Comment removed successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Comment doesn't exist!"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Update a comment by ID",
+        "description": "Update a comment by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "description": "Comment title",
+                    "type": "string",
+                    "required": false
+                  },
+                  "description": {
+                    "description": "Comment description",
+                    "type": "string",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment updated successfully!"
+          },
+          "401": {
+            "description": "Token invalid, Token expired or Unauthorized"
+          },
+          "404": {
+            "description": "Comment doesn't exist!"
+          }
+        }
+      }
+    },
     "/auth/login": {
       "post": {
         "tags": [

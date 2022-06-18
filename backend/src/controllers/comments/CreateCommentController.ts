@@ -16,7 +16,7 @@ export class CreateCommentController {
     });
 
     return res.status(201).json({
-      message: "Comment created successfully",
+      message: "Comment created successfully!",
       result: comment,
       status: 201,
     });

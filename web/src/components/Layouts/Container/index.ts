@@ -12,6 +12,8 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
   max-width: 124rem;
 
+  padding: 0 1.6rem;
+
   ${({ h }) =>
     h &&
     css`

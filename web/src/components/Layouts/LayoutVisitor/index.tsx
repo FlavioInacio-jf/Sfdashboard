@@ -3,10 +3,11 @@ import { FC, ReactNode } from 'react';
 import { Brand } from '../../Brand';
 import { Container } from '../Container';
 import { ActionsButton } from './ActionsButton';
+import { Footer } from './Footer';
 import { navLink } from './navLinks';
 import { Search } from './Search';
 import { SigInButton } from './SigInButton';
-import { Footer, Header, NavBar } from './styles';
+import { Header, NavBar } from './styles';
 
 interface LayouLoginProps {
   children: ReactNode;
@@ -38,9 +39,7 @@ export const LayoutVisitor: FC<LayouLoginProps> = ({ children }) => {
       <main>
         <Container>{children}</Container>
       </main>
-      <Footer>
-        <Container>Footer</Container>
-      </Footer>
+      <Footer />
     </>
   );
 };

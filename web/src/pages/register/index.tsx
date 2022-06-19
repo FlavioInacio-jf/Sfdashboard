@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
-import { Brand } from '../../components/Brand';
 import { Button } from '../../components/Button';
 import { Column } from '../../components/Column';
 import { Input } from '../../components/Form/Input';
@@ -34,10 +33,6 @@ const Register: NextPage = () => {
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <header>
-        <Brand />
-      </header>
-
       <Column column="1" margin="3rem 0 3rem 0">
         <Input<UserRegisterType>
           label="Name"

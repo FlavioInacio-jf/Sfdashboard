@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components';
 
 export interface LinkStyledProps {
+  w?: '25%' | '50%' | '75%' | '100%' | 'auto';
   variant?: 'primary' | 'secondary' | 'danger' | 'tertiary' | 'quartenary' | 'grey' | 'light';
   outline?: boolean;
   size?: 'small' | 'large' | '';
   positionIcon?: 'left' | 'right';
-  flex?: boolean;
-  margin?: string;
-  noPadding?: boolean;
+  d?: 'flex' | 'block' | 'inline-flex' | 'inline-block';
+  mL?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto' | 'none';
+  mR?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto' | 'none';
+  mX?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto' | 'none';
 }
 
 export const LinkStyled = styled.a<LinkStyledProps>`
-  width: ${({ flex = false }) => (flex ? '100%' : 'auto')};
-
   font-family: ${({ theme }) => theme.font.fontFamily[0]};
   font-size: 1.6rem;
   line-height: 2.08rem;
@@ -24,14 +24,35 @@ export const LinkStyled = styled.a<LinkStyledProps>`
 
   border-radius: 0.5rem;
 
-  display: ${({ flex = false }) => (flex ? 'flex' : 'inline-flex')};
   align-items: center;
   justify-content: center;
 
   padding: 0.6rem 1.2rem;
-  margin: ${({ margin = '' }) => margin || ''};
 
   transition: all 0.3s ease-in-out;
+
+  ${({ mR, theme }) =>
+    mR &&
+    css`
+      margin-right: ${theme.sizes[mR]};
+    `}
+
+  ${({ mL, theme }) =>
+    mL &&
+    css`
+      margin-right: ${theme.sizes[mL]};
+    `}
+
+  ${({ w = 'auto' }) =>
+    w &&
+    css`
+      width: ${w};
+    `};
+  ${({ d = 'inline-flex' }) =>
+    d &&
+    css`
+      display: ${d};
+    `};
 
   ${({ variant, outline, theme }) =>
     variant === 'primary' &&
@@ -168,10 +189,4 @@ export const LinkStyled = styled.a<LinkStyledProps>`
         border: 0.1rem solid ${theme.colours.neutrals[100]};
       `};
   }
-
-  ${({ noPadding }) =>
-    noPadding &&
-    css`
-      padding: 0;
-    `}
 `;

@@ -11,6 +11,8 @@ export const ContainerSigInButton = styled.button`
   font-weight: 700;
   color: ${({ theme }) => theme.colours.primary};
 
+  position: relative;
+
   > span {
     display: flex;
     align-items: flex-start;

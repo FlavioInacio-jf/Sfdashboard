@@ -27,8 +27,6 @@ export const NavBar = styled.nav`
   }
 `;
 
-export const Footer = styled.footer``;
-
 export const Brand = styled.h1`
   font-family: ${({ theme }) => theme.font.fontFamily[1]};
   font-size: 3.4rem;

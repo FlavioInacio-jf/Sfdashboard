@@ -1,15 +1,14 @@
 import { FC } from 'react';
-import { BsPerson } from 'react-icons/bs';
+import { Link } from '../../../Link';
 import { ContainerSigInButton } from './styles';
 
 export const SigInButton: FC = () => {
   return (
-    <ContainerSigInButton type="button">
-      <BsPerson />
-      <span>
-        Hello, login or <br />
-        <span>register</span>
-      </span>
+    <ContainerSigInButton>
+      <Link href="/register" outline mR="lg">
+        Register
+      </Link>
+      <Link href="/login">Log in</Link>
     </ContainerSigInButton>
   );
 };

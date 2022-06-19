@@ -27,6 +27,10 @@ export default createGlobalStyle`
     display: block;
   }
 
+  button {
+    cursor: pointer;
+  }
+
   .sr-only {
     position: absolute;
     width: 0.1rem;

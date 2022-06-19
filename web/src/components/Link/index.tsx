@@ -9,10 +9,12 @@ export interface LinkProps
   href: string;
 }
 
-export const Link: FC<LinkProps> = ({ children, href, ...props }) => {
+export const Link: FC<LinkProps> = ({ children, variant = 'primary', href, ...props }) => {
   return (
     <NextLink href={href} passHref>
-      <LinkStyled {...props}>{children}</LinkStyled>
+      <LinkStyled variant={variant} {...props}>
+        {children}
+      </LinkStyled>
     </NextLink>
   );
 };

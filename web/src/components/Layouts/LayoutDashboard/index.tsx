@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
-import { DashboardProvider } from '../../contexts/DashboardContext';
-import { Toast } from '../Toast';
+import { DashboardProvider } from '../../../contexts/DashboardContext';
+import { Toast } from '../../Toast';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Container, Content } from './styles';

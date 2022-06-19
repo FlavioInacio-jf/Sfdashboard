@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import { BrandStyled } from './styles';
 
-export const Brand = () => {
+export const Brand: FC = () => {
   return (
     <BrandStyled>
-      <span>S</span>
-      <span>F</span> Dashboard
+      <span>P</span>
+      Dream
     </BrandStyled>
   );
 };

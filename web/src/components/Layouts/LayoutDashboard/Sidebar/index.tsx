@@ -3,8 +3,8 @@ import Router, { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 import { FC } from 'react';
 import { BsBoxArrowRight, BsFillGridFill } from 'react-icons/bs';
-import { LogoutMutation } from '../../../mutations/logoutMutation';
-import { Link } from '../../Link';
+import { LogoutMutation } from '../../../../mutations/logoutMutation';
+import { Link } from '../../../Link';
 import { Brand, Container, SidebarItem, SidebarListItems } from './styles';
 
 export const signOut = () => {

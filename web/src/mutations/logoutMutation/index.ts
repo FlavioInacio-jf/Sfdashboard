@@ -1,7 +1,7 @@
 import { parseCookies } from 'nookies';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
-import { signOut } from '../../components/LayoutDashboard/Sidebar';
+import { signOut } from '../../components/Layouts/LayoutDashboard/Sidebar';
 import { api } from '../../services/api';
 
 export const LogoutMutation = () => {

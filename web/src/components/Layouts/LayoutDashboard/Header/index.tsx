@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { BsPlusLg, BsSearch } from 'react-icons/bs';
 import { useQuery } from 'react-query';
-import { queryKey } from '../../../constants/queryKeys';
-import { useDashboard } from '../../../hooks/useDashboard';
-import { userService } from '../../../services/userService';
-import { UserType } from '../../../types/userType';
-import { Button } from '../../Button';
-import { RenderIf } from '../../RenderIf';
+import { queryKey } from '../../../../constants/queryKeys';
+import { useDashboard } from '../../../../hooks/useDashboard';
+import { userService } from '../../../../services/userService';
+import { UserType } from '../../../../types/userType';
+import { Button } from '../../../Button';
+import { RenderIf } from '../../../RenderIf';
 import { Container, HeaderAvatar, HeaderWrapperActions, Search } from './styles';
 
 export const Header: FC = () => {

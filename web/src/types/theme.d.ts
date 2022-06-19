@@ -44,5 +44,14 @@ declare module 'styled-components' {
       laptop: string;
       desktop: string;
     };
+    sizes: {
+      none: string;
+      sm: string;
+      md: string;
+      lg: string;
+      xl: string;
+      xxl: string;
+      auto: string;
+    };
   }
 }

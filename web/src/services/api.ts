@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { parseCookies, setCookie } from 'nookies';
-import { signOut } from '../components/LayoutDashboard/Sidebar';
+import { signOut } from '../components/Layouts/LayoutDashboard/Sidebar';
 import { BASE_URL } from '../constants/endpoints';
 
 interface MessageErrorType {

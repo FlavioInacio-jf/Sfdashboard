@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 export const SearchGroup = styled.div`
+  flex: 2;
+
+  max-width: 70rem;
   height: 4rem;
 
   display: flex;
@@ -11,11 +14,15 @@ export const SearchGroup = styled.div`
   border-radius: 0.5rem;
   padding-right: ${({ theme }) => theme.sizes.lg};
 
+  margin: 0 ${({ theme }) => theme.sizes.xl};
+
   input {
+    width: 100%;
     height: 100%;
 
     font-family: ${({ theme }) => theme.font.fontFamily[0]};
     font-size: 1.6rem;
+
     border-radius: 0.5rem;
 
     padding: 0 ${({ theme }) => theme.sizes.lg};

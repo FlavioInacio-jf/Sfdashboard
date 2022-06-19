@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { FC, ReactNode } from 'react';
-import { BsCart3, BsFillHeartFill, BsPersonCircle } from 'react-icons/bs';
 import { Brand } from '../../Brand';
+import { Container } from '../Container';
+import { ActionsButton } from './ActionsButton';
 import { navLink } from './navLinks';
 import { Search } from './Search';
-import { Container, Footer, Header, NavBar } from './styles';
+import { SigInButton } from './SigInButton';
+import { Footer, Header, NavBar } from './styles';
 
 interface LayouLoginProps {
   children: ReactNode;
@@ -18,17 +20,8 @@ export const LayoutVisitor: FC<LayouLoginProps> = ({ children }) => {
           <Brand />
 
           <Search />
-          <div>
-            <BsPersonCircle />
-            <div>
-              Hello, name
-              <button type="button">My Account</button>
-            </div>
-          </div>
-          <div>
-            <BsFillHeartFill />
-            <BsCart3 />
-          </div>
+          <SigInButton />
+          <ActionsButton />
         </Container>
         <NavBar>
           <Container d="flex" justifyContent="start" h="50%">

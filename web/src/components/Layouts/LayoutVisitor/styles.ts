@@ -1,48 +1,4 @@
-import styled, { css } from 'styled-components';
-
-interface ContainerProps {
-  h?: '25%' | '50%' | '75%' | '100%' | 'auto';
-  d?: 'flex' | 'block' | 'inline-flex' | 'inline-block';
-  justifyContent?: 'start' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
-  alignItems?: 'stretch' | 'center' | 'start' | 'end';
-  flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
-}
-export const Container = styled.div<ContainerProps>`
-  width: 100%;
-  max-width: 128rem;
-
-  ${({ h }) =>
-    h &&
-    css`
-      height: ${h};
-    `};
-
-  margin: 0 auto;
-
-  ${({ d }) =>
-    d &&
-    css`
-      display: ${d};
-    `};
-
-  ${({ justifyContent }) =>
-    justifyContent &&
-    css`
-      justify-content: ${justifyContent};
-    `};
-
-  ${({ alignItems }) =>
-    alignItems &&
-    css`
-      align-items: ${alignItems};
-    `};
-
-  ${({ flexDirection }) =>
-    flexDirection &&
-    css`
-      flex-direction: ${flexDirection};
-    `};
-`;
+import styled from 'styled-components';
 
 export const Header = styled.header`
   width: 100%;
@@ -56,6 +12,8 @@ export const NavBar = styled.nav`
   font-family: ${({ theme }) => theme.font.fontFamily[0]};
   text-transform: uppercase;
   color: ${({ theme }) => theme.colours.neutrals.O00};
+
+  border-bottom: 0.5rem solid ${({ theme }) => theme.colours.secondary};
 
   padding: ${({ theme }) => theme.sizes.lg} ${({ theme }) => theme.sizes.md};
 

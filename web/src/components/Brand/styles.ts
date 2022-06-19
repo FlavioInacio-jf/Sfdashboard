@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 export const BrandStyled = styled.h1`
+  flex: 0;
+
   font-family: ${({ theme }) => theme.font.fontFamily[0]};
   font-size: 3rem;
   font-weight: 500;
-  text-align: center;
+  text-align: left;
   color: ${({ theme }) => theme.colours.primary};
 
   span:first-child {

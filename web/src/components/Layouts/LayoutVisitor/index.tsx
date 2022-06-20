@@ -1,28 +1,35 @@
 import Link from 'next/link';
 import { FC, ReactNode } from 'react';
+import { useAuth } from '../../../hooks/useAuth';
 import { Brand } from '../../Brand';
+import { RenderIf } from '../../RenderIf';
+import { Toast } from '../../Toast';
 import { Container } from '../Container';
 import { ActionsButton } from './ActionsButton';
 import { Footer } from './Footer';
 import { navLink } from './navLinks';
 import { Search } from './Search';
 import { SigInButton } from './SigInButton';
-import { Header, NavBar } from './styles';
+import { Header, Main, NavBar } from './styles';
 
 interface LayouLoginProps {
   children: ReactNode;
 }
 
 export const LayoutVisitor: FC<LayouLoginProps> = ({ children }) => {
+  const { isAuthenticated } = useAuth();
   return (
     <>
       <Header>
-        <Container d="flex" justifyContent="space-between" alignItems="center" h="50%">
+        <Container d="flex" justifyContent="space-between" alignItems="center" h="50%" pY="xl">
           <Brand />
 
           <Search />
           <SigInButton />
-          <ActionsButton />
+
+          <RenderIf condition={isAuthenticated}>
+            <ActionsButton />
+          </RenderIf>
         </Container>
         <NavBar>
           <Container d="flex" justifyContent="start" h="50%">
@@ -36,10 +43,9 @@ export const LayoutVisitor: FC<LayouLoginProps> = ({ children }) => {
           </Container>
         </NavBar>
       </Header>
-      <main>
-        <Container>{children}</Container>
-      </main>
+      <Main>{children}</Main>
       <Footer />
+      <Toast />
     </>
   );
 };

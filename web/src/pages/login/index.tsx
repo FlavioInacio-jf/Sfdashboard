@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '../../components/Button';
 import { Column } from '../../components/Column';
 import { Input } from '../../components/Form/Input';
-import { Toast } from '../../components/Toast';
+import { Container } from '../../components/Layouts/Container';
 import { LoginMutation } from '../../mutations/LoginMutation';
 import { CredentialsType } from '../../types/credentialsType';
 import { withSSRGuest } from '../../utils/withSSRGuest';
@@ -28,7 +28,7 @@ const Login: NextPage = () => {
     loginMutate(data);
   };
   return (
-    <>
+    <Container d="flex" h="100%" alignItems="center" justifyContent="center">
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Column column="1">
           <Input<CredentialsType>
@@ -59,8 +59,7 @@ const Login: NextPage = () => {
           Login
         </Button>
       </Form>
-      <Toast />
-    </>
+    </Container>
   );
 };
 

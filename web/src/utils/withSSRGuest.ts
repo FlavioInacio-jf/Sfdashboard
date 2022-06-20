@@ -10,7 +10,7 @@ export const withSSRGuest = <T>(fn: GetServerSideProps<T>): GetServerSideProps =
       return {
         redirect: {
           permanent: false,
-          destination: '/products'
+          destination: '/'
         }
       };
     }

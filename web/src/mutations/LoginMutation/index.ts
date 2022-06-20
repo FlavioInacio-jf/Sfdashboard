@@ -36,7 +36,7 @@ export const LoginMutation = () => {
       });
 
       api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-      Router.push('/products');
+      Router.push('/');
     }
   });
 };

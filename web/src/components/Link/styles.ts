@@ -27,8 +27,9 @@ export const LinkStyled = styled.a<LinkStyledProps>`
   align-items: center;
   justify-content: center;
 
-  padding: 0.6rem 1.2rem;
+  cursor: pointer;
 
+  padding: 0.6rem 1.2rem;
   transition: all 0.3s ease-in-out;
 
   ${({ mR, theme }) =>

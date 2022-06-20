@@ -10,7 +10,7 @@ export const LogoutMutation = () => {
   const config = {
     headers: { Authorization: `Bearer ${refreshToken}` }
   };
-  return useMutation(() => api.post('auth/logout', {}, config), {
+  return useMutation(() => api.post('auth/logout', undefined, config), {
     onError: () => {
       signOut();
     },

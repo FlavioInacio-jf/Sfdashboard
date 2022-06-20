@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 export const Header = styled.header`
   width: 100%;
-  height: 15rem;
+  height: auto;
+
+  margin-bottom: ${({ theme }) => theme.sizes.xxl};
 `;
 
 export const NavBar = styled.nav`
@@ -39,4 +41,9 @@ export const Brand = styled.h1`
   span:first-child {
     color: ${({ theme }) => theme.colours.quartenary};
   }
+`;
+
+export const Main = styled.main`
+  height: 100%;
+  min-height: calc(86.4vh - 23.2rem);
 `;

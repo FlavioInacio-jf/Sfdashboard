@@ -1,3 +1,4 @@
+import { parseCookies } from 'nookies';
 import { createContext, ReactNode, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { queryKey } from '../constants/queryKeys';
@@ -13,7 +14,9 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const { data: user } = useQuery<UserType>(queryKey.session, userService.me);
+  const cookies = parseCookies();
+  const { 'SFDashboard.auth.token': token } = cookies;
+  const { data: user } = useQuery<UserType>(queryKey.session, userService.me, { enabled: !!token });
 
   const isAuthenticated = useMemo(() => !!user, [user]);
 

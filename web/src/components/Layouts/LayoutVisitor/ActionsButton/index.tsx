@@ -6,14 +6,14 @@ import { ActionsContainer } from './styles';
 export const ActionsButton: FC = () => {
   return (
     <ActionsContainer>
-      <Link href="/">
+      <Link href="/my-account/favorites">
         <a>
           <span className="sr-only">Favorites</span>
           <BsHeart />
         </a>
       </Link>
 
-      <Link href="/">
+      <Link href="/cart">
         <a>
           <span className="sr-only">My cart</span>
           <BsCart3 />

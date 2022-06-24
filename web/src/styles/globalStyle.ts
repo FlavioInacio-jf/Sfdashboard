@@ -19,6 +19,7 @@ export default createGlobalStyle`
   a {
     color: inherit;
     text-decoration: none;
+    cursor: pointer;
   }
   img {
     max-width: 100%;

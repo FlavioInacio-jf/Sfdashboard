@@ -13,6 +13,11 @@ export const ActionsContainer = styled.div`
   a {
     display: inline-flex;
     align-items: center;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
   a + a {
     margin-left: ${({ theme }) => theme.sizes.xl};

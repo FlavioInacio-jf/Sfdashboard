@@ -7,6 +7,7 @@ import { UserType } from '../types/userType';
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  user: UserType | undefined;
 }
 interface AuthProviderProps {
   children: ReactNode;
@@ -20,5 +21,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const isAuthenticated = useMemo(() => !!user, [user]);
 
-  return <AuthContext.Provider value={{ isAuthenticated }}>{children}</AuthContext.Provider>;
+  const authProviderValues = useMemo(() => {
+    return {
+      isAuthenticated,
+      user
+    };
+  }, [isAuthenticated, user]);
+  return <AuthContext.Provider value={authProviderValues}>{children}</AuthContext.Provider>;
 };

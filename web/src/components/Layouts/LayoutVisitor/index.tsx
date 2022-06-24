@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FC, ReactNode } from 'react';
+import { FaBars } from 'react-icons/fa';
 import { useAuth } from '../../../hooks/useAuth';
 import { Brand } from '../../Brand';
 import { RenderIf } from '../../RenderIf';
@@ -33,6 +34,12 @@ export const LayoutVisitor: FC<LayouLoginProps> = ({ children }) => {
         </Container>
         <NavBar>
           <Container d="flex" justifyContent="start" h="50%">
+            <Link href="/">
+              <a>
+                <FaBars /> All produtcts
+              </a>
+            </Link>
+
             {navLink.map(({ href, name }) => {
               return (
                 <Link href={href} key={name}>

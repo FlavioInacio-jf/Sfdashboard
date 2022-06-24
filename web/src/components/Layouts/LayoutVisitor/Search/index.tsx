@@ -7,7 +7,7 @@ export const Search = () => {
       <label htmlFor="search" className="sr-only">
         Search
       </label>
-      <input type="search" id="search" />
+      <input type="search" id="search" placeholder="Search by product name" />
       <BsSearch />
     </SearchGroup>
   );

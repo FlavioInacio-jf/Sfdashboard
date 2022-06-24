@@ -11,7 +11,7 @@ export default createGlobalStyle`
 
   body {
     font: 400 1rem ${({ theme }) => theme.font.fontFamily[0]};
-    background-color: ${({ theme }) => theme.colours.neutrals.O00};
+    background-color: ${({ theme }) => theme.colours.neutrals.O50};
     scroll-behavior: smooth;
 
   }

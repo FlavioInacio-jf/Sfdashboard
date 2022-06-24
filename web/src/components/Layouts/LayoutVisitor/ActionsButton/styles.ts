@@ -8,7 +8,7 @@ export const ActionsContainer = styled.div`
 
   font-size: 3rem;
   text-align: right;
-  color: ${({ theme }) => theme.colours.primary};
+  color: ${({ theme }) => theme.colours.neutrals.O00};
 
   a {
     display: inline-flex;

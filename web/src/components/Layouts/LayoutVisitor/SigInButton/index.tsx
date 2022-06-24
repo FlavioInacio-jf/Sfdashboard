@@ -28,12 +28,14 @@ export const SigInButton: FC = () => {
   return (
     <ContainerSigInButton>
       <RenderIf condition={pathname !== '/register'}>
-        <Link href="/register" outline mR="lg">
+        <Link href="/register" variant="secondary" outline mR="lg">
           Register
         </Link>
       </RenderIf>
       <RenderIf condition={pathname !== '/login'}>
-        <Link href="/login">Login</Link>
+        <Link href="/login" variant="secondary">
+          Login
+        </Link>
       </RenderIf>
     </ContainerSigInButton>
   );

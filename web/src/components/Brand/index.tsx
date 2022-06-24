@@ -6,8 +6,8 @@ export const Brand: FC = () => {
   return (
     <Link href="/">
       <BrandStyled>
-        <span>P</span>
-        Dream
+        <span>PD</span>
+        ream
       </BrandStyled>
     </Link>
   );

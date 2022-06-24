@@ -34,7 +34,7 @@ export const NewProductModal: FC = () => {
     createProductMutate({
       ...data,
       price: priceNumber,
-      photo_url: data.photo_url || photo_product
+      photo: data.photo || photo_product
     });
     if (isSuccess) {
       reset();
@@ -52,7 +52,7 @@ export const NewProductModal: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input<ProductRegisterType>
           label="Name"
-          name="name"
+          name="title"
           type="text"
           max={100}
           maxLength={100}
@@ -64,7 +64,7 @@ export const NewProductModal: FC = () => {
         <Column column="1" justifyItems="start" justifyContent="start" margin="3rem 0 3rem 0">
           <Input<ProductRegisterType>
             label="Photo"
-            name="photo_url"
+            name="photo"
             type="text"
             placeholder="Ex.: https://photos.google.com/photos"
             register={register}

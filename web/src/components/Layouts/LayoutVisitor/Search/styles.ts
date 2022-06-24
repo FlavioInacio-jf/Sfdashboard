@@ -10,10 +10,10 @@ export const SearchGroup = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  border: 0.1rem solid ${({ theme }) => theme.colours.neutrals[200]};
-  border-radius: 0.5rem;
-  padding-right: ${({ theme }) => theme.sizes.lg};
+  background-color: ${({ theme }) => theme.colours.neutrals.O00};
+  border-radius: 1rem;
 
+  padding-right: ${({ theme }) => theme.sizes.lg};
   margin: 0 ${({ theme }) => theme.sizes.xl};
 
   input {
@@ -36,6 +36,6 @@ export const SearchGroup = styled.div`
 
   svg {
     font-size: 2rem;
-    color: ${({ theme }) => theme.colours.neutrals[200]};
+    color: ${({ theme }) => theme.colours.primary};
   }
 `;

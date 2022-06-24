@@ -34,7 +34,7 @@ const Products: NextPage = () => {
   const products = useMemo(() => data || [], [data]);
 
   const filteredProducts = useMemo(() => {
-    return products.filter(({ name }) => search(name, searchDashboard));
+    return products.filter(({ title }) => search(title, searchDashboard));
   }, [products, searchDashboard]);
 
   const handleOpenEditProductModal = () => {

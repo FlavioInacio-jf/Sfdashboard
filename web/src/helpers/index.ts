@@ -16,5 +16,5 @@ export const handleKeyUp = (mask: MasksType, event: FormEvent<HTMLInputElement>)
 };
 
 export const search = (filter: string, value: string) => {
-  return filter.toLocaleLowerCase().includes(value.toLocaleLowerCase());
+  return filter.toLowerCase().includes(value.toLowerCase());
 };

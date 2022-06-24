@@ -1,13 +1,14 @@
 export interface ProductType {
   id: number;
-  name: string;
-  price: number;
-  photo_url: string;
+  title: string;
   description: string;
-  category: string;
+  price: number;
   amount: number;
+  photo: string;
+  category: string;
+  status: 'published' | 'draft' | 'out_of_stock';
+  physical_condition: 'new' | 'old';
   created_at: Date;
-  updated_at: Date;
 }
 
 export type ProductRegisterType = Omit<ProductType, 'id' | 'createdAt' | 'updatedAt'>;

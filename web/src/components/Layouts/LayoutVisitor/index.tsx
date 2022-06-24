@@ -1,6 +1,4 @@
-import Link from 'next/link';
 import { FC, ReactNode } from 'react';
-import { FaBars } from 'react-icons/fa';
 import { useAuth } from '../../../hooks/useAuth';
 import { Brand } from '../../Brand';
 import { RenderIf } from '../../RenderIf';
@@ -8,10 +6,10 @@ import { Toast } from '../../Toast';
 import { Container } from '../Container';
 import { ActionsButton } from './ActionsButton';
 import { Footer } from './Footer';
-import { navLink } from './navLinks';
+import { NavBar } from './NavBar';
 import { Search } from './Search';
 import { SigInButton } from './SigInButton';
-import { Header, Main, NavBar } from './styles';
+import { Header, Main } from './styles';
 
 interface LayouLoginProps {
   children: ReactNode;
@@ -32,23 +30,7 @@ export const LayoutVisitor: FC<LayouLoginProps> = ({ children }) => {
             <ActionsButton />
           </RenderIf>
         </Container>
-        <NavBar>
-          <Container d="flex" justifyContent="start" h="50%">
-            <Link href="/">
-              <a>
-                <FaBars /> All produtcts
-              </a>
-            </Link>
-
-            {navLink.map(({ href, name }) => {
-              return (
-                <Link href={href} key={name}>
-                  <a>{name}</a>
-                </Link>
-              );
-            })}
-          </Container>
-        </NavBar>
+        <NavBar />
       </Header>
       <Main>{children}</Main>
       <Footer />

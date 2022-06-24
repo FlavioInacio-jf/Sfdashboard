@@ -1,4 +1,4 @@
-export const navLink = [
+export const content = [
   {
     href: '/',
     name: 'All STORE'

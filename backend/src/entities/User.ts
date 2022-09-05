@@ -14,17 +14,6 @@ export class User {
 
   @Column({
     nullable: false,
-    unique: true,
-  })
-  email: string;
-
-  @Column({
-    nullable: true,
-  })
-  photo?: string;
-
-  @Column({
-    nullable: false,
     length: 10,
   })
   role: "admin" | "user";

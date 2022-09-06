@@ -1,1 +1,1 @@
-export * from "./refreshToken.repository";
+export * from "./refresh-token.repository";

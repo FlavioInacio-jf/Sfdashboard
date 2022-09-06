@@ -4,10 +4,9 @@ import "express-async-errors";
 import "reflect-metadata";
 import swaggerUi from "swagger-ui-express";
 import { addressesRoutes } from "./addresses";
+import { AppEndpoint, AppError } from "./app";
 import { authRoutes } from "./auth";
-import { addresses, auth, products, users } from "./constants/endPoints";
 import "./database";
-import { AppError } from "./errors/AppError";
 import { productsRoutes } from "./products";
 import swaggerDocument from "./swagger.json";
 import { usersRoutes } from "./users";
@@ -20,10 +19,10 @@ app.use(express.json());
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-routes.use(addresses, addressesRoutes);
-routes.use(products, productsRoutes);
-routes.use(users, usersRoutes);
-routes.use(auth, authRoutes);
+routes.use(AppEndpoint.ADDRESSES, addressesRoutes);
+routes.use(AppEndpoint.PRODUCTS, productsRoutes);
+routes.use(AppEndpoint.USERS, usersRoutes);
+routes.use(AppEndpoint.AUTH, authRoutes);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

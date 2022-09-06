@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import { AppError } from "../../errors/AppError";
+import { AppError } from "../../app";
 import { RefreshTokenRepository } from "../repositories";
 
 interface ILogoutUserServiceRequest {

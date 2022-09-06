@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { EnsureAdmin, EnsureAuthenticated, validateResource } from "../../app";
 import {
   CreateUserController,
   DeleteUserController,
@@ -6,10 +7,6 @@ import {
   GetCurrentUserController,
   UpdateUserController,
 } from "../controllers";
-
-import { EnsureAdmin } from "../../middlewares/EnsureAdmin";
-import { EnsureAuthenticated } from "../../middlewares/EnsureAuthenticated";
-import { validateResource } from "../../middlewares/validateResource";
 import { createSchema, updateSchema } from "../schemas";
 
 const usersRoutes = Router();

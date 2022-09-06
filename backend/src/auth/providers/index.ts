@@ -1,1 +1,1 @@
-export * from "./generateRefreshToken.provider";
+export * from "./generate-refresh-token.provider";

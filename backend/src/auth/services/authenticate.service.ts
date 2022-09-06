@@ -1,9 +1,8 @@
 import { compare } from "bcrypt";
 import { getCustomRepository } from "typeorm";
-import { AppError } from "../../errors/AppError";
-import { GenerateRefreshTokenProvider } from "../providers";
-import { GenerateTokenProvider } from "../../provider/GenerateTokenProvider";
+import { AppError, GenerateTokenProvider } from "../../app";
 import { UsersRepository } from "../../users";
+import { GenerateRefreshTokenProvider } from "../providers";
 
 interface IAuthenticateUserRequest {
   email: string;

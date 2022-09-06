@@ -1,3 +1,3 @@
 export * from "./authenticate.service";
-export * from "./createRefreshToken.service";
+export * from "./create-refresh-token.service";
 export * from "./logout.service";

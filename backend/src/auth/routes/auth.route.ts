@@ -5,8 +5,7 @@ import {
   LogouUserController,
 } from "../controllers";
 
-import { EnsureAuthenticated } from "../../middlewares/EnsureAuthenticated";
-import { validateResource } from "../../middlewares/validateResource";
+import { EnsureAuthenticated, validateResource } from "../../app";
 import { createSchema } from "../schemas";
 
 const authRoutes = Router();

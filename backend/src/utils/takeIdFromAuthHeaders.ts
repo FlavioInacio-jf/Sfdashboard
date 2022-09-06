@@ -1,4 +1,4 @@
-import { verify } from "jsonwebtoken";
+import { verify } from 'npx husky install';
 
 interface IPayload {
   sub: string;

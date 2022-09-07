@@ -21,7 +21,6 @@ export class CreateProductController {
         title: "Produto criado com sucesso",
         detail: `Produto ${product.title} criado com sucesso`,
         result: product,
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

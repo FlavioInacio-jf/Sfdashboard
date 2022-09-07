@@ -21,7 +21,6 @@ export class CreateRefreshTokenController {
         title: "Refresh token criado com sucesso!",
         detail: "Refresh token criado com sucesso!",
         result: tokens,
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

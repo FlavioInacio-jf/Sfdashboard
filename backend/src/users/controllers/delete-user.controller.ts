@@ -15,7 +15,6 @@ export class DeleteUserController {
         title: "Usuário removido com sucesso",
         detail: `Usuário ${user.name} removido com sucesso`,
         result: user,
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

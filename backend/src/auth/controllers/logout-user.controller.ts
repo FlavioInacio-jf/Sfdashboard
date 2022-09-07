@@ -20,7 +20,6 @@ export class LogouUserController {
       return res.status(201).json({
         title: "Logout realizado com sucesso",
         detailt: "Logout realizado com sucesso",
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

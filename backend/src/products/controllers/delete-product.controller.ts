@@ -16,7 +16,6 @@ export class DeleteProductController {
         title: "Produto removido com sucesso",
         detail: `Produto ${product.title} removido com sucesso`,
         result: product,
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

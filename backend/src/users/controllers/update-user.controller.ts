@@ -21,7 +21,6 @@ export class UpdateUserController {
         title: "Usuário atualizado com sucesso",
         detail: `Usuário ${user.name} atualizado com sucesso`,
         result: user,
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

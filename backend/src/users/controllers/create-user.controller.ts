@@ -21,7 +21,6 @@ export class CreateUserController {
         title: "Usuário criado com sucesso",
         detail: `Usuário ${user.name} criado com sucesso`,
         result: user,
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

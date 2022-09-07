@@ -17,7 +17,6 @@ export class AuthenticateUserController {
         title: "Login realizado com sucesso!",
         detail: "Login realizado com sucesso!",
         result: token,
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

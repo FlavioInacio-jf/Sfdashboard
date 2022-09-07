@@ -23,7 +23,6 @@ export class UpdateProductController {
         title: "Produto atualizado com sucesso",
         detail: `Produto ${product.title} atualizado com sucesso`,
         result: product,
-        status: 201,
       });
     } catch (error) {
       const err = error as QueryFailedError;

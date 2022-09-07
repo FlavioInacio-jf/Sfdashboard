@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { sign } from "jsonwebtoken";
 import { getCustomRepository } from "typeorm";
-import { RefreshTokenRepository } from "../repositories";
+import { RefreshTokenRepository } from "../../app/repositories";
 
 export class GenerateRefreshTokenProvider {
   async execute(user_id: string): Promise<string> {

@@ -2,8 +2,8 @@ import { genSalt, hash } from "bcrypt";
 import { getCustomRepository } from "typeorm";
 import { CustomError } from "../../app/errors";
 import { EMAIL_ALREADY_EXIST } from "../../app/exceptions";
-import { User } from "../entities";
-import { UsersRepository } from "../repositories";
+import { User } from "../../app/entities";
+import { UsersRepository } from "../../app/repositories";
 import { IUserRegister } from "../types";
 
 export class CreateUserService {

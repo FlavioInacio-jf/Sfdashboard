@@ -1,3 +1,5 @@
+import { UserRole } from "../../users/enums";
+
 declare namespace Express {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   export interface Request {
@@ -5,7 +7,7 @@ declare namespace Express {
       id: string;
       name: string;
       email: string;
-      role: "admin" | "user";
+      role: UserRole;
       permissions: string[];
       created_at: Date;
     };

@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { User } from "../entities";
-import { UsersRepository } from "../repositories";
+import { User } from "../../app/entities";
+import { UsersRepository } from "../../app/repositories";
 
 interface IAllUsersRequest {
   limit?: number;

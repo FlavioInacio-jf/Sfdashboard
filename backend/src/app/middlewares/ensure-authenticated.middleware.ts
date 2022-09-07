@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { getCustomRepository } from "typeorm";
-import { UsersRepository } from "../../users";
+import { UsersRepository } from "../repositories";
 import { CustomError } from "../errors";
 import { EXPIRED_AT, INVALID_AT, USER_NOT_FOUND } from "../exceptions";
 
@@ -21,16 +21,16 @@ export class EnsureAuthenticated {
       throw new CustomError(INVALID_AT);
     }
 
-    const token = authHeader.split(" ");
+    const bearerToken = authHeader.split(" ");
 
-    if (token.length < 2) {
+    if (bearerToken.length < 2) {
       throw new CustomError(INVALID_AT);
     }
 
     try {
       const secret = process.env.SECRET;
 
-      const { sub: id } = verify(token[1], secret) as IPayload;
+      const { sub: id } = verify(bearerToken[1], secret) as IPayload;
 
       const usersRepository = getCustomRepository(UsersRepository);
 

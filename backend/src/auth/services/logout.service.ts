@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import { CustomError } from "../../app";
 import { INVALID_RT } from "../../app/exceptions";
-import { RefreshTokenRepository } from "../repositories";
+import { RefreshTokenRepository } from "../../app/repositories";
 
 interface ILogoutUserServiceRequest {
   user_id: string;

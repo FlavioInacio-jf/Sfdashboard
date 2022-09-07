@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Column,
   CreateDateColumn,
@@ -7,7 +8,7 @@ import {
   PrimaryColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
-import { User } from "../../users";
+import { User } from ".";
 
 @Entity("refreshToken")
 export class RefreshToken {

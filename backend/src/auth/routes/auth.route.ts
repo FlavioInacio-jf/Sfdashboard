@@ -4,14 +4,13 @@ import {
   CreateRefreshTokenController,
   LogouUserController,
 } from "../controllers";
-
 import { EnsureAuthenticated, validateResource } from "../../app";
 import { createSchema } from "../schemas";
 
 const authRoutes = Router();
 
-const authenticateUserController = new AuthenticateUserController();
 const createRefreshTokenController = new CreateRefreshTokenController();
+const authenticateUserController = new AuthenticateUserController();
 const logoutUserController = new LogouUserController();
 const ensureAuthenticated = new EnsureAuthenticated();
 

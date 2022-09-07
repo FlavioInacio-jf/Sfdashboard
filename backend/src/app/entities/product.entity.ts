@@ -1,44 +1,40 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+import { ProductStatus } from "../../products/enums";
 
-@Entity("users")
-export class User {
+@Entity("products")
+export class Product {
   @PrimaryColumn()
   readonly id: string;
 
   @Column({
     nullable: false,
-    length: 200,
   })
-  name: string;
-
-  @Column({
-    nullable: false,
-    length: 200,
-  })
-  email: string;
-
-  @Column({
-    nullable: false,
-    length: 10,
-  })
-  role: "admin" | "user";
-
-  @Column("simple-array", {
-    nullable: false,
-    array: true,
-  })
-  permissions: string[];
+  bar_code: string;
 
   @Column({
     nullable: false,
   })
-  password: string;
+  title: string;
+
+  @Column({
+    nullable: false,
+  })
+  price: number;
+
+  @Column({
+    nullable: false,
+  })
+  amount: number;
+
+  @Column({ nullable: false, enum: ProductStatus })
+  status: string;
 
   @CreateDateColumn({
     nullable: false,
   })
-  created_at: Date;
+  created_at?: Date;
 
   constructor() {
     if (!this.id) {

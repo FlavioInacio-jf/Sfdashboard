@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { ProductStatus } from "../enums";
 
 export const createSchema = yup.object().shape({
   bar_code: yup
@@ -22,31 +23,8 @@ export const createSchema = yup.object().shape({
   status: yup
     .string()
     .equals(
-      ["In stock", "Not sell", "Out of stock"],
+      [Object.values(ProductStatus)],
       "Status must be In stock, Not sell or Out of stock.",
     )
     .required("Status field is required."),
-});
-
-export const updateSchema = yup.object().shape({
-  title: yup
-    .string()
-    .min(10, "The title must be at least 10 characters long.")
-    .max(100, "The title must have a maximum of 100 characters.")
-    .notRequired(),
-  price: yup
-    .number()
-    .min(0, "The minimum value of the price body is 0")
-    .notRequired(),
-  amount: yup
-    .number()
-    .min(0, "The minimum value of the amount body is 0")
-    .notRequired(),
-  status: yup
-    .string()
-    .equals(
-      ["In stock", "Not sell", "Out of stock"],
-      "Status must be In stock, Not sell or Out of stock.",
-    )
-    .notRequired(),
 });

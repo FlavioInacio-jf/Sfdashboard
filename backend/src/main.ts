@@ -26,7 +26,7 @@ app.use(router);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof CustomError) {
-    return res.status(401).json({
+    return res.status(err.code).json({
       title: err.message,
       detail: err,
     });

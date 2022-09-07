@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm";
 import { CustomError } from "../../app";
 import { BAR_CODE_ALREADY_EXIST } from "../../app/exceptions";
-import { Product } from "../entities";
-import { ProductsRepository } from "../repositories";
+import { Product } from "../../app/entities";
+import { ProductsRepository } from "../../app/repositories";
 import { IProductRegister } from "../types";
 
 export class CreateProductService {

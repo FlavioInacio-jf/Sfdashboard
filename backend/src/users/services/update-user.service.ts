@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm";
 import { CustomError } from "../../app";
 import { USER_NOT_FOUND } from "../../app/exceptions";
-import { User } from "../entities";
-import { UsersRepository } from "../repositories";
+import { User } from "../../app/entities";
+import { UsersRepository } from "../../app/repositories";
 import { IUserUpdate } from "../types";
 
 export class UpdateUserService {

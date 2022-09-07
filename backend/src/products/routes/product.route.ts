@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateResource } from "../../app";
+import { EnsureAdmin, EnsureAuthenticated, validateResource } from "../../app";
 import {
   CreateProductController,
   DeleteProductController,
@@ -16,8 +16,21 @@ const getAllProductsController = new GetAllProductsController();
 const getSingleProductController = new GetSingleProductController();
 const updateProductController = new UpdateProductController();
 
+const ensureAuthenticated = new EnsureAuthenticated();
+productsRoutes.use(ensureAuthenticated.execute);
+
 productsRoutes.get("/", getAllProductsController.execute);
 productsRoutes.get("/:id", getSingleProductController.execute);
+
+/*
+  ----------------------------------------------------------------
+  Only users who are admins can delete, update and create products
+  ----------------------------------------------------------------
+ */
+
+const ensureAdmin = new EnsureAdmin();
+productsRoutes.use(ensureAdmin.execute);
+
 productsRoutes.post(
   "/",
   validateResource(createSchema),

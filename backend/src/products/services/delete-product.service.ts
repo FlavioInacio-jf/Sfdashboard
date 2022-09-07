@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm";
 import { CustomError } from "../../app";
 import { PRODUCT_NOT_FOUND } from "../../app/exceptions";
-import { Product } from "../entities";
-import { ProductsRepository } from "../repositories";
+import { Product } from "../../app/entities";
+import { ProductsRepository } from "../../app/repositories";
 
 interface IDeleteProductRequest {
   id: string;

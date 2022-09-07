@@ -3,7 +3,7 @@ import { getCustomRepository } from "typeorm";
 import { CustomError, GenerateTokenProvider } from "../../app";
 import { EXPIRED_RT, INVALID_RT } from "../../app/exceptions";
 import { GenerateRefreshTokenProvider } from "../providers";
-import { RefreshTokenRepository } from "../repositories";
+import { RefreshTokenRepository } from "../../app/repositories";
 
 interface IRefreshTokenRequest {
   user_id: string;

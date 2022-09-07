@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { Product } from "../entities";
-import { ProductsRepository } from "../repositories";
+import { Product } from "../../app/entities";
+import { ProductsRepository } from "../../app/repositories";
 
 interface IAllProductsRequest {
   limit?: number;

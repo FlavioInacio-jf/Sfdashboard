@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { QueryFailedError } from "typeorm";
 import { CustomError } from "../../app";
 
 export class GetCurrentUserController {
@@ -7,7 +8,8 @@ export class GetCurrentUserController {
       const { user } = req;
       return res.status(200).json({ result: user });
     } catch (error) {
-      throw new CustomError(error);
+      const err = error as QueryFailedError;
+      throw new CustomError({ title: err.message });
     }
   }
 }

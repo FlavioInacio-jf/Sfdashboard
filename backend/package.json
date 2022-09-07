@@ -1,7 +1,7 @@
 {
   "name": "sfdashboard-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.ts",
   "license": "MIT",
   "husky": {
     "hooks": {

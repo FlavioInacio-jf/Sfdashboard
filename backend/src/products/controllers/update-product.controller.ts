@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { QueryFailedError } from "typeorm";
 import { CustomError } from "../../app";
 import { UpdateProductService } from "../services";
 
@@ -25,7 +26,8 @@ export class UpdateProductController {
         status: 201,
       });
     } catch (error) {
-      throw new CustomError(error);
+      const err = error as QueryFailedError;
+      throw new CustomError({ title: err.message });
     }
   }
 }

@@ -1,31 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cors from "cors";
-import express, { NextFunction, Request, Response, Router } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import "reflect-metadata";
 import swaggerUi from "swagger-ui-express";
-import { AppEndpoint, CustomError } from "./app";
-import { authRoutes } from "./auth";
-import "./database";
-import { productsRoutes } from "./products";
+import { CustomError, routes } from "./app";
+import "./app/database";
 import swaggerDocument from "./swagger.json";
-import { usersRoutes } from "./users";
 
 const app = express();
-const routes = Router();
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-routes.use(AppEndpoint.PRODUCTS, productsRoutes);
-routes.use(AppEndpoint.USERS, usersRoutes);
-routes.use(AppEndpoint.AUTH, authRoutes);
+app.use(routes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof CustomError) {
-    return res.status(400).json({
+    return res.status(401).json({
       title: err.message,
       detail: err,
     });

@@ -9,7 +9,7 @@ import {
   UpdateUserController,
 } from "../controllers";
 
-import { createSchema, updateSchema } from "../schemas";
+import { updateSchema, createSchema } from "../schemas";
 
 const usersRoutes = Router();
 
@@ -22,11 +22,7 @@ const ensureAdmin = new EnsureAdmin();
 const ensureAuthenticated = new EnsureAuthenticated();
 
 usersRoutes.use(ensureAuthenticated.execute);
-usersRoutes.get(
-  "/me",
-  validateResource(createSchema),
-  getCurrentUserController.execute,
-);
+usersRoutes.get("/me", getCurrentUserController.execute);
 usersRoutes.patch(
   "/:id",
   validateResource(updateSchema),
@@ -34,7 +30,11 @@ usersRoutes.patch(
 );
 
 usersRoutes.use(ensureAdmin.execute);
-usersRoutes.post("/", createUserController.execute);
+usersRoutes.post(
+  "/",
+  validateResource(createSchema),
+  createUserController.execute,
+);
 usersRoutes.get("/", getAllUsersController.execute);
 usersRoutes.delete("/:id", deleteUserController.execute);
 

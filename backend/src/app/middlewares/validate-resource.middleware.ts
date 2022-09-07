@@ -10,6 +10,10 @@ export const validateResource =
       await schema.validate(body);
       next();
     } catch (error) {
-      throw new CustomError(error.errors);
+      throw new CustomError({
+        title: "Existe campos com erro de validação",
+        detail: Object.values(error.errors) as string[],
+        code: 400,
+      });
     }
   };

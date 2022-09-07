@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { QueryFailedError } from "typeorm";
 import { CustomError } from "../../app";
 import { CreateUserService } from "../services";
 
@@ -23,8 +22,7 @@ export class CreateUserController {
         result: user,
       });
     } catch (error) {
-      const err = error as QueryFailedError;
-      throw new CustomError({ title: err.message });
+      throw new CustomError(error);
     }
   }
 }

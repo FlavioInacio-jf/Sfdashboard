@@ -2,7 +2,7 @@ import { compare } from "bcrypt";
 import { getCustomRepository } from "typeorm";
 import { CustomError, GenerateTokenProvider } from "../../app";
 import { LOGIN_FAILED } from "../../app/exceptions";
-import { UsersRepository } from "../../users";
+import { UsersRepository } from "../../app/repositories";
 import { GenerateRefreshTokenProvider } from "../providers";
 import { IAuthenticateResponse } from "../types";
 

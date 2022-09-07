@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { QueryFailedError } from "typeorm";
 import { CustomError } from "../../app";
 import LogoutService from "../services/logout.service";
 
@@ -22,8 +21,7 @@ export class LogouUserController {
         detailt: "Logout realizado com sucesso",
       });
     } catch (error) {
-      const err = error as QueryFailedError;
-      throw new CustomError({ title: err.message });
+      throw new CustomError(error);
     }
   }
 }

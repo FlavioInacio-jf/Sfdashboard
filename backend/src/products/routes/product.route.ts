@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { validateResource } from "../../app";
 import {
   CreateProductController,
   DeleteProductController,
@@ -6,7 +7,6 @@ import {
   GetSingleProductController,
   UpdateProductController,
 } from "../controllers";
-import { EnsureAuthenticated, validateResource } from "../../app";
 import { createSchema, updateSchema } from "../schemas";
 
 const productsRoutes = Router();
@@ -15,9 +15,6 @@ const deleteCategoryController = new DeleteProductController();
 const getAllProductsController = new GetAllProductsController();
 const getSingleProductController = new GetSingleProductController();
 const updateProductController = new UpdateProductController();
-const ensureAuthenticated = new EnsureAuthenticated();
-
-productsRoutes.use(ensureAuthenticated.execute);
 
 productsRoutes.get("/", getAllProductsController.execute);
 productsRoutes.get("/:id", getSingleProductController.execute);

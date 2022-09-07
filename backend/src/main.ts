@@ -1,21 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import cors from "cors";
-import express, { NextFunction, Request, Response } from "express";
+import express, { NextFunction, Request, Response, Router } from "express";
 import "express-async-errors";
 import "reflect-metadata";
 import swaggerUi from "swagger-ui-express";
-import { CustomError, routes } from "./app";
+import { AppEndpoint, CustomError } from "./app";
 import "./app/database";
+import { authRoutes } from "./auth";
+import { productsRoutes } from "./products";
 import swaggerDocument from "./swagger.json";
+import { usersRoutes } from "./users";
 
 const app = express();
+const router = Router();
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use(routes);
+router.use(AppEndpoint.PRODUCTS, productsRoutes);
+router.use(AppEndpoint.USERS, usersRoutes);
+router.use(AppEndpoint.AUTH, authRoutes);
+app.use(router);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof CustomError) {

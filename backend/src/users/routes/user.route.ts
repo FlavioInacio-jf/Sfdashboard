@@ -15,8 +15,6 @@ const deleteUserController = new DeleteUserController();
 const getCurrentUserController = new GetCurrentUserController();
 const getAllUsersController = new GetAllUsersController();
 
-/* const ensureAuthenticated = new EnsureAuthenticated(); */
-
 usersRoutes.post("/", createUserController.execute);
 usersRoutes.get("/me", getCurrentUserController.execute);
 usersRoutes.patch("/:id", updateUserController.execute);

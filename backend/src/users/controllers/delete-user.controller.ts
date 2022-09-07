@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AppError } from "../../app";
+import { CustomError } from "../../app";
 import { DeleteUserService } from "../services";
 
 export class DeleteUserController {
@@ -11,12 +11,13 @@ export class DeleteUserController {
       const user = await deleteUserService.execute(id);
 
       return res.status(201).json({
-        message: "User removed successfully",
+        title: "Usuário removido com sucesso",
+        detail: `Usuário ${user.name} removido com sucesso`,
         result: user,
         status: 201,
       });
     } catch (error) {
-      throw new AppError(error.detail || error.message, 400, "/users");
+      throw new CustomError(error);
     }
   }
 }

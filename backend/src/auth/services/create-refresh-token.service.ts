@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { getCustomRepository } from "typeorm";
-import { AppError, GenerateTokenProvider } from "../../app";
+import { CustomError, GenerateTokenProvider } from "../../app";
+import { EXPIRED_RT, INVALID_RT } from "../../app/exceptions";
 import { GenerateRefreshTokenProvider } from "../providers";
 import { RefreshTokenRepository } from "../repositories";
 
@@ -18,14 +19,14 @@ export class CreateRefreshTokenService {
     });
 
     if (!refreshTokenExists) {
-      throw new AppError("Refresh token invalid!", 401, "/refresh-token");
+      throw new CustomError(INVALID_RT);
     }
 
     const refreshTokenExpired = dayjs().isAfter(
       dayjs.unix(refreshTokenExists.expires_in),
     );
     if (refreshTokenExpired) {
-      throw new AppError("Refresh token expired!", 401, "/refresh-token");
+      throw new CustomError(EXPIRED_RT);
     }
 
     const generateRefreshToken = new GenerateRefreshTokenProvider();

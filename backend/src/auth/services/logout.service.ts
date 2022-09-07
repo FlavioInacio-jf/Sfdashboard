@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { AppError } from "../../app";
+import { CustomError } from "../../app";
+import { INVALID_RT } from "../../app/exceptions";
 import { RefreshTokenRepository } from "../repositories";
 
 interface ILogoutUserServiceRequest {
@@ -20,7 +21,7 @@ export default class LogoutUserService {
     });
 
     if (!refreshTokenExists) {
-      throw new AppError("Refresh token invalid", 401, "/auth/logout");
+      throw new CustomError(INVALID_RT);
     }
 
     await refreshTokenRepository.delete({ id: refreshTokenExists.id });

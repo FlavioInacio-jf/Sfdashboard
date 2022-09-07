@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AppError } from "../../app";
+import { CustomError } from "../../app";
 import { UpdateUserService } from "../services";
 
 export class UpdateUserController {
@@ -7,23 +7,23 @@ export class UpdateUserController {
     const updateUserService = new UpdateUserService();
     try {
       const { id } = req.params;
-      const { name, photo, role, permissions } = req.body;
+      const { name, role, permissions } = req.body;
 
       const user = await updateUserService.execute({
         id,
         name,
-        photo,
         role,
         permissions,
       });
 
       return res.status(200).json({
-        message: "User updated successfully",
+        title: "Usuário atualizado com sucesso",
+        detail: `Usuário ${user.name} atualizado com sucesso`,
         result: user,
         status: 201,
       });
     } catch (error) {
-      throw new AppError(error.detail || error.message, 400, "/users");
+      throw new CustomError(error);
     }
   }
 }

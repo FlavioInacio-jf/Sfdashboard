@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { AppError } from "../../app";
+import { CustomError } from "../../app";
+import { PRODUCT_NOT_FOUND } from "../../app/exceptions";
 import { Product } from "../entities";
 import { ProductsRepository } from "../repositories";
 
@@ -14,7 +15,7 @@ export class DeleteProductService {
     const product = await productsRepository.findOne({ id });
 
     if (!product) {
-      throw new AppError("Product doesn't exist!", 404, `/products/${id}`);
+      throw new CustomError(PRODUCT_NOT_FOUND);
     }
 
     await productsRepository.delete({ id });

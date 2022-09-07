@@ -1,33 +1,25 @@
 import { genSalt, hash } from "bcrypt";
 import { getCustomRepository } from "typeorm";
+import { CustomError } from "../../app/errors";
+import { EMAIL_ALREADY_EXIST } from "../../app/exceptions";
 import { User } from "../entities";
-import { AppError } from "../../app";
 import { UsersRepository } from "../repositories";
-
-interface IUserRequest {
-  name: string;
-  email: string;
-  photo?: string;
-  role: "admin" | "user";
-  permissions: string[];
-  password: string;
-}
+import { IUserRegister } from "../types";
 
 export class CreateUserService {
   async execute({
     name,
     email,
-    photo,
     permissions,
     password,
     role,
-  }: IUserRequest): Promise<User> {
+  }: IUserRegister): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const emailAlreadyExists = await usersRepository.findOne({ email });
 
     if (emailAlreadyExists) {
-      throw new AppError(`Email "${email}" already exists`, 409, "/users");
+      throw new CustomError(EMAIL_ALREADY_EXIST(email));
     }
 
     const salt = await genSalt(12);
@@ -38,7 +30,6 @@ export class CreateUserService {
       email,
       password: passwordHash,
       permissions,
-      photo,
       role,
     });
 

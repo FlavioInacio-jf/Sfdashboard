@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AppError } from "../../app";
+import { CustomError } from "../../app";
 import { GetAllUsersService } from "../services";
 
 export class GetAllUsersController {
@@ -8,7 +8,7 @@ export class GetAllUsersController {
 
     try {
       const { limit } = req.query;
-      const limitNumber = Number(limit);
+      const limitNumber = parseInt(limit as string, 10);
 
       const products = await getAllUsersService.execute({
         limit: limitNumber,
@@ -16,7 +16,7 @@ export class GetAllUsersController {
 
       return res.status(200).json({ result: products, limit: limitNumber });
     } catch (error) {
-      throw new AppError(error.detail || error.message, 400, "/users");
+      throw new CustomError(error);
     }
   }
 }

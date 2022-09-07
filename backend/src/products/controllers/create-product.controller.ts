@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AppError } from "../../app";
+import { CustomError } from "../../app";
 import { CreateProductService } from "../services";
 
 export class CreateProductController {
@@ -17,12 +17,13 @@ export class CreateProductController {
       });
 
       return res.status(201).json({
-        message: "Product created successfully",
+        title: "Produto criado com sucesso",
+        detail: `Produto ${product.title} criado com sucesso`,
         result: product,
         status: 201,
       });
     } catch (error) {
-      throw new AppError(error.detail || error.message, 409, "/products");
+      throw new CustomError(error);
     }
   }
 }

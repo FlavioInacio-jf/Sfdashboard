@@ -1,24 +1,14 @@
 import { compare } from "bcrypt";
 import { getCustomRepository } from "typeorm";
-import { AppError, GenerateTokenProvider } from "../../app";
+import { CustomError, GenerateTokenProvider } from "../../app";
+import { LOGIN_FAILED } from "../../app/exceptions";
 import { UsersRepository } from "../../users";
 import { GenerateRefreshTokenProvider } from "../providers";
+import { IAuthenticateResponse } from "../types";
 
 interface IAuthenticateUserRequest {
   email: string;
   password: string;
-}
-
-interface IAuthenticateResponse {
-  id: string;
-  name: string;
-  email: string;
-  photo?: string;
-  role?: "admin" | "user";
-  permissions: string[];
-  created_at: Date;
-  accessToken: string;
-  refreshToken: string;
 }
 
 export class AuthenticateUserService {
@@ -30,13 +20,13 @@ export class AuthenticateUserService {
     const user = await usersRepository.findOne({ email });
 
     if (!user) {
-      throw new AppError(`Email and/or password incorrect.`, 401, "/auth");
+      throw new CustomError(LOGIN_FAILED);
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError(`Email and/or password incorrect.`, 401, "/auth");
+      throw new CustomError(LOGIN_FAILED);
     }
 
     const generateRefreshToken = new GenerateRefreshTokenProvider();

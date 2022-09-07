@@ -1,6 +1,7 @@
 import { getCustomRepository } from "typeorm";
+import { CustomError } from "../../app";
+import { USER_NOT_FOUND } from "../../app/exceptions";
 import { User } from "../entities";
-import { AppError } from "../../app";
 import { UsersRepository } from "../repositories";
 
 export class DeleteUserService {
@@ -10,7 +11,7 @@ export class DeleteUserService {
     const user = await usersRepository.findOne({ id });
 
     if (!user) {
-      throw new AppError("User doesn't exist!", 404, `/users/${id}`);
+      throw new CustomError(USER_NOT_FOUND);
     }
 
     await usersRepository.delete({ id });

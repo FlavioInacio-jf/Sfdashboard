@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { AnyObjectSchema } from "yup";
-import { AppError } from "../errors";
+import { CustomError } from "../errors";
 
 export const validateResource =
   (schema: AnyObjectSchema) =>
@@ -9,7 +9,7 @@ export const validateResource =
       const { body } = req;
       await schema.validate(body);
       next();
-    } catch (err) {
-      throw new AppError(err.errors, 403, `${req.baseUrl}${req.path}`);
+    } catch (error) {
+      throw new CustomError(error.errors);
     }
   };

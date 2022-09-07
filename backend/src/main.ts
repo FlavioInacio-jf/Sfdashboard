@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import cors from "cors";
 import express, { NextFunction, Request, Response, Router } from "express";
 import "express-async-errors";
 import "reflect-metadata";
 import swaggerUi from "swagger-ui-express";
-import { addressesRoutes } from "./addresses";
-import { AppEndpoint, AppError } from "./app";
+import { AppEndpoint, CustomError } from "./app";
 import { authRoutes } from "./auth";
 import "./database";
 import { productsRoutes } from "./products";
@@ -19,24 +19,20 @@ app.use(express.json());
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-routes.use(AppEndpoint.ADDRESSES, addressesRoutes);
 routes.use(AppEndpoint.PRODUCTS, productsRoutes);
 routes.use(AppEndpoint.USERS, usersRoutes);
 routes.use(AppEndpoint.AUTH, authRoutes);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
-      message: err.message,
-      path: err.path,
-      code: err.statusCode,
+  if (err instanceof CustomError) {
+    return res.status(400).json({
+      title: err.message,
+      detail: err,
     });
   }
   return res.status(500).json({
-    status: "error",
-    message: `Internal Server Error - ${err.message}`,
-    code: 500,
+    title: "Error interno",
+    detail: `Erro do interno do servidor - ${err.message}`,
   });
 });
 

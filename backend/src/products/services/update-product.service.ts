@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { AppError } from "../../app";
+import { CustomError } from "../../app";
+import { PRODUCT_NOT_FOUND } from "../../app/exceptions";
 import { Product } from "../entities";
 import { ProductsRepository } from "../repositories";
 import { IProductUpdate } from "../types";
@@ -16,7 +17,7 @@ export class UpdateProductService {
     const productExists = await productsRepository.findOne({ id });
 
     if (!productExists) {
-      throw new AppError("Product doesn't exist!", 404, `/products/${id}`);
+      throw new CustomError(PRODUCT_NOT_FOUND);
     }
 
     productExists.price = price || productExists.price;

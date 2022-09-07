@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { getCustomRepository } from "typeorm";
-import { AppError } from "../errors";
 import { UsersRepository } from "../../users";
+import { CustomError } from "../errors";
+import { EXPIRED_AT, INVALID_AT, USER_NOT_FOUND } from "../exceptions";
 
 interface IPayload {
   sub: string;
@@ -15,16 +16,15 @@ export class EnsureAuthenticated {
     next: NextFunction,
   ): Promise<void> {
     const authHeader = req.headers.authorization;
-    const { baseUrl, path } = req;
 
     if (!authHeader) {
-      throw new AppError("token invalid", 401, `${baseUrl}`);
+      throw new CustomError(INVALID_AT);
     }
 
     const token = authHeader.split(" ");
 
     if (token.length < 2) {
-      throw new AppError("token invalid", 401, `${baseUrl}`);
+      throw new CustomError(INVALID_AT);
     }
 
     try {
@@ -37,7 +37,7 @@ export class EnsureAuthenticated {
       const user = await usersRepository.findOne({ id });
 
       if (!user) {
-        throw new AppError("Unauthorized", 401, `${baseUrl}${path}`);
+        throw new CustomError(USER_NOT_FOUND);
       }
       delete user.password;
       req.user = {
@@ -45,7 +45,7 @@ export class EnsureAuthenticated {
       };
       next();
     } catch {
-      throw new AppError("token expired", 401, `${baseUrl}`);
+      throw new CustomError(EXPIRED_AT);
     }
   }
 }

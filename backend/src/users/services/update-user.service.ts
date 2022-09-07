@@ -1,28 +1,18 @@
 import { getCustomRepository } from "typeorm";
+import { CustomError } from "../../app";
+import { USER_NOT_FOUND } from "../../app/exceptions";
 import { User } from "../entities";
-import { AppError } from "../../app";
 import { UsersRepository } from "../repositories";
-
-interface IUserUpdateRequest {
-  id: string;
-  name: string;
-  role: "admin" | "user";
-  permissions: string[];
-}
+import { IUserUpdate } from "../types";
 
 export class UpdateUserService {
-  async execute({
-    id,
-    name,
-    role,
-    permissions,
-  }: IUserUpdateRequest): Promise<User> {
+  async execute({ id, name, role, permissions }: IUserUpdate): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const user = await usersRepository.findOne({ id });
 
     if (!user) {
-      throw new AppError("User doesn't exist!", 404, `/users/${id}`);
+      throw new CustomError(USER_NOT_FOUND);
     }
 
     user.name = name || user.name;

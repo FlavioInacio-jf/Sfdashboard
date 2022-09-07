@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { AppError } from "../../app";
+import { CustomError } from "../../app";
+import { BAR_CODE_ALREADY_EXIST } from "../../app/exceptions";
 import { Product } from "../entities";
 import { ProductsRepository } from "../repositories";
 import { IProductRegister } from "../types";
@@ -17,7 +18,9 @@ export class CreateProductService {
     const barCodeAlreadyExists = await productsRepository.findOne({ bar_code });
 
     if (barCodeAlreadyExists) {
-      throw new AppError(`Product "${title}" already exists`, 409, "/products");
+      throw new CustomError(
+        BAR_CODE_ALREADY_EXIST(barCodeAlreadyExists.bar_code),
+      );
     }
 
     const product = productsRepository.create({

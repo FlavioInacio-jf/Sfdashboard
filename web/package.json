@@ -2,6 +2,26 @@
   "name": "sfdashboard",
   "version": "0.1.0",
   "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.tsx": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build",
+    "lint": "next lint",
+    "lint:fix": "eslint . --ext .tsx --fix",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
   "dependencies": {
     "@hookform/error-message": "^2.0.0",
     "@testing-library/jest-dom": "^5.14.1",
@@ -35,15 +55,6 @@
     "trim-newlines": "^3.0.1",
     "glob-parent": "^5.1.2",
     "trim": "0.0.3"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "start": "next start",
-    "build": "next build",
-    "lint": "next lint",
-    "lint:fix": "eslint --fix",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -99,7 +110,9 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-storybook": "^0.5.12",
+    "husky": "^8.0.1",
     "json-server": "^0.17.0",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
     "prettier": "^2.6.2",

@@ -8,7 +8,7 @@ import { LayoutDashboard } from '../components/LayoutDashboard';
 import { LayoutLogin } from '../components/LayoutLogin';
 import { queryClient } from '../services/query';
 import GlobalStyle from '../styles/globalStyle';
-import '../styles/reset.css';
+import '../styles/styles.css';
 import { Theme } from '../styles/Theme';
 
 Modal.setAppElement('#__next');

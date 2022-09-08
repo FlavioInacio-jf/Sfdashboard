@@ -5,7 +5,6 @@ import { Button } from '../components/Button';
 import { Column } from '../components/Column';
 import { Input } from '../components/Form/Input';
 import { LoginMutation } from '../mutations/LoginMutation';
-import { Form } from '../styles/homeStyles';
 import { CredentialsType } from '../types/credentialsType';
 import { withSSRGuest } from '../utils/withSSRGuest';
 
@@ -25,7 +24,7 @@ const Login: NextPage = () => {
     loginMutate(data);
   };
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <header>
         <Brand />
       </header>
@@ -57,7 +56,7 @@ const Login: NextPage = () => {
         flex>
         Login
       </Button>
-    </Form>
+    </form>
   );
 };
 

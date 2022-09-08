@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  frontend:
+    container_name: dashboard
+    build:
+      context: ./
+    image: "dashboard"
+    ports:
+      - "3000:3000"
+    restart: unless-stopped

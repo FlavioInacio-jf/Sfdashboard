@@ -1,10 +1,10 @@
-import type { NextPage } from 'next';
-import { useMemo, useState } from 'react';
+import { ReactElement, useMemo, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 import { useQuery } from 'react-query';
 import { Button } from '../../components/Button';
 import { DetailsProductModal } from '../../components/DetailsProductModal';
 import { EditProductModal } from '../../components/EditProductModal';
+import { LayoutDashboard } from '../../components/Layouts/LayoutDashboard';
 import { Loader } from '../../components/Loader';
 import { Message } from '../../components/Message';
 import { NewProductModal } from '../../components/NewProductModal';
@@ -18,9 +18,10 @@ import { deleteProductMutation } from '../../mutations/deleteProductMutation';
 import { productService } from '../../services/productService';
 import { ProductType, ProductUpdateType } from '../../types/productType';
 import { withSSRAuth } from '../../utils/withSSRAuth';
+import { NextPageWithLayout } from '../_app.page';
 import { ContainerProducts } from './styles';
 
-const Products: NextPage = () => {
+const Products: NextPageWithLayout = () => {
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState({} as ProductUpdateType);
 
@@ -113,6 +114,9 @@ const Products: NextPage = () => {
   );
 };
 
+Products.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutDashboard>{page}</LayoutDashboard>;
+};
 export default Products;
 
 export const getServerSideProps = withSSRAuth(async () => {

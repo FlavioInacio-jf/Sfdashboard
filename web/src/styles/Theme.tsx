@@ -7,10 +7,10 @@ interface ThemeProps {
 
 export const theme = {
   colours: {
-    primary: '#222831',
-    secondary: '#393E46',
-    tertiary: '#00ADB5',
-    quartenary: '#EEEEEE',
+    primary: '#337CFF',
+    secondary: '#0F4C75',
+    tertiary: '#1F1F1F',
+    quartenary: '#242424',
     neutrals: {
       O00: '#FFFFFF',
       O25: '#F5F5F5',
@@ -18,13 +18,13 @@ export const theme = {
       100: '#E4E7EB',
       200: '#CBD2D9',
       300: '#9AA5B1',
-      400: '#52667A',
+      400: '#555555',
       500: '#313D49',
       600: '#29333D',
       700: '#212931',
       800: '#181F25',
       900: '#101418',
-      999: '#080A0C'
+      999: '#060606'
     },
     orange: {
       O00: '#FB8469',

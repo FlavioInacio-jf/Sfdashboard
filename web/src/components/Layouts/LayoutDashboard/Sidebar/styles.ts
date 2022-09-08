@@ -82,12 +82,14 @@ export const SidebarItem = styled.li<{ isActive: boolean }>`
     font-size: 2.4rem;
     text-align: center;
     color: ${({ theme }) => theme.colours.secondary};
+    padding: 1.2rem;
   }
   ${({ isActive }) =>
     isActive &&
     css`
       a {
-        color: ${({ theme }) => theme.colours.neutrals.O00};
+        color: #f2f7ff;
+        background-color: ${({ theme }) => theme.colours.primary};
       }
     `}
 

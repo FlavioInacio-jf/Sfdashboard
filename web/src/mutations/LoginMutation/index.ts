@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import Router from 'next/router';
 import { setCookie } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
@@ -6,20 +5,16 @@ import { toast } from 'react-toastify';
 import { queryKey } from '../../constants/queryKeys';
 import { api } from '../../services/api';
 import { authService } from '../../services/authService';
-import { CredentialsType } from '../../types/credentialsType';
+import { CredentialsType, IErrorResponseType } from '../../types';
 
 export const LoginMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation((credentials: CredentialsType) => authService.login(credentials), {
     onError: (error) => {
-      const err = error as AxiosError;
+      const err = error as IErrorResponseType;
 
-      if (err?.response?.status === 401) {
-        toast.error('Email and/or password incorrect.');
-      } else {
-        toast.error('Hello, we had an internal error!');
-      }
+      toast.error(err.response.data.title);
     },
     onSuccess: (response) => {
       const { accessToken, refreshToken, ...rest } = response.data.result;

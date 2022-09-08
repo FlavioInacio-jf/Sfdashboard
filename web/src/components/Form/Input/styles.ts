@@ -19,7 +19,7 @@ export const Label = styled.label`
   font-weight: 500;
   font-size: 1.4rem;
   line-height: 1.82rem;
-  color: ${({ theme }) => theme.colours.neutrals[900]};
+  color: ${({ theme }) => theme.colours.neutrals[100]};
 
   margin-bottom: 0.5rem;
 

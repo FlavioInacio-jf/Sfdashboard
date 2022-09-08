@@ -1,22 +1,19 @@
 import { ReactElement, useMemo, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
 import { useQuery } from 'react-query';
-import { Button } from '../../components/Button';
+import { Box } from '../../components/Box';
 import { DetailsProductModal } from '../../components/DetailsProductModal';
 import { EditProductModal } from '../../components/EditProductModal';
 import { LayoutDashboard } from '../../components/Layouts/LayoutDashboard';
-import { Loader } from '../../components/Loader';
-import { Message } from '../../components/Message';
 import { NewProductModal } from '../../components/NewProductModal';
 import { ProductCard } from '../../components/ProductCard';
 import { RenderIf } from '../../components/RenderIf';
-import { TitleStyled } from '../../components/Title/styles';
-import { queryKey } from '../../constants/queryKeys';
+import { QueryKeys } from '../../enums';
 import { search } from '../../helpers';
 import { useDashboard } from '../../hooks/useDashboard';
 import { deleteProductMutation } from '../../mutations/deleteProductMutation';
 import { productService } from '../../services/productService';
 import { ProductType, ProductUpdateType } from '../../types/productType';
+import { displayDate } from '../../utils/format';
 import { withSSRAuth } from '../../utils/withSSRAuth';
 import { NextPageWithLayout } from '../_app.page';
 import { ContainerProducts } from './styles';
@@ -30,7 +27,7 @@ const Products: NextPageWithLayout = () => {
 
   const { mutate: deleteProductMutate } = deleteProductMutation();
   const { handleOpenNewProductModal, searchDashboard } = useDashboard();
-  const { data, isLoading } = useQuery<ProductType[]>(queryKey.products, productService.index);
+  const { data, isLoading } = useQuery<ProductType[]>(QueryKeys.PRODUCTS, productService.index);
 
   const products = useMemo(() => data || [], [data]);
 
@@ -58,47 +55,38 @@ const Products: NextPageWithLayout = () => {
 
   return (
     <>
-      <TitleStyled size="large" weight="600" font="inter">
-        My products
-      </TitleStyled>
+      <div className="w-full h-full">
+        <div className="flex justify-between h-full">
+          <div className="flex-[3]">
+            <header className="p-[3.2rem]">
+              <h2 className="text-white font-bold text-[2.8rem]">Dashboard</h2>
+              <span className="flex text-[1.6rem] mt-[1.2rem] font-medium  text-[#5f5f5f]">
+                {displayDate(new Date())}
+              </span>
+            </header>
+            <div>
+              <Box>oi</Box>
+              <RenderIf condition={products.length > 0}>
+                <ContainerProducts>
+                  {filteredProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      onRequestOpenEditModal={handleOpenEditProductModal}
+                      onRequestOpenDetailsModal={handleOpenDetailsProductModal}
+                      onAddProductEdit={setEditingProduct}
+                      onAddProductDetails={setSeeingProduct}
+                      onDeleteProduct={handleDeleteProduct}
+                    />
+                  ))}
+                </ContainerProducts>
+              </RenderIf>
+            </div>
+          </div>
 
-      <RenderIf condition={isLoading}>
-        <Loader />
-      </RenderIf>
-
-      <RenderIf condition={products.length > 0}>
-        <ContainerProducts>
-          {filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onRequestOpenEditModal={handleOpenEditProductModal}
-              onRequestOpenDetailsModal={handleOpenDetailsProductModal}
-              onAddProductEdit={setEditingProduct}
-              onAddProductDetails={setSeeingProduct}
-              onDeleteProduct={handleDeleteProduct}
-            />
-          ))}
-        </ContainerProducts>
-      </RenderIf>
-
-      <RenderIf condition={products.length === 0}>
-        <Message
-          title="No results found"
-          description="Please, register a new product by clicking the button below."
-          image="/assets/empty.svg">
-          <Button
-            type="button"
-            variant="primary"
-            size="large"
-            positionIcon="left"
-            onClick={handleOpenNewProductModal}
-            margin="3rem 0 0 0">
-            <BsPlusLg /> New product
-          </Button>
-        </Message>
-      </RenderIf>
-
+          <div className="flex-1">Teste</div>
+        </div>
+      </div>
       <NewProductModal />
       <DetailsProductModal
         productSeeing={seeingProduct}

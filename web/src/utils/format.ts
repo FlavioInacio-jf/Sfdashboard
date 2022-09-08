@@ -22,6 +22,6 @@ export const displayDate = (date: Date) => {
   return unformattedDate.toLocaleDateString('pt-br', {
     day: 'numeric',
     month: 'short',
-    year: '2-digit'
+    weekday: 'short'
   });
 };

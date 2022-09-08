@@ -2,7 +2,7 @@
 import { parseCookies } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { queryKey } from '../../constants/queryKeys';
+import { QueryKeys } from '../../enums';
 import { productService } from '../../services/productService';
 import { ProductType } from '../../types/productType';
 
@@ -24,10 +24,10 @@ export const deleteProductMutation = () => {
     },
     onSuccess: (result, variables) => {
       const { name } = result.data.result;
-      const oldProducts = queryClient.getQueryData<ProductType[]>(queryKey.products) || [];
+      const oldProducts = queryClient.getQueryData<ProductType[]>(QueryKeys.PRODUCTS) || [];
 
       queryClient.setQueryData(
-        queryKey.products,
+        QueryKeys.PRODUCTS,
         oldProducts.filter((product) => product.id !== variables)
       );
       toast.success(`Hello, the product ${name} was removed successfully!`);

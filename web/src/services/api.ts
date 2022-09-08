@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { parseCookies, setCookie } from 'nookies';
 import { signOut } from '../components/Layouts/LayoutDashboard/Sidebar';
-import { BASE_URL } from '../constants/endpoints';
+import { EndPoints } from '../enums';
 
 interface MessageErrorType {
   message: string;
@@ -25,7 +25,7 @@ let failedRequestsQueue: FailedRequestsQueueType[] = [];
 let isRefreshing = false;
 
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: EndPoints.BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   },

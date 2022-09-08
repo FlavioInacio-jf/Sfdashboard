@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { parseCookies } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { queryKey } from '../../constants/queryKeys';
+import { QueryKeys } from '../../enums';
 import { productService } from '../../services/productService';
 import { ProductRegisterType, ProductType } from '../../types/productType';
 
@@ -28,9 +28,9 @@ export const createProductMutation = () => {
     },
     onSuccess: (response, variables) => {
       const product = response.data.result;
-      const oldProducts = queryClient.getQueryData<ProductType[]>(queryKey.products) || [];
+      const oldProducts = queryClient.getQueryData<ProductType[]>(QueryKeys.PRODUCTS) || [];
 
-      queryClient.setQueryData(queryKey.products, [...oldProducts, product]);
+      queryClient.setQueryData(QueryKeys.PRODUCTS, [...oldProducts, product]);
       toast.success('Hello, your product was created successfully!');
     }
   });

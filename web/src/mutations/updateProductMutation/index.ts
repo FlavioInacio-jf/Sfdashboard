@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { parseCookies } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { queryKey } from '../../constants/queryKeys';
+import { QueryKeys } from '../../enums';
 import { productService } from '../../services/productService';
 import { ProductUpdateType } from '../../types/productType';
 
@@ -27,7 +27,7 @@ export const updateProductMutation = () => {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(queryKey.products);
+      queryClient.invalidateQueries(QueryKeys.PRODUCTS);
       toast.success('Hello, your product was updated successfully!');
     }
   });

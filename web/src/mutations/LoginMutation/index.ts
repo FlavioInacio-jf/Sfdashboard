@@ -2,7 +2,7 @@ import Router from 'next/router';
 import { setCookie } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { queryKey } from '../../constants/queryKeys';
+import { QueryKeys } from '../../enums';
 import { api } from '../../services/api';
 import { authService } from '../../services/authService';
 import { CredentialsType, IErrorResponseType } from '../../types';
@@ -19,7 +19,7 @@ export const LoginMutation = () => {
     onSuccess: (response) => {
       const { accessToken, refreshToken, ...rest } = response.data.result;
 
-      queryClient.setQueryData(queryKey.session, rest);
+      queryClient.setQueryData(QueryKeys.SESSION, rest);
       setCookie(undefined, 'SFDashboard.auth.token', accessToken, {
         maxAge: 60 * 60 * 3, // 3 hours
         path: '/'

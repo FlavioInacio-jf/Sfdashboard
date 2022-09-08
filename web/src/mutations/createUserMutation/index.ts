@@ -2,7 +2,7 @@
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { queryKey } from '../../constants/queryKeys';
+import { QueryKeys } from '../../enums';
 import { userService } from '../../services/userService';
 import { UserRegisterType } from '../../types/userType';
 
@@ -26,7 +26,7 @@ export const CreateUserMutation = () => {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(queryKey.products);
+      queryClient.invalidateQueries(QueryKeys.PRODUCTS);
       toast.success(
         'Hello, your username has been successfully created!,Now just go to the home page and access your account'
       );

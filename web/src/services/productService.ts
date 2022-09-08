@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { parseCookies } from 'nookies';
-import { PRODUCTS } from '../constants/endpoints';
+import { EndPoints } from '../enums';
 import { ProductRegisterType, ProductUpdateType } from '../types/productType';
 import { api } from './api';
 
@@ -15,19 +15,19 @@ export const productService = {
       }
     };
     try {
-      const res = await get(`${PRODUCTS}`, config);
+      const res = await get(`${EndPoints.PRODUCTS}`, config);
       return res.data.result;
     } catch (err) {
       console.error(err);
     }
   },
   create: (product: ProductRegisterType, config?: AxiosRequestConfig) =>
-    post(`${PRODUCTS}`, product, config),
+    post(`${EndPoints.PRODUCTS}`, product, config),
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update: (
     { id, created_at, updated_at, ...rest }: ProductUpdateType,
     config?: AxiosRequestConfig
-  ) => patch(`${PRODUCTS}/${id}`, rest, config),
-  single: (id: string, config?: AxiosRequestConfig) => get(`${PRODUCTS}/${id}`, config),
-  remove: (id: number, config?: AxiosRequestConfig) => destroy(`${PRODUCTS}/${id}`, config)
+  ) => patch(`${EndPoints.PRODUCTS}/${id}`, rest, config),
+  single: (id: string, config?: AxiosRequestConfig) => get(`${EndPoints.PRODUCTS}/${id}`, config),
+  remove: (id: number, config?: AxiosRequestConfig) => destroy(`${EndPoints.PRODUCTS}/${id}`, config)
 };

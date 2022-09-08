@@ -30,7 +30,7 @@ const Login: NextPage = () => {
       <div className="w-full h-[100vh] flex items-center justify-center">
         <div className="w-full h-full flex justify-between">
           <div className="flex-1 flex flex-col items-center justify-center px-[1.6rem] bg-[#1f1f1f]">
-            <div className="w-[550px] bg-[#242424] rounded-lg overflow-hidden p-[3.2rem]">
+            <div className="w-[550px] md:w-full bg-[#242424] shadow-lg rounded-lg overflow-hidden p-[3.2rem]">
               <header>
                 <Brand />
               </header>
@@ -56,11 +56,11 @@ const Login: NextPage = () => {
                   />
                 </Column>
                 <Button
+                  w="100%"
                   type="submit"
                   variant="primary"
                   className="h-[4.5rem]"
-                  disabled={!isValid || !isDirty || isSubmitting}
-                  flex>
+                  disabled={!isValid || !isDirty || isSubmitting}>
                   Login
                 </Button>
               </form>

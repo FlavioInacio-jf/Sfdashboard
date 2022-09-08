@@ -2,17 +2,51 @@ import styled, { css } from 'styled-components';
 
 export interface ButtonStyledProps {
   variant?: 'primary' | 'secondary' | 'danger' | 'tertiary' | 'quartenary' | 'grey';
-  outline?: boolean;
-  size?: 'small' | 'large' | '';
+  size?: 'sm' | 'md' | 'lg';
   positionIcon?: 'left' | 'right';
-  flex?: boolean;
-  margin?: string;
-  noPadding?: boolean;
+  outline?: boolean;
+  w?: '25%' | '50%' | '75%' | '100%' | 'auto';
+  h?: '25%' | '50%' | '75%' | '100%' | 'auto';
+  m?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto';
+  mX?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto';
+  mY?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto';
+  mT?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto';
+  mL?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto';
+  mR?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto';
+  mB?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'auto';
+  rounded?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'pill' | 'circle' | 'none';
+  border?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'none';
+  d?: 'block' | 'inline-block' | 'inline' | 'flex' | 'inline-flex' | 'none';
 }
 
-export const ButtonStyled = styled.button<ButtonStyledProps>`
-  width: ${({ flex = false }) => (flex ? '100%' : 'auto')};
+const roundedSize = {
+  none: '0',
+  sm: '0.4rem',
+  md: '0.6rem',
+  lg: '0.5rem',
+  xl: '1rem',
+  xxl: '2rem',
+  pill: '50rem',
+  circle: '50%'
+};
+const borderSize = {
+  none: '0',
+  sm: '0.1rem',
+  md: '0.2rem',
+  lg: '0.3rem',
+  xl: '0.4rem',
+  xxl: '0.5rem'
+};
+const sizes = {
+  sm: '0.4rem',
+  md: '0.8rem',
+  lg: '1.6rem',
+  xl: '3.2rem',
+  xxl: '6.4rem',
+  auto: 'auto'
+};
 
+export const ButtonStyled = styled.button<ButtonStyledProps>`
   font-family: ${({ theme }) => theme.font.fontFamily[0]};
   font-size: 1.6rem;
   line-height: 2.08rem;
@@ -24,12 +58,8 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
 
   border-radius: 0.5rem;
 
-  display: ${({ flex = false }) => (flex ? 'flex' : 'inline-flex')};
   align-items: center;
   justify-content: center;
-
-  padding: 0.6rem 1.2rem;
-  margin: ${({ margin = '' }) => margin || ''};
 
   transition: all 0.3s ease-in-out;
 
@@ -82,26 +112,34 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
     `};
 
   ${({ size }) =>
-    size === 'small' &&
+    size === 'sm' &&
     css`
       font-size: 1.4rem;
-      line-height: 1.82rem;
       padding: 0.4rem 0.8rem;
+      height: 2.6rem;
     `};
 
   ${({ size }) =>
-    size === 'large' &&
+    size === 'md' &&
     css`
-      font-size: 2rem;
-      line-height: 2.6rem;
+      font-size: 1.6rem;
       padding: 0.8rem 1.6rem;
+      height: 4.2rem;
+    `};
+
+  ${({ size }) =>
+    size === 'lg' &&
+    css`
+      font-size: 1.8rem;
+      padding: 1.2rem 2.4rem;
+      height: 5.8rem;
     `};
 
   ${({ positionIcon }) =>
     positionIcon === 'left' &&
     css`
       svg {
-        margin-right: 2rem;
+        margin-right: 0.8rem;
       }
     `};
 
@@ -109,7 +147,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
     positionIcon === 'right' &&
     css`
       svg {
-        margin-left: 2rem;
+        margin-left: 0.8rem;
       }
     `};
   &:not(:disabled):hover {
@@ -162,11 +200,75 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
       `};
   }
 
-  ${({ noPadding }) =>
-    noPadding &&
+  ${({ d = 'inline-flex' }) =>
+    d &&
     css`
-      padding: 0;
-    `}
+      display: ${d};
+    `};
+
+  ${({ w }) =>
+    w &&
+    css`
+      width: ${w};
+    `};
+
+  ${({ h }) =>
+    h &&
+    css`
+      height: ${h};
+    `};
+
+  ${({ rounded }) =>
+    rounded &&
+    css`
+      border-radius: ${roundedSize[rounded]};
+    `};
+
+  ${({ border }) =>
+    border &&
+    css`
+      border-width: ${borderSize[border]};
+    `};
+
+  //Margins
+
+  ${({ mX }) =>
+    mX &&
+    css`
+      margin-left: ${sizes[mX]};
+      margin-right: ${sizes[mX]};
+    `};
+
+  ${({ mY }) =>
+    mY &&
+    css`
+      margin-top: ${sizes[mY]};
+      margin-bottom: ${sizes[mY]};
+    `};
+
+  ${({ mB }) =>
+    mB &&
+    css`
+      margin-bottom: ${sizes[mB]};
+    `};
+
+  ${({ mT }) =>
+    mT &&
+    css`
+      margin-top: ${sizes[mT]};
+    `};
+
+  ${({ mR }) =>
+    mR &&
+    css`
+      margin-right: ${sizes[mR]};
+    `};
+
+  ${({ mL }) =>
+    mL &&
+    css`
+      margin-left: ${sizes[mL]};
+    `};
 
   &:disabled {
     cursor: default;

@@ -1,4 +1,4 @@
-import { CredentialsType } from '../types/credentialsType';
+import { CredentialsType } from '../types';
 import { api } from './api';
 
 const { post } = api;

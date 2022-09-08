@@ -7,7 +7,7 @@ export const USER_NOT_FOUND: CustomErrorType = {
 };
 
 export const EMAIL_ALREADY_EXIST = (email: string): CustomErrorType => ({
-  title: "Já existe um e-mail cadastrado",
+  title: "Já existe um usuário com esse e-mail cadastrado",
   detail: `Email "${email}" já foi cadastrado`,
   code: 409,
 });

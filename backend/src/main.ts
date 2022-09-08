@@ -7,6 +7,7 @@ import swaggerUi from "swagger-ui-express";
 import { AppEndpoint, CustomError } from "./app";
 import "./app/database";
 import { authRoutes } from "./auth";
+import { clientsRoutes } from "./clients";
 import { productsRoutes } from "./products";
 import swaggerDocument from "./swagger.json";
 import { usersRoutes } from "./users";
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 router.use(AppEndpoint.PRODUCTS, productsRoutes);
+router.use(AppEndpoint.CLIENTS, clientsRoutes);
 router.use(AppEndpoint.USERS, usersRoutes);
 router.use(AppEndpoint.AUTH, authRoutes);
 app.use(router);

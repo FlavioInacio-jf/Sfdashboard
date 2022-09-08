@@ -3,4 +3,5 @@ export enum AppEndpoint {
   PRODUCTS = "/products",
   USERS = "/users",
   AUTH = "/auth",
+  CLIENTS = "/clients",
 }

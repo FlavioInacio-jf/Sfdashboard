@@ -35,6 +35,18 @@ export class User {
 
   @Column({
     nullable: false,
+    default: 0,
+  })
+  total_sales?: number;
+
+  @Column({
+    nullable: false,
+    default: 0,
+  })
+  quantity_sales?: number;
+
+  @Column({
+    nullable: false,
   })
   password: string;
 

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { EnsureAdmin, EnsureAuthenticated, validateResource } from "../../app";
 import {
+  BuyProductController,
   CreateProductController,
   DeleteProductController,
   GetAllProductsController,
@@ -15,12 +16,14 @@ const deleteCategoryController = new DeleteProductController();
 const getAllProductsController = new GetAllProductsController();
 const getSingleProductController = new GetSingleProductController();
 const updateProductController = new UpdateProductController();
+const buyProductController = new BuyProductController();
 
 const ensureAuthenticated = new EnsureAuthenticated();
 productsRoutes.use(ensureAuthenticated.execute);
 
 productsRoutes.get("/", getAllProductsController.execute);
 productsRoutes.get("/:id", getSingleProductController.execute);
+productsRoutes.post("/:id/sales", buyProductController.execute);
 
 /*
   ----------------------------------------------------------------

@@ -28,12 +28,12 @@ app.use(router);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof CustomError) {
-    return res.status(err.code).json(err);
+    const { code, ...rest } = err;
+    return res.status(code).json(rest);
   }
   return res.status(500).json({
     title: "Error interno",
     detail: `Erro do interno do servidor - ${err.message}`,
-    code: 500,
   });
 });
 

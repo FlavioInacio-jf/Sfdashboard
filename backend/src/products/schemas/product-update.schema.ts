@@ -19,7 +19,7 @@ export const updateSchema = yup.object().shape({
     .string()
     .equals(
       [Object.values(ProductStatus)],
-      "Status must be In stock, Not sell or Out of stock.",
+      `Status must be ${Object.values(ProductStatus)}`,
     )
     .notRequired(),
 });

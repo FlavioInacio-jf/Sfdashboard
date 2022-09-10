@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { EnsureAdmin, EnsureAuthenticated, validateResource } from "../../app";
+import {
+  AppEndpoint,
+  EnsureAdmin,
+  EnsureAuthenticated,
+  validateResource,
+} from "../../app";
 import {
   BuyProductController,
   CreateProductController,
@@ -23,7 +28,7 @@ productsRoutes.use(ensureAuthenticated.execute);
 
 productsRoutes.get("/", getAllProductsController.execute);
 productsRoutes.get("/:id", getSingleProductController.execute);
-productsRoutes.post("/:id/sales", buyProductController.execute);
+productsRoutes.post(`/:id${AppEndpoint.SALE}`, buyProductController.execute);
 
 /*
   ----------------------------------------------------------------

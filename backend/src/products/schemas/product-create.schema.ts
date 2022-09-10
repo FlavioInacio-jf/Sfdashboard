@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { ProductStatus } from "../enums";
 
-export const createSchema = yup.object().shape({
+export const productCreateSchema = yup.object().shape({
   bar_code: yup
     .string()
     .required("Bar code field is required.")

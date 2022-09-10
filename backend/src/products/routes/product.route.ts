@@ -13,7 +13,11 @@ import {
   GetSingleProductController,
   UpdateProductController,
 } from "../controllers";
-import { createSchema, updateSchema } from "../schemas";
+import {
+  productBuySchema,
+  productCreateSchema,
+  productUpdateSchema,
+} from "../schemas";
 
 const productsRoutes = Router();
 const createProductController = new CreateProductController();
@@ -28,7 +32,11 @@ productsRoutes.use(ensureAuthenticated.execute);
 
 productsRoutes.get("/", getAllProductsController.execute);
 productsRoutes.get("/:id", getSingleProductController.execute);
-productsRoutes.post(`/:id${AppEndpoint.SALE}`, buyProductController.execute);
+productsRoutes.post(
+  `/:id${AppEndpoint.SALE}`,
+  validateResource(productBuySchema),
+  buyProductController.execute,
+);
 
 /*
   ----------------------------------------------------------------
@@ -41,12 +49,12 @@ productsRoutes.use(ensureAdmin.execute);
 
 productsRoutes.post(
   "/",
-  validateResource(createSchema),
+  validateResource(productCreateSchema),
   createProductController.execute,
 );
 productsRoutes.patch(
   "/:id",
-  validateResource(updateSchema),
+  validateResource(productUpdateSchema),
   updateProductController.execute,
 );
 productsRoutes.delete("/:id", deleteCategoryController.execute);

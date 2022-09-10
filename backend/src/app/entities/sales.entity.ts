@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   CreateDateColumn,
+  Entity,
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
@@ -9,6 +10,7 @@ import {
 import { v4 as uuidV4 } from "uuid";
 import { Client, Product, User } from ".";
 
+@Entity("sales")
 export class Sale {
   @PrimaryColumn({ nullable: false })
   readonly id: string;

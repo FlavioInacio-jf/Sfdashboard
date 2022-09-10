@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { ProductStatus } from "../enums";
 
-export const updateSchema = yup.object().shape({
+export const productUpdateSchema = yup.object().shape({
   title: yup
     .string()
     .min(10, "The title must be at least 10 characters long.")

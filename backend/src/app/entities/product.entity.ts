@@ -29,7 +29,7 @@ export class Product {
   amount: number;
 
   @Column({ nullable: false, enum: ProductStatus })
-  status: string;
+  status: "In stock" | "Not sell" | "Out of stock";
 
   @CreateDateColumn({
     nullable: false,

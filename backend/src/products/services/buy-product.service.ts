@@ -49,7 +49,16 @@ export class BuyProductService {
     userExists.quantity_sales += 1;
     userExists.total_sales += productExists.price * amount;
 
+    productExists.amount -= amount;
+
+    if (productExists.amount === 0) {
+      productExists.status = "Out of stock";
+    }
+
+    await usersRepository.save(userExists);
+    await productsRepository.save(productExists);
     await salesRepository.save(transaction);
+
     return transaction;
   }
 }

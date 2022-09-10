@@ -46,7 +46,10 @@ export class Sale {
   @JoinColumn({ name: "client_id" })
   client: Client;
 
-  @ManyToOne(type => User, Sale => Sale, { onDelete: "SET NULL" })
+  @ManyToOne(type => User, Sale => Sale, {
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  })
   @JoinColumn({ name: "user_id" })
   user: User;
 

@@ -1,6 +1,11 @@
 export const usersDoc = {
   "/users": {
     post: {
+      security: [
+        {
+          bearer: [],
+        },
+      ],
       tags: ["users"],
       summary: "Create a new user",
       description: "Create a new user",
@@ -64,10 +69,12 @@ export const usersDoc = {
       },
     },
     get: {
+      security: [
+        {
+          bearer: [],
+        },
+      ],
       tags: ["users"],
-      security: {
-        bearerAuth: [],
-      },
       summary: "Get all users",
       description: "List all users",
       responses: {
@@ -79,6 +86,11 @@ export const usersDoc = {
   },
   "/users/{id}": {
     delete: {
+      security: [
+        {
+          bearer: [],
+        },
+      ],
       tags: ["users"],
       summary: "Delete user by ID",
       description: "Delete user by ID",
@@ -108,6 +120,11 @@ export const usersDoc = {
       },
     },
     patch: {
+      security: [
+        {
+          bearer: [],
+        },
+      ],
       tags: ["users"],
       summary: "Update a user by ID",
       description: "Update a user by ID",

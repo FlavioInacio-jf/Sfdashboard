@@ -1,4 +1,4 @@
-import { authDoc, productsDoc, usersDoc } from ".";
+import { authDoc, clientsDoc, productsDoc, usersDoc } from ".";
 
 export const swaggerDoc = {
   openapi: "3.0.0",
@@ -28,6 +28,7 @@ export const swaggerDoc = {
   paths: {
     ...authDoc,
     ...usersDoc,
+    ...clientsDoc,
     ...productsDoc,
   },
 };

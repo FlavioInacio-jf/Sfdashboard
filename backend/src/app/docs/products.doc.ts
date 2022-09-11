@@ -1,3 +1,5 @@
+import { ProductStatus } from "../../products/enums";
+
 export const productsDoc = {
   "/products": {
     post: {
@@ -16,15 +18,15 @@ export const productsDoc = {
               type: "object",
               properties: {
                 title: {
-                  description: "Product title",
+                  description: "Product name",
+                  type: "string",
+                  required: true,
+                },
+                bar_code: {
+                  description: "Product code",
                   type: "string",
                   required: true,
                   unique: true,
-                },
-                description: {
-                  description: "Product description",
-                  type: "string",
-                  required: true,
                 },
                 price: {
                   description: "Product price",
@@ -36,26 +38,10 @@ export const productsDoc = {
                   type: "number",
                   required: true,
                 },
-                photo: {
-                  description: "Product url photo",
-                  type: "string",
-                  required: true,
-                },
-                category: {
-                  description: "Product category",
-                  type: "string",
-                  required: false,
-                },
-                physical_condition: {
-                  description: "Product physical condition",
-                  type: "string",
-                  enum: ["old", "new"],
-                  required: true,
-                },
                 status: {
                   description: "Product status",
                   type: "string",
-                  enum: ["published", "draft", "out_of_stock"],
+                  enum: Object.values(ProductStatus),
                   required: true,
                 },
               },
@@ -68,10 +54,12 @@ export const productsDoc = {
           description: "Product created successfully",
         },
         "401": {
-          description: "Token invalid, Token expired or Unauthorized",
+          description:
+            "Token informed is invalid: Perform new authentication to acquire new token",
         },
         "409": {
-          description: "Product already exists",
+          description:
+            "A product has already been registered with this barcode",
         },
       },
     },
@@ -89,7 +77,8 @@ export const productsDoc = {
           description: "Success",
         },
         "401": {
-          description: "Token invalid, Token expired or Unauthorized",
+          description:
+            "Token informed is invalid: Perform new authentication to acquire new token",
         },
       },
     },
@@ -119,10 +108,11 @@ export const productsDoc = {
           description: "Success",
         },
         "401": {
-          description: "Token invalid, Token expired or Unauthorized",
+          description:
+            "Token informed is invalid: Perform new authentication to acquire new token",
         },
         "404": {
-          description: "Product doesn't exist!",
+          description: "Product not found",
         },
       },
     },
@@ -147,13 +137,14 @@ export const productsDoc = {
       ],
       responses: {
         "201": {
-          description: "Product removed successfully!",
+          description: "Product removed successfully",
         },
         "401": {
-          description: "Token invalid, Token expired or Unauthorized",
+          description:
+            "Token informed is invalid: Perform new authentication to acquire new token",
         },
         "404": {
-          description: "Product doesn't exist!",
+          description: "Product not found",
         },
       },
     },
@@ -182,8 +173,8 @@ export const productsDoc = {
             schema: {
               type: "object",
               properties: {
-                description: {
-                  description: "Product description",
+                title: {
+                  description: "Product name",
                   type: "string",
                   required: false,
                 },
@@ -197,26 +188,10 @@ export const productsDoc = {
                   type: "number",
                   required: false,
                 },
-                photo: {
-                  description: "Product url photo",
-                  type: "string",
-                  required: false,
-                },
-                category: {
-                  description: "Product category",
-                  type: "string",
-                  required: false,
-                },
-                physical_condition: {
-                  description: "Product physical condition",
-                  type: "string",
-                  enum: ["old", "new"],
-                  required: false,
-                },
                 status: {
                   description: "Product status",
                   type: "string",
-                  enum: ["published", "draft", "out_of_stock"],
+                  enum: Object.values(ProductStatus),
                   required: false,
                 },
               },
@@ -229,10 +204,49 @@ export const productsDoc = {
           description: "Product updated successfully",
         },
         "401": {
-          description: "Token invalid, Token expired or Unauthorized",
+          description:
+            "Token informed is invalid: Perform new authentication to acquire new token",
         },
         "404": {
           description: "Product doesn't exist!",
+        },
+      },
+    },
+  },
+  "/products/{id}/sale": {
+    post: {
+      security: [
+        {
+          bearer: [],
+        },
+      ],
+      tags: ["products"],
+      summary: "Buy a product by id",
+      description: "Buy a product by id",
+      parameters: [
+        {
+          name: "id",
+          in: "path",
+          schema: {
+            type: "string",
+          },
+          required: true,
+        },
+      ],
+      responses: {
+        "201": {
+          description: "The purchase of the product was successful",
+        },
+        "401": {
+          description:
+            "Token informed is invalid: Perform new authentication to acquire new token",
+        },
+        "404": {
+          description: "Product not found",
+        },
+        "409": {
+          description:
+            "Product does not have enough stock for the requested quantity",
         },
       },
     },

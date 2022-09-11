@@ -14,7 +14,6 @@ export const authDoc = {
                   description: "This e-mail will be used for login",
                   type: "string",
                   required: true,
-                  unique: true,
                 },
                 password: {
                   description: "This password will be used for login",
@@ -31,7 +30,7 @@ export const authDoc = {
           description: "Login successfully performed",
         },
         "401": {
-          description: "Email and/or password incorrect.",
+          description: "Error performing authentication",
         },
       },
     },
@@ -52,7 +51,8 @@ export const authDoc = {
           description: "Logout successfully performed",
         },
         "401": {
-          description: "Refresh token invalid",
+          description:
+            "Token informed is invalid: Perform new authentication to acquire new token",
         },
       },
     },
@@ -75,10 +75,11 @@ export const authDoc = {
         "Create a new access token and refresh token. It's necessary to place the refresh token in the request header.",
       responses: {
         "201": {
-          description: "Refresh token created successfully!",
+          description: "Refresh token criado com sucesso!",
         },
         "401": {
-          description: "Refresh token invalid! or Refresh token expired!",
+          description:
+            "Token informed is invalid: Perform new authentication to acquire new token",
         },
       },
     },

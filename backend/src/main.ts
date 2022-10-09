@@ -4,12 +4,11 @@ import express, { NextFunction, Request, Response, Router } from "express";
 import "express-async-errors";
 import "reflect-metadata";
 import swaggerUi from "swagger-ui-express";
-import { AppEndpoint, CustomError } from "./app";
+import { AppEndpoint, CustomError, swaggerDoc } from "./app";
 import "./app/database";
 import { authRoutes } from "./auth";
 import { clientsRoutes } from "./clients";
 import { productsRoutes } from "./products";
-import swaggerDocument from "./swagger.json";
 import { usersRoutes } from "./users";
 
 const app = express();
@@ -18,7 +17,7 @@ const router = Router();
 app.use(cors());
 app.use(express.json());
 
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 router.use(AppEndpoint.PRODUCTS, productsRoutes);
 router.use(AppEndpoint.CLIENTS, clientsRoutes);

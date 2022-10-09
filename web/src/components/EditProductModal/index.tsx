@@ -2,8 +2,8 @@ import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsCheckLg, BsXLg } from 'react-icons/bs';
 import { Modal } from '../../components/Modal';
-import { updateProductMutation } from '../../mutations/updateProductMutation';
-import { ProductUpdateType } from '../../types/productType';
+import { updateProductMutation } from '../../mutations';
+import { ProductUpdateType } from '../../types';
 import { Button } from '../Button';
 import { Column } from '../Column';
 import { Input } from '../Form/Input';
@@ -109,7 +109,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
         <Column sizeColumns="auto auto" justifyItems="center" margin="3rem 0 0 0">
           <Button
             variant="danger"
-            size="large"
+            size="md"
             type="button"
             positionIcon="left"
             outline
@@ -119,7 +119,7 @@ export const EditProductModal: FC<EditProductModalProps> = ({
           </Button>
           <Button
             variant="primary"
-            size="large"
+            size="md"
             positionIcon="left"
             type="submit"
             disabled={!isValid || !isDirty || isSubmitting}>

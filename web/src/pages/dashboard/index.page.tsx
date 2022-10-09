@@ -4,8 +4,8 @@ import { BsPlus } from 'react-icons/bs';
 import { Box } from '../../components/Box';
 import { Button } from '../../components/Button';
 import { LayoutDashboard } from '../../components/Layouts/LayoutDashboard';
-import { displayDate } from '../../utils/format';
-import { withSSRAuth } from '../../utils/withSSRAuth';
+import { displayDateHelper } from '../../helpers';
+import { withSSRAuth } from '../../utils';
 import { NextPageWithLayout } from '../_app.page';
 
 const Dashboard: NextPageWithLayout = () => {
@@ -19,7 +19,7 @@ const Dashboard: NextPageWithLayout = () => {
           <div>
             <h2 className="text-white font-bold text-[2.8rem]">Dashboard</h2>
             <span className="flex text-[1.6rem] mt-[1.2rem] font-medium  text-[#5f5f5f]">
-              {displayDate(new Date())}
+              {displayDateHelper(new Date())}
             </span>
           </div>
           <Button variant="primary" positionIcon="right" size="md">

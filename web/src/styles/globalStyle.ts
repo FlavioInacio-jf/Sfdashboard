@@ -26,17 +26,6 @@ export default createGlobalStyle`
 
     display: block;
   }
-
-  .sr-only {
-    position: absolute;
-    width: 0.1rem;
-    height: 0.1rem;
-    padding: 0;
-    margin: -0.1rem;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
   .overlay-modal {
     background-color: rgba(0, 0, 0, 0.5);
 

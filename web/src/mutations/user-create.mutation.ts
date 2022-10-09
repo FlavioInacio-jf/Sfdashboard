@@ -2,9 +2,9 @@
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { QueryKeys } from '../../enums';
-import { userService } from '../../services';
-import { UserRegisterType } from '../../types/userType';
+import { QueryKeys } from '../enums';
+import { userService } from '../services';
+import { UserRegisterType } from '../types/userType';
 
 export const CreateUserMutation = () => {
   const { create } = userService;

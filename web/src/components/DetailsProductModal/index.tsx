@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { ProductType } from '../../types/productType';
-import { formatPrice } from '../../utils/format';
+import { ProductType } from '../../types';
+import { formatPriceHelper } from '../../helpers';
 import { Modal } from '../Modal';
 import { Title } from '../Title';
 import {
@@ -45,7 +45,7 @@ export const DetailsProductModal: FC<DetailsProductModalProps> = ({
         </OverflowVertical>
 
         <DetailsProductFooter>
-          <span className="price">{formatPrice(price)}</span>
+          <span className="price">{formatPriceHelper(price)}</span>
           <span className="amount">{amount}</span>
         </DetailsProductFooter>
       </Container>

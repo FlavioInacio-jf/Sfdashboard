@@ -2,10 +2,9 @@ import Router from 'next/router';
 import { setCookie } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { QueryKeys } from '../../enums';
-import { api } from '../../services';
-import { authService } from '../../services';
-import { IAuthCredentials, IErrorResponseType } from '../../types';
+import { IAuthCredentials, IErrorResponseType } from '../types';
+import { QueryKeys } from '../enums';
+import { api, authService } from '../services';
 
 export const LoginMutation = () => {
   const queryClient = useQueryClient();

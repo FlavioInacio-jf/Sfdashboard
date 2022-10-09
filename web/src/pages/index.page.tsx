@@ -5,9 +5,9 @@ import { Button } from '../components/Button';
 import { Column } from '../components/Column';
 import { Input } from '../components/Form/Input';
 import { Toast } from '../components/Toast';
-import { LoginMutation } from '../mutations/LoginMutation';
+import { LoginMutation } from '../mutations';
 import { IAuthCredentials } from '../types';
-import { withSSRGuest } from '../utils/withSSRGuest';
+import { withSSRGuest } from '../utils';
 
 const Login: NextPage = () => {
   const {

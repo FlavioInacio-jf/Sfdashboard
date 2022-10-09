@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { parseCookies } from 'nookies';
+import { api } from '.';
 import { EndPoints } from '../enums';
-import { ProductRegisterType, ProductUpdateType } from '../types/productType';
-import { api } from './api';
+import { ProductRegisterType, ProductUpdateType } from '../types';
 
 const { get, delete: destroy, post, patch } = api;
 
@@ -29,5 +29,6 @@ export const productService = {
     config?: AxiosRequestConfig
   ) => patch(`${EndPoints.PRODUCTS}/${id}`, rest, config),
   single: (id: string, config?: AxiosRequestConfig) => get(`${EndPoints.PRODUCTS}/${id}`, config),
-  remove: (id: number, config?: AxiosRequestConfig) => destroy(`${EndPoints.PRODUCTS}/${id}`, config)
+  remove: (id: number, config?: AxiosRequestConfig) =>
+    destroy(`${EndPoints.PRODUCTS}/${id}`, config)
 };

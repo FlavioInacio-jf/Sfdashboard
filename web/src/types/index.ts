@@ -1,5 +1,9 @@
-export * from './categoryType';
-export * from './credentials.type';
+export * from './auth-credentials.type';
 export * from './error-response.type';
-export * from './productType';
 export * from './userType';
+
+export * from './product-status.type';
+export * from './product-response.type';
+export * from './product-update-request.type';
+
+export * from './masks.type';

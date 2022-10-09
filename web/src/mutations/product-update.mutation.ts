@@ -4,8 +4,8 @@ import { parseCookies } from 'nookies';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { QueryKeys } from '../../enums';
-import { productService } from '../../services/productService';
-import { ProductUpdateType } from '../../types/productType';
+import { productService } from '../../services';
+import { ProductUpdateType } from '../../types';
 
 export const updateProductMutation = () => {
   const { update } = productService;

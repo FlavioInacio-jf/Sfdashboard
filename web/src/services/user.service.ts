@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import { parseCookies } from 'nookies';
 import { EndPoints } from '../enums';
 import { UserRegisterType } from '../types/userType';
-import { api } from './api';
+import { api } from '.';
 
 let cookies = parseCookies();
 const { get, post } = api;

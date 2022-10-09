@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ErrorMessage } from '@hookform/error-message';
 import { TextareaHTMLAttributes } from 'react';
 import { DeepMap, FieldError, Path, RegisterOptions, UseFormRegister } from 'react-hook-form';
@@ -9,7 +10,7 @@ export interface TextAreaProps<T>
   label: string;
   name: Path<T>;
   margin: string;
-  register?: UseFormRegister<T>;
+  register?: UseFormRegister<any>;
   errors?: Partial<DeepMap<T, FieldError>>;
   rules?: RegisterOptions;
   disabledRequeridStyle?: boolean;

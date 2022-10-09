@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ErrorMessage } from '@hookform/error-message';
 import { InputHTMLAttributes } from 'react';
 import { DeepMap, FieldError, Path, RegisterOptions, UseFormRegister } from 'react-hook-form';
 import { BsAsterisk } from 'react-icons/bs';
-import { handleKeyUp, MasksType } from '../../../helpers';
+import { MasksType } from '../../../types';
+import { validadeMaskUtil } from '../../../utils';
 import { FormGroup, FormGroupProps, InputStyled, InputStyledTextError, Label } from './styles';
 
 export interface InputProps<T>
@@ -11,7 +13,7 @@ export interface InputProps<T>
   label: string;
   name: Path<T>;
   mask?: MasksType;
-  register?: UseFormRegister<T>;
+  register?: UseFormRegister<any>;
   errors?: Partial<DeepMap<T, FieldError>>;
   rules?: RegisterOptions;
   disabledRequeridStyle?: boolean;
@@ -28,8 +30,6 @@ export function Input<T>({
   disabledRequeridStyle,
   ...rest
 }: InputProps<T>) {
-  //const errorMessage = get(errors, name);
-  //const hasError = !!(errors && errorMessage);
   return (
     <FormGroup margin={margin}>
       <Label htmlFor={name}>
@@ -44,12 +44,11 @@ export function Input<T>({
         name={name}
         id={name}
         {...rest}
-        onKeyUp={(event) => handleKeyUp(mask || 'none', event)}
+        onKeyUp={(event) => validadeMaskUtil(mask || 'none', event)}
         {...(register && register(name, rules))}
       />
       <ErrorMessage
         errors={errors}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         name={name as any}
         render={({ message }) => <InputStyledTextError>{message}</InputStyledTextError>}
       />

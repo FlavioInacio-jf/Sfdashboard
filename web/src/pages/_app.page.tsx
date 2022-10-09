@@ -6,13 +6,14 @@ import Modal from 'react-modal';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import 'react-toastify/dist/ReactToastify.css';
-import { queryClient } from '../services/query';
+import { queryClient } from '../services';
 import GlobalStyle from '../styles/globalStyle';
 import '../styles/styles.css';
 import { Theme } from '../styles/Theme';
 
 Modal.setAppElement('#__next');
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}> = NextPage<P> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };

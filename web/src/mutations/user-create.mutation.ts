@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { QueryKeys } from '../../enums';
-import { userService } from '../../services/userService';
+import { userService } from '../../services';
 import { UserRegisterType } from '../../types/userType';
 
 export const CreateUserMutation = () => {

@@ -8,13 +8,11 @@ import { NewProductModal } from '../../components/NewProductModal';
 import { ProductCard } from '../../components/ProductCard';
 import { RenderIf } from '../../components/RenderIf';
 import { QueryKeys } from '../../enums';
-import { search } from '../../helpers';
-import { useDashboard } from '../../hooks/useDashboard';
-import { deleteProductMutation } from '../../mutations/deleteProductMutation';
-import { productService } from '../../services/productService';
-import { ProductType, ProductUpdateType } from '../../types/productType';
-import { displayDate } from '../../utils/format';
-import { withSSRAuth } from '../../utils/withSSRAuth';
+import { displayDateHelper } from '../../helpers';
+import { deleteProductMutation } from '../../mutations';
+import { productService } from '../../services';
+import { ProductType, ProductUpdateType } from '../../types';
+import { withSSRAuth } from '../../utils';
 import { NextPageWithLayout } from '../_app.page';
 import { ContainerProducts } from './styles';
 
@@ -26,14 +24,9 @@ const Products: NextPageWithLayout = () => {
   const [seeingProduct, setSeeingProduct] = useState({} as ProductUpdateType);
 
   const { mutate: deleteProductMutate } = deleteProductMutation();
-  const { handleOpenNewProductModal, searchDashboard } = useDashboard();
-  const { data, isLoading } = useQuery<ProductType[]>(QueryKeys.PRODUCTS, productService.index);
+  const { data } = useQuery<ProductType[]>(QueryKeys.PRODUCTS, productService.index);
 
-  const products = useMemo(() => data || [], [data]);
-
-  const filteredProducts = useMemo(() => {
-    return products.filter(({ name }) => search(name, searchDashboard));
-  }, [products, searchDashboard]);
+  const products = useMemo(() => data?.result || [], [data]);
 
   const handleOpenEditProductModal = () => {
     setIsEditProductModalOpen(true);
@@ -61,14 +54,14 @@ const Products: NextPageWithLayout = () => {
             <header className="p-[3.2rem]">
               <h2 className="text-white font-bold text-[2.8rem]">Dashboard</h2>
               <span className="flex text-[1.6rem] mt-[1.2rem] font-medium  text-[#5f5f5f]">
-                {displayDate(new Date())}
+                {displayDateHelper(new Date())}
               </span>
             </header>
             <div>
               <Box>oi</Box>
               <RenderIf condition={products.length > 0}>
                 <ContainerProducts>
-                  {filteredProducts.map((product) => (
+                  {products.map((product) => (
                     <ProductCard
                       key={product.id}
                       product={product}

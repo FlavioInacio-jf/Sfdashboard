@@ -1,8 +1,8 @@
 import { parseCookies } from 'nookies';
 import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
-import { signOut } from '../../components/Layouts/LayoutDashboard/Sidebar';
-import { api } from '../../services/api';
+import { signOut } from '../components/Layouts/LayoutDashboard/Sidebar';
+import { api } from '../services';
 
 export const LogoutMutation = () => {
   const { 'SFDashboard.auth.refreshToken': refreshToken } = parseCookies();

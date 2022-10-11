@@ -4,7 +4,7 @@ import { destroyCookie } from 'nookies';
 import { FC, useCallback } from 'react';
 import { BsBoxArrowRight } from 'react-icons/bs';
 import { FaChartBar } from 'react-icons/fa';
-import { LogoutMutation } from '../../../../mutations/logoutMutation';
+import { LogoutMutation } from '../../../../mutations';
 import { routes } from './routes';
 
 export const signOut = () => {

@@ -2,20 +2,10 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { parseCookies, setCookie } from 'nookies';
 import { signOut } from '../components/Layouts/LayoutDashboard/Sidebar';
 import { EndPoints } from '../enums';
-
-interface MessageErrorType {
-  message: string;
-  code: number;
-  path: string;
-}
+import { IApiErrorResponse } from '../types';
 
 let cookies = parseCookies();
 
-interface MessageErrorType {
-  message: string;
-  code: number;
-  path: string;
-}
 interface FailedRequestsQueueType {
   onSuccess: (token: string) => void;
   onFailure: (err: AxiosError) => void;
@@ -42,9 +32,9 @@ api.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 api.interceptors.response.use(
   (response) => response,
-  (error: AxiosError<MessageErrorType>) => {
+  (error: AxiosError<IApiErrorResponse>) => {
     if (error.response?.status === 401) {
-      if (error.response?.data?.message === 'token expired') {
+      if (error.response?.data?.title === 'token expired') {
         const originalConfig = error.config;
         cookies = parseCookies();
 

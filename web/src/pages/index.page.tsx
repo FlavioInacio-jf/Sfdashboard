@@ -5,23 +5,23 @@ import { Button } from '../components/Button';
 import { Column } from '../components/Column';
 import { Input } from '../components/Form/Input';
 import { Toast } from '../components/Toast';
-import { LoginMutation } from '../mutations/LoginMutation';
-import { CredentialsType } from '../types';
-import { withSSRGuest } from '../utils/withSSRGuest';
+import { LoginMutation } from '../mutations';
+import { IAuthCredentials } from '../types';
+import { withSSRGuest } from '../utils';
 
 const Login: NextPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid, isSubmitting }
-  } = useForm<CredentialsType>({
+  } = useForm<IAuthCredentials>({
     mode: 'onBlur',
     reValidateMode: 'onBlur'
   });
 
   const { mutate: loginMutate } = LoginMutation();
 
-  const onSubmit = (data: CredentialsType) => {
+  const onSubmit = (data: IAuthCredentials) => {
     loginMutate(data);
   };
   return (
@@ -36,7 +36,7 @@ const Login: NextPage = () => {
               </header>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Column column="1">
-                  <Input<CredentialsType>
+                  <Input<IAuthCredentials>
                     label="E-mail"
                     name="email"
                     type="text"
@@ -47,7 +47,7 @@ const Login: NextPage = () => {
                 </Column>
 
                 <Column column="1" margin="3rem 0 3rem 0">
-                  <Input<CredentialsType>
+                  <Input<IAuthCredentials>
                     label="Senha"
                     name="password"
                     type="password"

@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { DashboardProvider } from '../../../contexts/DashboardContext';
+import { DashboardProvider } from '../../../contexts';
 import { Toast } from '../../Toast';
 import { Profile } from './Profile';
 import { Sidebar } from './Sidebar';

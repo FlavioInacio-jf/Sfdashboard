@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsCheckLg, BsXLg } from 'react-icons/bs';
 import { Modal } from '../../components/Modal';
-import { useDashboard } from '../../hooks/useDashboard';
-import { createProductMutation } from '../../mutations/createProductMutation';
-import { ProductRegisterType } from '../../types/productType';
-import { convertPriceToNumber } from '../../utils/format';
+import { convertPriceToNumberHelper } from '../../helpers';
+import { useDashboard } from '../../hooks';
+import { createProductMutation } from '../../mutations';
+import { ProductRegisterType } from '../../types';
 import { Button } from '../Button';
 import { Column } from '../Column';
 import { Input } from '../Form/Input';
@@ -29,7 +29,7 @@ export const NewProductModal: FC = () => {
   const { isNewProductModalOpen, handleCloseNewProductModal } = useDashboard();
 
   const onSubmit = (data: ProductRegisterType) => {
-    const priceNumber = convertPriceToNumber(data.price);
+    const priceNumber = convertPriceToNumberHelper(data.price);
 
     createProductMutate({
       ...data,
@@ -106,7 +106,7 @@ export const NewProductModal: FC = () => {
         <Column sizeColumns="auto auto" justifyItems="center" margin="3rem 0 0 0">
           <Button
             variant="danger"
-            size="large"
+            size="md"
             type="button"
             positionIcon="left"
             outline
@@ -116,7 +116,7 @@ export const NewProductModal: FC = () => {
           </Button>
           <Button
             variant="primary"
-            size="large"
+            size="md"
             positionIcon="left"
             type="submit"
             disabled={!isValid || !isDirty || isSubmitting}>

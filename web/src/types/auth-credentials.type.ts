@@ -1,4 +1,4 @@
-export interface CredentialsType {
+export interface IAuthCredentials {
   email: string;
   password: string;
 }

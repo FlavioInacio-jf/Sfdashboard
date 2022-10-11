@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { BsArrowLeft } from 'react-icons/bs';
-import { Link } from '../../components/Link';
-import { Message } from '../../components/Message';
+import { Link, Message } from '../../components';
 import { Custom404Container } from './styles';
 
 const Custom404: NextPage = () => {

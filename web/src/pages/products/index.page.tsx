@@ -1,12 +1,14 @@
 import { ReactElement, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
-import { Box } from '../../components/Box';
-import { DetailsProductModal } from '../../components/DetailsProductModal';
-import { EditProductModal } from '../../components/EditProductModal';
-import { LayoutDashboard } from '../../components/Layouts/LayoutDashboard';
-import { NewProductModal } from '../../components/NewProductModal';
-import { ProductCard } from '../../components/ProductCard';
-import { RenderIf } from '../../components/RenderIf';
+import {
+  Box,
+  DetailsProductModal,
+  EditProductModal,
+  LayoutDashboard,
+  NewProductModal,
+  ProductCard,
+  RenderIf
+} from '../../components';
 import { QueryKeys } from '../../enums';
 import { displayDateHelper } from '../../helpers';
 import { deleteProductMutation } from '../../mutations';

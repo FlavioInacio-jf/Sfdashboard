@@ -1,9 +1,7 @@
 import Head from 'next/head';
 import { ReactElement } from 'react';
 import { BsPlus } from 'react-icons/bs';
-import { Box } from '../../components/Box';
-import { Button } from '../../components/Button';
-import { LayoutDashboard } from '../../components/Layouts/LayoutDashboard';
+import { Box, Button, LayoutDashboard } from '../../components';
 import { displayDateHelper } from '../../helpers';
 import { withSSRAuth } from '../../utils';
 import { NextPageWithLayout } from '../_app.page';

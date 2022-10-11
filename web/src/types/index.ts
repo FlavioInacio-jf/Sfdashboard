@@ -1,5 +1,7 @@
 export * from './auth-credentials.type';
-export * from './error-response.type';
+export * from './api-error-response.type';
+export * from './api-response.type';
+
 export * from './userType';
 
 export * from './product-status.type';

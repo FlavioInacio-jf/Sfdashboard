@@ -1,14 +1,13 @@
 import { Request, Response } from "express";
-import { CustomError } from "../../app";
-import { DeleteClientService } from "../services";
+import { CustomError } from "../../../app";
+import { DeleteClientUseCase } from "./delete-client.useCase";
 
 export class DeleteClientController {
+  constructor(private deleteClientUseCase: DeleteClientUseCase) {}
   async execute(req: Request, res: Response) {
-    const deleteClientService = new DeleteClientService();
-
     try {
       const { id } = req.params;
-      const client = await deleteClientService.execute(id);
+      const client = await this.deleteClientUseCase.execute(id);
 
       return res.status(201).json({
         title: "Cliente removido com sucesso",

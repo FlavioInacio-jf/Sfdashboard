@@ -1,7 +1,7 @@
 import {
   ICreateProductRequestDTO,
   IDeleteProductRequestDTO,
-  IQueryProductResquestDTO
+  IQueryProductResquestDTO,
 } from "../dtos";
 import { Product } from "../entities";
 

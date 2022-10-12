@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import { CustomError } from "../../app";
-import { UpdateClientService } from "../services";
+import { CustomError } from "../../../app";
+import { UpdateClientUseCase } from "./update-client.useCase";
 
 export class UpdateClientController {
+  constructor(private updateClientUseCase: UpdateClientUseCase) {}
   async execute(req: Request, res: Response) {
-    const updateClientService = new UpdateClientService();
     try {
       const { id } = req.params;
       const { name, email } = req.body;
 
-      const client = await updateClientService.execute({
+      const client = await this.updateClientUseCase.execute({
         id,
         name,
         email,

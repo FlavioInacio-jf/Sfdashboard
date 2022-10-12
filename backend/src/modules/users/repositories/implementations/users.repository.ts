@@ -43,13 +43,13 @@ export class UsersRepository implements IUsersRepository {
   async findAll({
     limit,
     page,
-    ...rest
+    ...filters
   }: IQueryUserRequestDTO): Promise<User[] | undefined> {
     const users = await this.repository.find({
       select: ["id", "name", "role", "permissions"],
       take: limit,
       skip: page,
-      where: { ...rest },
+      where: { ...filters },
     });
 
     return users;

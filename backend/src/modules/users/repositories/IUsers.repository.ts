@@ -8,5 +8,5 @@ export interface IUsersRepository {
   findById: (id: string) => Promise<User | undefined>;
   findByEmail: (email: string) => Promise<User | undefined>;
   findAll: (query: IQueryUserRequestDTO) => Promise<User[]>;
-  delete: (id: IDeleteUserRequestDTO) => Promise<void>;
+  delete: (data: IDeleteUserRequestDTO) => Promise<void>;
 }

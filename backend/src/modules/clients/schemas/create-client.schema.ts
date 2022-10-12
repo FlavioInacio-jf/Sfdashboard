@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const createSchema = yup.object().shape({
+export const createClientSchema = yup.object().shape({
   name: yup
     .string()
     .required("Name field is required.")

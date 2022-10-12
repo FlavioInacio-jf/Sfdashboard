@@ -1,16 +1,15 @@
 import { Request, Response } from "express";
-import { CustomError } from "../../app";
-import { GetAllClientsService } from "../services";
+import { CustomError } from "../../../app";
+import { GetAllClientsUseCase } from "./get-all-clients.useCase";
 
 export class GetAllClientsController {
+  constructor(private getAllClientsUseCase: GetAllClientsUseCase) {}
   async execute(req: Request, res: Response) {
-    const getAllClientsService = new GetAllClientsService();
-
     try {
       const { limit } = req.query;
       const limitNumber = parseInt(limit as string, 10);
 
-      const clients = await getAllClientsService.execute({
+      const clients = await this.getAllClientsUseCase.execute({
         limit: limitNumber,
       });
 

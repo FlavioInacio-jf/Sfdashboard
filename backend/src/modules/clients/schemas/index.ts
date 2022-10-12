@@ -1,2 +1,2 @@
-export * from "./client-create.schema";
-export * from "./client-update.schema";
+export * from "./create-client.schema";
+export * from "./update-client.schema";

@@ -1,17 +1,16 @@
 import { Request, Response } from "express";
-import { CustomError } from "../../app";
-import LogoutService from "../services/logout.service";
+import { CustomError } from "../../../app";
+import LogoutUserUseCase from "./logout-user.useCase";
 
 export class LogouUserController {
+  constructor(private logoutUserUseCase: LogoutUserUseCase) {}
   async execute(req: Request, res: Response) {
-    const logoutUserService = new LogoutService();
-
     try {
       const authHeader = req.headers.authorization;
       const { id: user_id } = req.user;
       const [, refreshToken] = authHeader.split(" ");
 
-      await logoutUserService.execute({
+      await this.logoutUserUseCase.execute({
         old_refresh_token: refreshToken,
         user_id,
       });

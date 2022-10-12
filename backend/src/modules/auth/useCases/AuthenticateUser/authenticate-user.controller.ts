@@ -1,14 +1,13 @@
 import { Request, Response } from "express";
-import { CustomError } from "../../app";
-import { AuthenticateUserService } from "../services";
+import { CustomError } from "../../../app";
+import { AuthenticateUserUseCase } from "./authenticate-user.useCase";
 
 export class AuthenticateUserController {
+  constructor(private authenticateUserUseCase: AuthenticateUserUseCase) {}
   async execute(req: Request, res: Response): Promise<Response> {
-    const authenticateUserService = new AuthenticateUserService();
-
     try {
       const { email, password } = req.body;
-      const token = await authenticateUserService.execute({
+      const token = await this.authenticateUserUseCase.execute({
         email,
         password,
       });

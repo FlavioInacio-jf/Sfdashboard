@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
-import { getCustomRepository } from "typeorm";
 import { UsersRepository } from "../../users/repositories";
 import { CustomError } from "../errors";
 import { EXPIRED_AT, INVALID_AT, USER_NOT_FOUND } from "../exceptions";
@@ -32,9 +31,7 @@ export class EnsureAuthenticated {
 
       const { sub: id } = verify(bearerToken[1], secret) as IPayload;
 
-      const usersRepository = getCustomRepository(UsersRepository);
-
-      const user = await usersRepository.findById(id);
+      const user = await UsersRepository;
 
       if (!user) {
         throw new CustomError(USER_NOT_FOUND);

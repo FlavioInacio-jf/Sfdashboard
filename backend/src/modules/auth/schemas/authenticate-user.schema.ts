@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const createSchema = yup.object().shape({
+export const authenticateUserSchema = yup.object().shape({
   email: yup
     .string()
     .email("The email field must be of type email")

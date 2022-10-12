@@ -1,11 +1,11 @@
-import { CustomErrorType } from "../types";
+import { ICustomErrorDTO } from "../dtos";
 
 export class CustomError {
   public title: string;
   public detail?: string | string[];
   public code?: number;
 
-  constructor(error: CustomErrorType) {
+  constructor(error: ICustomErrorDTO) {
     Object.assign(this, error);
     if (!this.detail) {
       this.detail = this.title;

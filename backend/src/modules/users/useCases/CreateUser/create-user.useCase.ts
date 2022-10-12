@@ -1,12 +1,15 @@
-import { genSalt, hash } from "bcrypt";
 import { CustomError } from "../../../app/errors";
 import { EMAIL_ALREADY_EXIST } from "../../../app/exceptions";
+import { IHashProvider } from "../../../auth";
 import { ICreateUserRequestDTO } from "../../dtos";
 import { User } from "../../entities";
 import { IUsersRepository } from "../../repositories";
 
 export class CreateUserUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    private usersRepository: IUsersRepository,
+    private hashProvider: IHashProvider,
+  ) {}
 
   async execute({
     name,
@@ -20,9 +23,7 @@ export class CreateUserUseCase {
     if (emailAlreadyExists) {
       throw new CustomError(EMAIL_ALREADY_EXIST(email));
     }
-
-    const salt = await genSalt(12);
-    const passwordHash = await hash(password, salt);
+    const passwordHash = await this.hashProvider.generate(password);
 
     const user = await this.usersRepository.create({
       name,

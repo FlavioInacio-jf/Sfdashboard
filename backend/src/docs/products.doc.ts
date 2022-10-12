@@ -1,4 +1,4 @@
-import { ProductStatus } from "../../products/enums";
+import { ProductStatusEnum } from "../modules/products/enums";
 
 export const productsDoc = {
   "/products": {
@@ -41,7 +41,7 @@ export const productsDoc = {
                 status: {
                   description: "Product status",
                   type: "string",
-                  enum: Object.values(ProductStatus),
+                  enum: Object.values(ProductStatusEnum),
                   required: true,
                 },
               },
@@ -191,7 +191,7 @@ export const productsDoc = {
                 status: {
                   description: "Product status",
                   type: "string",
-                  enum: Object.values(ProductStatus),
+                  enum: Object.values(ProductStatusEnum),
                   required: false,
                 },
               },

@@ -1,12 +1,12 @@
 import { genSalt, hash } from "bcrypt";
-import { User } from "../../entities";
 import { CustomError } from "../../../app/errors";
 import { EMAIL_ALREADY_EXIST } from "../../../app/exceptions";
 import { ICreateUserRequestDTO } from "../../dtos";
-import { UsersRepository } from "../../repositories";
+import { User } from "../../entities";
+import { IUsersRepository } from "../../repositories";
 
 export class CreateUserUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) {}
 
   async execute({
     name,

@@ -25,7 +25,7 @@ export class User {
     length: 10,
     enum: UserRole,
   })
-  role: "admin" | "user";
+  role: keyof typeof UserRole;
 
   @Column("simple-array", {
     nullable: false,

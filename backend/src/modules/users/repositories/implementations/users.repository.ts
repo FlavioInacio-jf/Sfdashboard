@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { getRepository, Repository } from "typeorm";
-import { ICreateUserRequestDTO } from "../../dtos";
-import { IQueryUserDTO } from "../../dtos/query-user.dto";
+import {
+  ICreateUserRequestDTO,
+  IDeleteUserRequestDTO,
+  IQueryUserRequestDTO,
+} from "../../dtos";
 import { User } from "../../entities";
 import { IUsersRepository } from "../IUsers.repository";
 
@@ -23,7 +26,7 @@ export class UsersRepository implements IUsersRepository {
     await this.repository.save(data);
   }
 
-  async delete(id: string): Promise<void> {
+  async delete({ id }: IDeleteUserRequestDTO): Promise<void> {
     await this.repository.delete(id);
   }
   async findById(id: string): Promise<User | undefined> {
@@ -41,7 +44,7 @@ export class UsersRepository implements IUsersRepository {
     limit,
     page,
     ...rest
-  }: IQueryUserDTO): Promise<User[] | undefined> {
+  }: IQueryUserRequestDTO): Promise<User[] | undefined> {
     const users = await this.repository.find({
       select: ["id", "name", "role", "permissions"],
       take: limit,

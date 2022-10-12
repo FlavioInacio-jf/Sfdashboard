@@ -1,4 +1,4 @@
-import { IQueryUserDTO } from "../../dtos/query-user.dto";
+import { IQueryUserRequestDTO } from "../../dtos/query-user-request.dto";
 import { User } from "../../entities";
 import { UsersRepository } from "../../repositories";
 
@@ -8,7 +8,7 @@ export class GetAllUsersUseCase {
     limit = 12,
     page = 1,
     ...query
-  }: IQueryUserDTO): Promise<User[]> {
+  }: IQueryUserRequestDTO): Promise<User[]> {
     const users = await this.usersRepository.findAll({ limit, page, ...query });
     return users;
   }

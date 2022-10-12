@@ -6,26 +6,20 @@ import {
   validateResource,
 } from "../../app";
 import {
-  BuyProductController,
-  CreateProductController,
-  DeleteProductController,
-  GetAllProductsController,
-  GetSingleProductController,
-  UpdateProductController,
-} from "../controllers";
-import {
   productBuySchema,
   productCreateSchema,
   productUpdateSchema,
 } from "../schemas";
+import {
+  buyProductController,
+  createProductController,
+  deleteProductController,
+  getAllProductsController,
+  getSingleProductController,
+  updateProductController,
+} from "../useCases";
 
 const productsRoutes = Router();
-const createProductController = new CreateProductController();
-const deleteCategoryController = new DeleteProductController();
-const getAllProductsController = new GetAllProductsController();
-const getSingleProductController = new GetSingleProductController();
-const updateProductController = new UpdateProductController();
-const buyProductController = new BuyProductController();
 
 const ensureAuthenticated = new EnsureAuthenticated();
 productsRoutes.use(ensureAuthenticated.execute);
@@ -57,6 +51,6 @@ productsRoutes.patch(
   validateResource(productUpdateSchema),
   updateProductController.execute,
 );
-productsRoutes.delete("/:id", deleteCategoryController.execute);
+productsRoutes.delete("/:id", deleteProductController.execute);
 
 export { productsRoutes };

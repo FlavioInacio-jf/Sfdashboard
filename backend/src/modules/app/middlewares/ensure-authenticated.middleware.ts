@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { getCustomRepository } from "typeorm";
-import { UsersRepository } from "../repositories";
+import { UsersRepository } from "../../users/repositories";
 import { CustomError } from "../errors";
 import { EXPIRED_AT, INVALID_AT, USER_NOT_FOUND } from "../exceptions";
 
@@ -34,7 +34,7 @@ export class EnsureAuthenticated {
 
       const usersRepository = getCustomRepository(UsersRepository);
 
-      const user = await usersRepository.findOne({ id });
+      const user = await usersRepository.findById(id);
 
       if (!user) {
         throw new CustomError(USER_NOT_FOUND);

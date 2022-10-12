@@ -1,5 +1,5 @@
-import { ICreateUserRequestDTO } from "../dtos";
-import { IQueryUserDTO } from "../dtos/query-user.dto";
+import { ICreateUserRequestDTO, IDeleteUserRequestDTO } from "../dtos";
+import { IQueryUserRequestDTO } from "../dtos/query-user-request.dto";
 import { User } from "../entities";
 
 export interface IUsersRepository {
@@ -7,6 +7,6 @@ export interface IUsersRepository {
   update: (data: User) => Promise<void>;
   findById: (id: string) => Promise<User | undefined>;
   findByEmail: (email: string) => Promise<User | undefined>;
-  findAll: (query: IQueryUserDTO) => Promise<User[] | undefined>;
-  delete: (id: string) => Promise<void>;
+  findAll: (query: IQueryUserRequestDTO) => Promise<User[]>;
+  delete: (id: IDeleteUserRequestDTO) => Promise<void>;
 }

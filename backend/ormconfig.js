@@ -1,11 +1,9 @@
 module.exports =  {
-  type: "sqlite",
-  database: "src/app/database/database.sqlite",
-  migrations: ["src/migrations/**/*.ts"],
-  entities: [`${__dirname}/**/**/**/*.entity{.ts,.js}`],
+  migrations: ["./src/database/migrations/*.ts"],
+  entities: [`./src/modules/**/entities/*.entity{.ts,.js}`],
   cli: {
-    migrationsDir: "src/migrations",
-    entitiesDir: `${__dirname}/**/**/**/*.entity{.ts,.js}`,
+    migrationsDir: "./src/database/migrations",
+    entitiesDir: `./src/modules/**/entities/*.entity{.ts,.js}`,
   },
   synchronize: true,
   keepConnectionAlive: true,

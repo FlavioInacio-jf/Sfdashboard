@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import "reflect-metadata";
+import "express-async-errors";
 import cors from "cors";
 import express, { NextFunction, Request, Response, Router } from "express";
-import "express-async-errors";
-import "reflect-metadata";
 import swaggerUi from "swagger-ui-express";
-import { AppEndpoint, CustomError, swaggerDoc } from "./app";
-import "./app/database";
-import { authRoutes } from "./auth";
-import { clientsRoutes } from "./clients";
-import { productsRoutes } from "./products";
-import { usersRoutes } from "./users";
+import { AppEndpoint, CustomError } from "./modules/app";
+import "./database";
+import { authRoutes } from "./modules/auth";
+import { clientsRoutes } from "./modules/clients";
+import { productsRoutes } from "./modules/products";
+import { usersRoutes } from "./modules/users";
+import { swaggerDoc } from "./docs";
 
 const app = express();
 const router = Router();

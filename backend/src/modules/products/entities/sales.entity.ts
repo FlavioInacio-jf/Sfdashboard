@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 
 import { v4 as uuidV4 } from "uuid";
-import { Client } from "../../app";
+import { Client } from "../../clients/entities";
 import { User } from "../../users";
 import { Product } from "./product.entity";
 

@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { UserRole } from "../enums";
+import { UserRoleEnum } from "../enums";
 
 export const createSchema = yup.object().shape({
   name: yup
@@ -10,7 +10,7 @@ export const createSchema = yup.object().shape({
   email: yup.string().email().required("Email field is required."),
   role: yup
     .string()
-    .equals([Object.values(UserRole)], "Role must be admin or user.")
+    .equals([Object.values(UserRoleEnum)], "Role must be admin or user.")
     .required("Role field is required."),
   permissions: yup.array().required("Permissions field is required."),
   password: yup

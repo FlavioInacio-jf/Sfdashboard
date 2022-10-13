@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
-import { UserRole } from "../enums";
+import { UserRoleEnum } from "../enums";
 
 @Entity("users")
 export class User {
@@ -23,9 +23,9 @@ export class User {
   @Column({
     nullable: false,
     length: 10,
-    enum: UserRole,
+    enum: UserRoleEnum,
   })
-  role: keyof typeof UserRole;
+  role: keyof typeof UserRoleEnum;
 
   @Column("simple-array", {
     nullable: false,

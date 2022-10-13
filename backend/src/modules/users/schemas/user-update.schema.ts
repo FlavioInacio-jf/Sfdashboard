@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { UserRole } from "../enums";
+import { UserRoleEnum } from "../enums";
 
 export const updateSchema = yup.object().shape({
   name: yup
@@ -9,7 +9,7 @@ export const updateSchema = yup.object().shape({
     .max(100, "The name must have a maximum of 100 characters."),
   role: yup
     .string()
-    .equals([Object.values(UserRole)], "Role must be admin or user.")
+    .equals([Object.values(UserRoleEnum)], "Role must be admin or user.")
     .notRequired(),
   permissions: yup.array().notRequired(),
 });

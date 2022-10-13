@@ -1,4 +1,6 @@
-import { UserRole } from "../../modules/users";
+import { UserRoleEnum } from "../../modules/users";
+
+export {};
 
 declare global {
   namespace Express {
@@ -8,7 +10,7 @@ declare global {
         id: string;
         name: string;
         email: string;
-        role: UserRole;
+        role: keyof typeof UserRoleEnum;
         permissions: string[];
         created_at: Date;
       };

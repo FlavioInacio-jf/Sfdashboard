@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { ProductStatus } from "../enums";
+import { ProductStatusEnum } from "../enums";
 
 export const productUpdateSchema = yup.object().shape({
   title: yup
@@ -18,8 +18,8 @@ export const productUpdateSchema = yup.object().shape({
   status: yup
     .string()
     .equals(
-      [Object.values(ProductStatus)],
-      `Status must be ${Object.values(ProductStatus)}`,
+      [Object.values(ProductStatusEnum)],
+      `Status must be ${Object.values(ProductStatusEnum)}`,
     )
     .notRequired(),
 });

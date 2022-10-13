@@ -1,4 +1,4 @@
-import { HashProvider } from "../../../auth";
+import { HashProvider } from "../../../app";
 import { UsersRepository } from "../../repositories";
 import { CreateUserController } from "./create-user.controller";
 import { CreateUserUseCase } from "./create-user.useCase";

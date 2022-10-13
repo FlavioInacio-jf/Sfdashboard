@@ -1,4 +1,5 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { appDataSource } from "../../../../database";
 import { IExpireInProvider, ITokenProvider } from "../../../app";
 import { ICreateRefreshTokenDTO, IDeleteRefreshTokenDTO } from "../../dtos";
 import { RefreshToken } from "../../entities";
@@ -11,7 +12,7 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     private expireInProvider: IExpireInProvider,
     private tokenProvider: ITokenProvider,
   ) {
-    this.repository = getRepository(RefreshToken);
+    this.repository = appDataSource.getRepository(RefreshToken);
   }
 
   async findByUserIdAndToken({
@@ -22,8 +23,7 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     old_token: string;
   }): Promise<RefreshToken | undefined> {
     const refreshToken = await this.repository.findOne({
-      user_id,
-      refresh_token: old_token,
+      where: { user_id, refresh_token: old_token },
     });
 
     return refreshToken;

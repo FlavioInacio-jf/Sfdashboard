@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { ProductStatus } from "../enums";
+import { ProductStatusEnum } from "../enums";
 
 export const productCreateSchema = yup.object().shape({
   bar_code: yup
@@ -23,8 +23,8 @@ export const productCreateSchema = yup.object().shape({
   status: yup
     .string()
     .equals(
-      [Object.values(ProductStatus)],
-      `Status must be ${Object.values(ProductStatus)}`,
+      [Object.values(ProductStatusEnum)],
+      `Status must be ${Object.values(ProductStatusEnum)}`,
     )
     .required("Status field is required."),
 });

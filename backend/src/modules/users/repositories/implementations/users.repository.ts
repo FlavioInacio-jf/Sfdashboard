@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { appDataSource } from "../../../../database";
 import {
   ICreateUserRequestDTO,
   IDeleteUserRequestDTO,
@@ -12,7 +13,7 @@ export class UsersRepository implements IUsersRepository {
   private repository: Repository<User>;
 
   constructor() {
-    this.repository = getRepository(User);
+    this.repository = appDataSource.getRepository(User);
   }
 
   async create(data: ICreateUserRequestDTO): Promise<User> {
@@ -30,7 +31,7 @@ export class UsersRepository implements IUsersRepository {
     await this.repository.delete(id);
   }
   async findById(id: string): Promise<User | undefined> {
-    const user = await this.repository.findOne(id);
+    const user = await this.repository.findOne({ where: { id } });
 
     return user;
   }

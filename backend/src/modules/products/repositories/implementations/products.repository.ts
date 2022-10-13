@@ -1,4 +1,5 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { appDataSource } from "../../../../database";
 import {
   ICreateProductRequestDTO,
   IDeleteProductRequestDTO,
@@ -10,7 +11,7 @@ import { IProductsRepository } from "../IProducts.repository";
 export class ProductsRepository implements IProductsRepository {
   private repository: Repository<Product>;
   constructor() {
-    this.repository = getRepository(Product);
+    this.repository = appDataSource.getRepository(Product);
   }
 
   async create(data: ICreateProductRequestDTO): Promise<Product> {
@@ -32,7 +33,7 @@ export class ProductsRepository implements IProductsRepository {
   }
 
   async findById(id: string): Promise<Product | undefined> {
-    const product = await this.repository.findOne(id);
+    const product = await this.repository.findOne({ where: { id } });
 
     return product;
   }

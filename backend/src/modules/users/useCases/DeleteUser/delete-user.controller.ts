@@ -7,7 +7,7 @@ export class DeleteUserController {
   async execute(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const user = await this.deleteUserUseCase.execute(id);
+      const user = await this.deleteUserUseCase.execute({ id });
 
       return res.status(201).json({
         title: "Usuário removido com sucesso",

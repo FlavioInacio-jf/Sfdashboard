@@ -1,6 +1,6 @@
 import { IPaginateQueryBaseDTO } from "../../app/dtos";
-import { UserRole } from "../enums";
+import { UserRoleEnum } from "../enums";
 
 export interface IQueryUserRequestDTO extends IPaginateQueryBaseDTO {
-  role?: UserRole;
+  role?: keyof typeof UserRoleEnum;
 }

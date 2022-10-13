@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
-import { ProductStatus } from "../enums";
+import { ProductStatusEnum } from "../enums";
 
 @Entity("products")
 export class Product {
@@ -28,8 +28,8 @@ export class Product {
   })
   amount: number;
 
-  @Column({ nullable: false, enum: ProductStatus })
-  status: keyof typeof ProductStatus;
+  @Column({ nullable: false, enum: ProductStatusEnum })
+  status: keyof typeof ProductStatusEnum;
 
   @CreateDateColumn({
     nullable: false,

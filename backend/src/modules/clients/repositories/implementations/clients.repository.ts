@@ -1,4 +1,5 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { appDataSource } from "../../../../database";
 import { ICreateClientRequestDTO, IDeleteClientRequestDTO } from "../../dtos";
 import { IQueryClientRequestDTO } from "../../dtos/query-client-request.dto";
 import { Client } from "../../entities";
@@ -8,7 +9,7 @@ export class ClientsRepository implements IClientsRepository {
   private repository: Repository<Client>;
 
   constructor() {
-    this.repository = getRepository(Client);
+    this.repository = appDataSource.getRepository(Client);
   }
   async create(data: ICreateClientRequestDTO): Promise<Client> {
     const client = this.repository.create(data);

@@ -1,4 +1,5 @@
-import { getRepository, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { appDataSource } from "../../../../database";
 import { ICreateTransactionSalesRequestDTO } from "../../dtos";
 import { Sale } from "../../entities";
 import { ISalesRepository } from "../ISales.repository";
@@ -7,7 +8,7 @@ export class SalesRepository implements ISalesRepository {
   private repository: Repository<Sale>;
 
   constructor() {
-    this.repository = getRepository(Sale);
+    this.repository = appDataSource.getRepository(Sale);
   }
   async create(data: ICreateTransactionSalesRequestDTO): Promise<Sale> {
     const transaction = this.repository.create(data);

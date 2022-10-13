@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import { verify } from "jsonwebtoken";
-import { UsersRepository } from "../../users/repositories";
-import { CustomError } from "../errors";
-import { EXPIRED_AT, INVALID_AT, USER_NOT_FOUND } from "../exceptions";
-
-interface IPayload {
-  sub: string;
-}
+import { ITokenProvider } from "../../providers";
+import { IUsersRepository } from "../../../users/repositories";
+import { CustomError } from "../../errors";
+import { EXPIRED_AT, INVALID_AT, USER_NOT_FOUND } from "../../exceptions";
 
 export class EnsureAuthenticated {
+  constructor(
+    private usersRepository: IUsersRepository,
+    private tokenProvider: ITokenProvider,
+  ) {}
   async execute(
     req: Request,
     res: Response,
@@ -29,9 +29,9 @@ export class EnsureAuthenticated {
     try {
       const secret = process.env.SECRET;
 
-      const { sub: id } = verify(bearerToken[1], secret) as IPayload;
+      const id = this.tokenProvider.verifyAuthToken(bearerToken[1], secret);
 
-      const user = await UsersRepository;
+      const user = await this.usersRepository.findById(id as string);
 
       if (!user) {
         throw new CustomError(USER_NOT_FOUND);

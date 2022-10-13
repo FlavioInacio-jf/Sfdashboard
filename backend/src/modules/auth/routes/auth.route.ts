@@ -1,10 +1,13 @@
 import { Router } from "express";
-import { EnsureAuthenticated, validateResource } from "../../app";
+import { ensureAuthenticated, validateResource } from "../../app";
 import { authenticateUserSchema } from "../schemas";
+import {
+  authenticateUserController,
+  createRefreshTokenController,
+  logoutUserController,
+} from "../useCases";
 
 const authRoutes = Router();
-
-const ensureAuthenticated = new EnsureAuthenticated();
 
 /** The user registration route does not have the token as mandatory */
 authRoutes.post(

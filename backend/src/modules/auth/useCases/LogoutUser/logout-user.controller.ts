@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CustomError } from "../../../app";
 import LogoutUserUseCase from "./logout-user.useCase";
 
-export class LogouUserController {
+export class LogoutUserController {
   constructor(private logoutUserUseCase: LogoutUserUseCase) {}
   async execute(req: Request, res: Response) {
     try {

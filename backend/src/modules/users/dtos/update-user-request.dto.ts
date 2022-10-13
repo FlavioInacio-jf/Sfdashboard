@@ -3,6 +3,6 @@ import { UserRole } from "../enums";
 export interface IUpdateUserRequestDTO {
   id: string;
   name: string;
-  role: UserRole;
+  role: keyof typeof UserRole;
   permissions: string[];
 }

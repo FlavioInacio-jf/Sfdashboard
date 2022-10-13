@@ -1,13 +1,13 @@
-import { CustomError } from "../../../app";
+import { CustomError, IExpireInProvider, ITokenProvider } from "../../../app";
 import { EXPIRED_RT, INVALID_RT } from "../../../app/exceptions";
 import { ICreateRefreshTokenRequestDTO } from "../../dtos";
-import { IExpireInProvider } from "../../providers/ExpireInProvider";
 import { IRefreshTokenRepository } from "../../repositories";
 
 export class CreateRefreshTokenUseCase {
   constructor(
     private refreshTokenRepository: IRefreshTokenRepository,
     private expireInProvider: IExpireInProvider,
+    private tokenProvider: ITokenProvider,
   ) {}
 
   async execute({ user_id, old_refresh_token }: ICreateRefreshTokenRequestDTO) {
@@ -29,8 +29,10 @@ export class CreateRefreshTokenUseCase {
     }
 
     // New refresh token and token
-    const newRefreshToken = await generateRefreshToken.execute(user_id);
-    const newAccessToken = generateToken.execute({ user_id });
+    const newRefreshToken = await this.refreshTokenRepository.create({
+      user_id,
+    });
+    const newAccessToken = this.tokenProvider.createAuthToken(user_id);
 
     // Delete old refresh token
     await this.refreshTokenRepository.delete({ id: refreshTokenExists.id });

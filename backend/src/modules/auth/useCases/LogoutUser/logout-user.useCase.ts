@@ -1,25 +1,24 @@
 import { CustomError } from "../../../app";
 import { INVALID_RT } from "../../../app/exceptions";
-
-interface ILogoutUserServiceRequest {
-  user_id: string;
-  old_refresh_token: string;
-}
+import { ILogoutUserRequestDTO } from "../../dtos";
+import { IRefreshTokenRepository } from "../../repositories";
 
 export default class LogoutUserUseCase {
+  constructor(private refreshTokenRepository: IRefreshTokenRepository) {}
   async execute({
     user_id,
     old_refresh_token,
-  }: ILogoutUserServiceRequest): Promise<void> {
-    const refreshTokenExists = await refreshTokenRepository.findOne({
-      user_id,
-      refresh_token: old_refresh_token,
-    });
+  }: ILogoutUserRequestDTO): Promise<void> {
+    const refreshTokenExists =
+      await this.refreshTokenRepository.findByUserIdAndToken({
+        user_id,
+        old_token: old_refresh_token,
+      });
 
     if (!refreshTokenExists) {
       throw new CustomError(INVALID_RT);
     }
 
-    await refreshTokenRepository.delete({ id: refreshTokenExists.id });
+    await this.refreshTokenRepository.delete({ id: refreshTokenExists.id });
   }
 }

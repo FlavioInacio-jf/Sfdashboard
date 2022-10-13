@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { EnsureAuthenticated, validateResource } from "../../app";
+import { ensureAuthenticated, validateResource } from "../../app";
 import { createClientSchema, updateClientSchema } from "../schemas";
 import {
   createClientController,
@@ -10,8 +10,6 @@ import {
 } from "../useCases";
 
 const clientsRoutes = Router();
-
-const ensureAuthenticated = new EnsureAuthenticated();
 
 clientsRoutes.use(ensureAuthenticated.execute);
 clientsRoutes.post(

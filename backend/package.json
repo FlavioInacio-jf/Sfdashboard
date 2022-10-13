@@ -9,7 +9,7 @@
     }
   },
   "lint-staged": {
-    "*.tsx": [
+    "*.ts": [
       "eslint --fix",
       "git add"
     ]
@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/main.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "format:prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "format:prettier": "prettier --config .prettierrc 'src/*.ts' --write",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },

@@ -1,6 +1,6 @@
 import { CustomError } from "../../../app/errors";
 import { EMAIL_ALREADY_EXIST } from "../../../app/exceptions";
-import { IHashProvider } from "../../../auth";
+import { IHashProvider } from "../../../app";
 import { ICreateUserRequestDTO } from "../../dtos";
 import { User } from "../../entities";
 import { IUsersRepository } from "../../repositories";

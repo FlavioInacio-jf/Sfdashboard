@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import "reflect-metadata";
+import "express-async-errors";
 import cors from "cors";
 import express, { NextFunction, Request, Response, Router } from "express";
-import "express-async-errors";
-import "reflect-metadata";
 import swaggerUi from "swagger-ui-express";
 import { AppEndpoint, CustomError } from "./modules/app";
 import "./database";

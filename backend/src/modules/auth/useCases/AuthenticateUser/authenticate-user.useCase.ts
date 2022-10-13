@@ -1,13 +1,14 @@
-import { CustomError } from "../../../app";
+import { CustomError, IHashProvider, ITokenProvider } from "../../../app";
 import { LOGIN_FAILED } from "../../../app/exceptions";
-import { generateToken } from "../../../app/utils";
 import { IUsersRepository } from "../../../users/repositories";
 import { IAuthenticateUserRequestDTO } from "../../dtos";
-import { IHashProvider } from "../../providers";
+import { IRefreshTokenRepository } from "../../repositories";
 
 export class AuthenticateUserUseCase {
   constructor(
+    private refreshTokenRepository: IRefreshTokenRepository,
     private usersRepository: IUsersRepository,
+    private tokenProvider: ITokenProvider,
     private hashProvider: IHashProvider,
   ) {}
   async execute({ email, password }: IAuthenticateUserRequestDTO) {
@@ -26,10 +27,10 @@ export class AuthenticateUserUseCase {
       throw new CustomError(LOGIN_FAILED);
     }
 
-    const generateRefreshToken = new GenerateRefreshTokenProvider();
-
-    const accessToken = generateToken({ user_id: user.id });
-    const refreshToken = await generateRefreshToken.execute(user.id);
+    const accessToken = this.tokenProvider.createAuthToken(user.id);
+    const refreshToken = await this.refreshTokenRepository.create({
+      user_id: user.id,
+    });
     delete user.password;
     return {
       ...user,

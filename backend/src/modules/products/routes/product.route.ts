@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   AppEndpoint,
   EnsureAdmin,
-  EnsureAuthenticated,
+  ensureAuthenticated,
   validateResource,
 } from "../../app";
 import {
@@ -21,7 +21,6 @@ import {
 
 const productsRoutes = Router();
 
-const ensureAuthenticated = new EnsureAuthenticated();
 productsRoutes.use(ensureAuthenticated.execute);
 
 productsRoutes.get("/", getAllProductsController.execute);

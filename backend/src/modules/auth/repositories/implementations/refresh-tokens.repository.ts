@@ -1,13 +1,16 @@
 import { getRepository, Repository } from "typeorm";
+import { IExpireInProvider, ITokenProvider } from "../../../app";
 import { ICreateRefreshTokenDTO, IDeleteRefreshTokenDTO } from "../../dtos";
 import { RefreshToken } from "../../entities";
-import { IExpireInProvider } from "../../providers/ExpireInProvider";
 import { IRefreshTokenRepository } from "../IRefresh-tokens.repository";
 
 export class RefreshTokenRepository implements IRefreshTokenRepository {
   private repository: Repository<RefreshToken>;
 
-  constructor(private expireInProvider: IExpireInProvider) {
+  constructor(
+    private expireInProvider: IExpireInProvider,
+    private tokenProvider: ITokenProvider,
+  ) {
     this.repository = getRepository(RefreshToken);
   }
 
@@ -26,12 +29,8 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
     return refreshToken;
   }
   async create({ user_id }: ICreateRefreshTokenDTO): Promise<string> {
-    const secret = process.env.SECRET;
-
     const expires_in = this.expireInProvider.generate(7);
-    const refresh_token = sign({}, secret, {
-      subject: user_id,
-    });
+    const refresh_token = this.tokenProvider.createRefreshToken(user_id);
 
     const generateRefreshToken = this.repository.create({
       user_id,

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { EnsureAdmin, EnsureAuthenticated, validateResource } from "../../app";
+import { EnsureAdmin, ensureAuthenticated, validateResource } from "../../app";
 import { createSchema, updateSchema } from "../schemas";
 import {
   createUserController,
@@ -12,7 +12,6 @@ import { getAllUsersController } from "../useCases/GetAllUsers";
 const usersRoutes = Router();
 
 const ensureAdmin = new EnsureAdmin();
-const ensureAuthenticated = new EnsureAuthenticated();
 
 usersRoutes.use(ensureAuthenticated.execute);
 usersRoutes.get("/me", getCurrentUserController.execute);

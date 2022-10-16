@@ -1,16 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import "reflect-metadata";
 import "express-async-errors";
+import "reflect-metadata";
 import cors from "cors";
+
 import express, { NextFunction, Request, Response, Router } from "express";
+
 import swaggerUi from "swagger-ui-express";
+import { swaggerDoc } from "./docs";
 import { AppEndpoint, CustomError } from "./modules/app";
-import "./database";
 import { authRoutes } from "./modules/auth";
 import { clientsRoutes } from "./modules/clients";
 import { productsRoutes } from "./modules/products";
 import { usersRoutes } from "./modules/users";
-import { swaggerDoc } from "./docs";
 
 const app = express();
 const router = Router();
@@ -26,6 +26,7 @@ router.use(AppEndpoint.USERS, usersRoutes);
 router.use(AppEndpoint.AUTH, authRoutes);
 app.use(router);
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof CustomError) {
     const { code, ...rest } = err;
@@ -37,4 +38,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-app.listen(3333, () => console.log("Server is running in localhost:3333"));
+export { app };

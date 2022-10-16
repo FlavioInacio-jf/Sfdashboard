@@ -21,7 +21,9 @@ const authenticateUserUseCase = new AuthenticateUserUseCase(
   tokenProvider,
   hashProvider,
 );
+
 const authenticateUserController = new AuthenticateUserController(
   authenticateUserUseCase,
 );
+
 export { authenticateUserController, authenticateUserUseCase };

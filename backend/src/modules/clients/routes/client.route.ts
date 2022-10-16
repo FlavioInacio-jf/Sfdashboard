@@ -11,19 +11,28 @@ import {
 
 const clientsRoutes = Router();
 
-clientsRoutes.use(ensureAuthenticated.execute);
+clientsRoutes.use(ensureAuthenticated.execute.bind(ensureAuthenticated));
 clientsRoutes.post(
   "/",
   validateResource(createClientSchema),
-  createClientController.execute,
+  createClientController.execute.bind(createClientController),
 );
-clientsRoutes.get("/", getAllClientsController.execute);
-clientsRoutes.get("/:id", getSingleClientController.execute);
+clientsRoutes.get(
+  "/",
+  getAllClientsController.execute.bind(getAllClientsController),
+);
+clientsRoutes.get(
+  "/:id",
+  getSingleClientController.execute.bind(getSingleClientController),
+);
 clientsRoutes.patch(
   "/:id",
   validateResource(updateClientSchema),
-  updateClientController.execute,
+  updateClientController.execute.bind(updateClientController),
 );
-clientsRoutes.delete("/:id", deleteClientController.execute);
+clientsRoutes.delete(
+  "/:id",
+  deleteClientController.execute.bind(deleteClientController),
+);
 
 export { clientsRoutes };

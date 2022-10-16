@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { appDataSource } from "../../../../database";
+import { appDataSource } from "../../../../config";
 import { IExpireInProvider, ITokenProvider } from "../../../app";
 import { ICreateRefreshTokenDTO, IDeleteRefreshTokenDTO } from "../../dtos";
 import { RefreshToken } from "../../entities";

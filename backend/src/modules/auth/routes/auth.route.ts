@@ -13,13 +13,19 @@ const authRoutes = Router();
 authRoutes.post(
   "/login",
   validateResource(authenticateUserSchema),
-  authenticateUserController.execute,
+  authenticateUserController.execute.bind(authenticateUserController),
 );
 
 /** Users need to have the authentication token to access these routes */
 
-authRoutes.use(ensureAuthenticated.execute);
-authRoutes.post("/refresh-token", createRefreshTokenController.execute);
-authRoutes.post("/logout", logoutUserController.execute);
+authRoutes.use(ensureAuthenticated.execute.bind(ensureAuthenticated));
+authRoutes.post(
+  "/refresh-token",
+  createRefreshTokenController.execute.bind(createRefreshTokenController),
+);
+authRoutes.post(
+  "/logout",
+  logoutUserController.execute.bind(logoutUserController),
+);
 
 export { authRoutes };

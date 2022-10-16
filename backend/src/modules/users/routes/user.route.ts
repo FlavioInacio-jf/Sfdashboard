@@ -13,21 +13,27 @@ const usersRoutes = Router();
 
 const ensureAdmin = new EnsureAdmin();
 
-usersRoutes.use(ensureAuthenticated.execute);
-usersRoutes.get("/me", getCurrentUserController.execute);
+usersRoutes.use(ensureAuthenticated.execute.bind(ensureAuthenticated));
+usersRoutes.get(
+  "/me",
+  getCurrentUserController.execute.bind(getCurrentUserController),
+);
 usersRoutes.patch(
   "/:id",
   validateResource(updateSchema),
-  updateUserController.execute,
+  updateUserController.execute.bind(updateUserController),
 );
 
 usersRoutes.use(ensureAdmin.execute);
 usersRoutes.post(
   "/",
   validateResource(createSchema),
-  createUserController.execute,
+  createUserController.execute.bind(createUserController),
 );
-usersRoutes.get("/", getAllUsersController.execute);
-usersRoutes.delete("/:id", deleteUserController.execute);
+usersRoutes.get("/", getAllUsersController.execute.bind(getAllUsersController));
+usersRoutes.delete(
+  "/:id",
+  deleteUserController.execute.bind(deleteUserController),
+);
 
 export { usersRoutes };

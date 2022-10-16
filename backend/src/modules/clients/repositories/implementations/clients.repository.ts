@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { appDataSource } from "../../../../database";
+import { appDataSource } from "../../../../config";
 import { ICreateClientRequestDTO, IDeleteClientRequestDTO } from "../../dtos";
 import { IQueryClientRequestDTO } from "../../dtos/query-client-request.dto";
 import { Client } from "../../entities";

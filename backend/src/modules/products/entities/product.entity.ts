@@ -28,8 +28,13 @@ export class Product {
   })
   amount: number;
 
-  @Column({ nullable: false, enum: ProductStatusEnum })
-  status: keyof typeof ProductStatusEnum;
+  @Column({
+    type: "simple-enum",
+    nullable: false,
+    default: ProductStatusEnum["Not sell"],
+    enum: ProductStatusEnum,
+  })
+  status: ProductStatusEnum;
 
   @CreateDateColumn({
     nullable: false,

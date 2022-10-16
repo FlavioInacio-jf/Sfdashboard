@@ -21,11 +21,12 @@ export class User {
   email: string;
 
   @Column({
+    type: "simple-enum",
     nullable: false,
     length: 10,
     enum: UserRoleEnum,
   })
-  role: keyof typeof UserRoleEnum;
+  role: UserRoleEnum;
 
   @Column("simple-array", {
     nullable: false,

@@ -7,6 +7,7 @@ export class AuthenticateUserController {
   async execute(req: Request, res: Response): Promise<Response> {
     try {
       const { email, password } = req.body;
+
       const token = await this.authenticateUserUseCase.execute({
         email,
         password,
@@ -17,6 +18,7 @@ export class AuthenticateUserController {
         result: token,
       });
     } catch (error) {
+      console.error(error);
       throw new CustomError(error);
     }
   }

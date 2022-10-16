@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Repository } from "typeorm";
-import { appDataSource } from "../../../../database";
+import { appDataSource } from "../../../../config";
 import {
   ICreateUserRequestDTO,
   IDeleteUserRequestDTO,

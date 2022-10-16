@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { appDataSource } from "../../../../database";
+import { appDataSource } from "../../../../config";
 import { ICreateTransactionSalesRequestDTO } from "../../dtos";
 import { Sale } from "../../entities";
 import { ISalesRepository } from "../ISales.repository";

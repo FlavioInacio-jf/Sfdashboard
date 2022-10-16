@@ -28,6 +28,7 @@ export class AuthenticateUserUseCase {
     }
 
     const accessToken = this.tokenProvider.createAuthToken(user.id);
+
     const refreshToken = await this.refreshTokenRepository.create({
       user_id: user.id,
     });

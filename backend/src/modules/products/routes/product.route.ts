@@ -21,14 +21,20 @@ import {
 
 const productsRoutes = Router();
 
-productsRoutes.use(ensureAuthenticated.execute);
+productsRoutes.use(ensureAuthenticated.execute.bind(ensureAuthenticated));
 
-productsRoutes.get("/", getAllProductsController.execute);
-productsRoutes.get("/:id", getSingleProductController.execute);
+productsRoutes.get(
+  "/",
+  getAllProductsController.execute.bind(getAllProductsController),
+);
+productsRoutes.get(
+  "/:id",
+  getSingleProductController.execute.bind(getSingleProductController),
+);
 productsRoutes.post(
   `/:id${AppEndpoint.SALE}`,
   validateResource(productBuySchema),
-  buyProductController.execute,
+  buyProductController.execute.bind(buyProductController),
 );
 
 /*
@@ -43,13 +49,16 @@ productsRoutes.use(ensureAdmin.execute);
 productsRoutes.post(
   "/",
   validateResource(productCreateSchema),
-  createProductController.execute,
+  createProductController.execute.bind(createProductController),
 );
 productsRoutes.patch(
   "/:id",
   validateResource(productUpdateSchema),
-  updateProductController.execute,
+  updateProductController.execute.bind(updateProductController),
 );
-productsRoutes.delete("/:id", deleteProductController.execute);
+productsRoutes.delete(
+  "/:id",
+  deleteProductController.execute.bind(deleteProductController),
+);
 
 export { productsRoutes };

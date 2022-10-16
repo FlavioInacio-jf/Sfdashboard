@@ -18,6 +18,9 @@ const router = Router();
 app.use(cors());
 app.use(express.json());
 
+router.get("/", (req, res) => {
+  return res.redirect("/docs");
+});
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 router.use(AppEndpoint.PRODUCTS, productsRoutes);
